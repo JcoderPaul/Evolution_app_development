@@ -224,6 +224,45 @@ class ReservationBaseTest {
         assertThat(reservationBase.isReservationConflict(testCreate_4)).isFalse();
     }
 
+    @Test
+    void isReservationConflictedTest() {
+        Long placeTestId = 1L;
+        Long userTestId = 5L;
+        LocalDate reservationTestDate = LocalDate.of(1878, 5,12);
+        LocalTime testStartTime = LocalTime.of(14,00,00);
+        LocalTime testFinishTime = LocalTime.of(16,00,00);
+
+        Reservation testCreate_1 = new Reservation(reservationTestDate,
+                placeTestId,
+                userTestId,
+                testStartTime,
+                testFinishTime);
+        reservationBase.create(testCreate_1);
+
+        Reservation testCreate_2 = new Reservation(reservationTestDate,
+                placeTestId,
+                userTestId,
+                testStartTime.plusHours(1),
+                testFinishTime.plusHours(2));
+        assertThat(reservationBase.isReservationConflict(testCreate_2)).isTrue();
+
+        Reservation testCreate_3 = new Reservation(reservationTestDate,
+                placeTestId,
+                userTestId,
+                testStartTime.minusHours(1),
+                testFinishTime.minusHours(1));
+
+        assertThat(reservationBase.isReservationConflict(testCreate_3)).isTrue();
+
+        Reservation testCreate_4 = new Reservation(reservationTestDate,
+                placeTestId,
+                userTestId,
+                testStartTime.plusMinutes(30),
+                testFinishTime.minusMinutes(10));
+
+        assertThat(reservationBase.isReservationConflict(testCreate_4)).isTrue();
+    }
+
     /* Проверяем броски исключений */
 
     @Test
