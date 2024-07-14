@@ -1,7 +1,8 @@
 package me.oldboy.cwapp.base;
 
 import me.oldboy.cwapp.entity.Reservation;
-import me.oldboy.cwapp.exception.ReservationBaseException;
+import me.oldboy.cwapp.exception.base_exception.ReservationBaseException;
+import me.oldboy.cwapp.store.base.ReservationBase;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
