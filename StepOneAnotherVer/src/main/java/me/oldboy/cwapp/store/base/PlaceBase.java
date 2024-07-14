@@ -1,9 +1,9 @@
-package me.oldboy.cwapp.base;
+package me.oldboy.cwapp.store.base;
 
 import me.oldboy.cwapp.entity.Place;
 import me.oldboy.cwapp.entity.Species;
-import me.oldboy.cwapp.exception.PlaceBaseException;
-import me.oldboy.cwapp.repository.PlaceRepository;
+import me.oldboy.cwapp.exception.base_exception.PlaceBaseException;
+import me.oldboy.cwapp.store.repository.PlaceRepository;
 
 import java.util.HashMap;
 import java.util.List;
@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 
 public class PlaceBase implements PlaceRepository {
 
-    private Map<Long, Place> placeBase = new HashMap<>();
+    private final Map<Long, Place> allPlaceBase = new HashMap<>();
 
     /**
      * Создает новый Place (конференц-зал или рабочее место).
@@ -29,18 +29,18 @@ public class PlaceBase implements PlaceRepository {
     @Override
     public Long create(Place place) {
         Long generatedPlaceId = null;
-        if(place.getPlaceId() == null && placeBase.size() == 0){
+        if(place.getPlaceId() == null && allPlaceBase.size() == 0){
             generatedPlaceId = 1L;
             place.setPlaceId(generatedPlaceId);
-            placeBase.put(generatedPlaceId, place);
-        } else if(place.getPlaceId() == null && placeBase.size() > 0){
-            generatedPlaceId = 1L + placeBase.keySet()
+            allPlaceBase.put(generatedPlaceId, place);
+        } else if(place.getPlaceId() == null && allPlaceBase.size() > 0){
+            generatedPlaceId = 1L + allPlaceBase.keySet()
                                              .stream()
                                              .mapToLong(k->k)
                                              .max()
                                              .orElseThrow(() -> new PlaceBaseException("Сбой в генерации ID!"));
             place.setPlaceId(generatedPlaceId);
-            placeBase.put(generatedPlaceId, place);
+            allPlaceBase.put(generatedPlaceId, place);
         } else {
             throw new PlaceBaseException("Ошибка создания нового " + place.getSpecies() + " !");
         }
@@ -56,13 +56,13 @@ public class PlaceBase implements PlaceRepository {
      */
     @Override
     public Place update(Place place) {
-        if(placeBase.containsKey(place.getPlaceId())) {
+        if(allPlaceBase.containsKey(place.getPlaceId())) {
             delete(place.getPlaceId());
-            placeBase.put(place.getPlaceId(), place);
+            allPlaceBase.put(place.getPlaceId(), place);
         } else {
             throw new PlaceBaseException("Вы пытаетесь обновить несуществующий " + place.getSpecies() + " !");
         }
-        return placeBase.get(place.getPlaceId());
+        return allPlaceBase.get(place.getPlaceId());
     }
 
     /**
@@ -74,7 +74,7 @@ public class PlaceBase implements PlaceRepository {
      */
     @Override
     public Optional<Place> findById(Long placeId) {
-        return Optional.ofNullable(placeBase.get(placeId));
+        return Optional.ofNullable(allPlaceBase.get(placeId));
     }
 
     /**
@@ -86,8 +86,8 @@ public class PlaceBase implements PlaceRepository {
      */
     @Override
     public boolean delete(Long placeId) {
-        if(placeBase.containsKey(placeId)){
-            placeBase.remove(placeId);
+        if(allPlaceBase.containsKey(placeId)){
+            allPlaceBase.remove(placeId);
         } else {
             throw new PlaceBaseException("Место/зал с ID: " + placeId + " в базе не найден!");
         }
@@ -104,12 +104,11 @@ public class PlaceBase implements PlaceRepository {
      */
     @Override
     public Optional<Place> findBySpeciesAndPlaceNumber(Species species, Integer placeNumber) {
-        return Optional.ofNullable(placeBase.entrySet().stream()
+        return Optional.ofNullable(allPlaceBase.entrySet().stream()
                 .map(k -> k.getValue())
                 .filter(u -> (u.getSpecies().equals(species) && u.getPlaceNumber().equals(placeNumber)))
                 .findAny()
-                .orElseThrow(() -> new PlaceBaseException(species + " с номером " +
-                                                          placeNumber + " не найден!")));
+                .orElse(null));
     }
 
     /**
@@ -119,7 +118,7 @@ public class PlaceBase implements PlaceRepository {
      */
     @Override
     public List<Place> findAll() {
-        return placeBase.entrySet().stream()
+        return allPlaceBase.entrySet().stream()
                 .map(k -> k.getValue())
                 .collect(Collectors.toList());
     }
@@ -132,13 +131,13 @@ public class PlaceBase implements PlaceRepository {
      */
     @Override
     public List<Place> findAllBySpecies(Species species) {
-        return placeBase.entrySet().stream()
+        return allPlaceBase.entrySet().stream()
                 .map(k -> k.getValue())
                 .filter(p->p.getSpecies().equals(species))
                 .collect(Collectors.toList());
     }
 
-    public Map<Long, Place> getPlaceBase() {
-        return placeBase;
+    public Map<Long, Place> getAllPlaceBase() {
+        return allPlaceBase;
     }
 }
