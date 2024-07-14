@@ -1,7 +1,8 @@
 package me.oldboy.cwapp.base;
 
 import me.oldboy.cwapp.entity.Place;
-import me.oldboy.cwapp.exception.PlaceBaseException;
+import me.oldboy.cwapp.exception.base_exception.PlaceBaseException;
+import me.oldboy.cwapp.store.base.PlaceBase;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -24,7 +25,7 @@ class PlaceBaseTest {
 
     @AfterEach
     public void killBase(){
-        placeBase.getPlaceBase().clear();
+        placeBase.getAllPlaceBase().clear();
     }
 
     /* Проверяем нормальную работу методов */
@@ -81,6 +82,14 @@ class PlaceBaseTest {
                 .isEqualTo(placeBase.findById(placeId_2));
         assertThat(placeBase.findBySpeciesAndPlaceNumber(WORKPLACE, 6))
                 .isEqualTo(placeBase.findById(placeId_3));
+    }
+
+    @Test
+    void findNonExistentPlaceBySpeciesAndNumberExceptionTest() {
+        Place findPlace = new Place(8L, WORKPLACE, 34);
+        assertThat(placeBase.findBySpeciesAndPlaceNumber(findPlace.getSpecies(),
+                                                         findPlace.getPlaceNumber())
+                            .isEmpty()).isTrue();
     }
 
     @Test
@@ -157,15 +166,5 @@ class PlaceBaseTest {
                 .hasMessageContaining("Место/зал с ID: " +
                                                 deletePlace.getPlaceId() +
                                                 " в базе не найден!");
-    }
-
-    @Test
-    void findNonExistentPlaceBySpeciesAndNumberExceptionTest() {
-        Place findPlace = new Place(8L, WORKPLACE, 34);
-        assertThatThrownBy(()->placeBase.findBySpeciesAndPlaceNumber(findPlace.getSpecies(),
-                                                                     findPlace.getPlaceNumber()))
-                .isInstanceOf(PlaceBaseException.class)
-                .hasMessageContaining(findPlace.getSpecies() + " с номером " +
-                                                findPlace.getPlaceNumber() + " не найден!");
     }
 }
