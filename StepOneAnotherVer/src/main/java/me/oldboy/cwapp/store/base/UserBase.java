@@ -1,9 +1,9 @@
-package me.oldboy.cwapp.base;
+package me.oldboy.cwapp.store.base;
 
 import lombok.Getter;
 import me.oldboy.cwapp.entity.User;
-import me.oldboy.cwapp.exception.UserBaseException;
-import me.oldboy.cwapp.repository.UserRepository;
+import me.oldboy.cwapp.exception.base_exception.UserBaseException;
+import me.oldboy.cwapp.store.repository.UserRepository;
 
 import java.util.*;
 import java.util.stream.Collectors;
