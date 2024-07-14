@@ -1,4 +1,4 @@
-package me.oldboy.cwapp.repository;
+package me.oldboy.cwapp.store.repository;
 
 import me.oldboy.cwapp.entity.Place;
 import me.oldboy.cwapp.entity.Reservation;
