@@ -1,8 +1,8 @@
-package me.oldboy.cwapp.base;
+package me.oldboy.cwapp.store.base;
 
 import me.oldboy.cwapp.entity.Reservation;
-import me.oldboy.cwapp.exception.ReservationBaseException;
-import me.oldboy.cwapp.repository.ReservationRepository;
+import me.oldboy.cwapp.exception.base_exception.ReservationBaseException;
+import me.oldboy.cwapp.store.repository.ReservationRepository;
 
 import java.time.LocalDate;
 import java.util.HashMap;
