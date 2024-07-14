@@ -171,6 +171,7 @@ public class ReservationBase implements ReservationRepository {
      * @param newReservation новая бронь конфликт которой мы хотим проверить с уже существующими
      * @return true - если конфликт при бронировании есть, false - если конфликт при бронировании не обнаружен
      */
+    @Override
     public boolean isReservationConflict(Reservation newReservation){
         return findByDateAndPlace(newReservation.getReservationDate(),
                                    newReservation.getReservationPlaceId())
