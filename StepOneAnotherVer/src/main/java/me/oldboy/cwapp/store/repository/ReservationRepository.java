@@ -17,4 +17,5 @@ public interface ReservationRepository {
     Optional<List<Reservation>> findByPlaceId(Long placeId);
     Optional<List<Reservation>> findByDateAndPlace(LocalDate reservationDate, Long reservationPlaceId);
     List<Reservation> findAll();
+    boolean isReservationConflict(Reservation newReservation);
 }
