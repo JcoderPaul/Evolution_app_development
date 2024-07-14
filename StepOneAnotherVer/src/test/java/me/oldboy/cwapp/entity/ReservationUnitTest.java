@@ -1,6 +1,6 @@
 package me.oldboy.cwapp.entity;
 
-import me.oldboy.cwapp.exception.ReservationUnitException;
+import me.oldboy.cwapp.exception.entity_exception.ReservationUnitException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
