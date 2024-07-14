@@ -4,7 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import me.oldboy.cwapp.exception.ReservationUnitException;
+import me.oldboy.cwapp.exception.entity_exception.ReservationUnitException;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
