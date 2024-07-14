@@ -1,7 +1,8 @@
 package me.oldboy.cwapp.base;
 
 import me.oldboy.cwapp.entity.User;
-import me.oldboy.cwapp.exception.UserBaseException;
+import me.oldboy.cwapp.exception.base_exception.UserBaseException;
+import me.oldboy.cwapp.store.base.UserBase;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
