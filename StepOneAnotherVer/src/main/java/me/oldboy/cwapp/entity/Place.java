@@ -18,4 +18,13 @@ public class Place {
         this.species = species;
         this.placeNumber = placeNumber;
     }
+
+    @Override
+    public String toString() {
+        return "Place [" +
+                "placeId: " + placeId +
+                ", species: " + species +
+                ", placeNumber: " + placeNumber +
+                ']';
+    }
 }
