@@ -1,9 +1,9 @@
 package me.oldboy.cwapp.services;
 
-import me.oldboy.cwapp.store.base.UserBase;
 import me.oldboy.cwapp.entity.Role;
 import me.oldboy.cwapp.entity.User;
 import me.oldboy.cwapp.exception.service_exception.UserServiceException;
+import me.oldboy.cwapp.store.repository.UserRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -14,12 +14,12 @@ import java.util.Optional;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 class UserServiceTest {
 
     @Mock
-    private UserBase userBase;
+    private UserRepository userRepository;
     @InjectMocks
     private UserService userService;
 
@@ -40,31 +40,34 @@ class UserServiceTest {
 
     @Test
     void registrationUserServiceGoodTest() {
-        when(userBase.findUserByLogin(testUser.getUserLogin())).thenReturn(Optional.empty());
-        when(userBase.create(testUser)).thenReturn(userRegId);
+        when(userRepository.findUserByLogin(testUser.getUserLogin())).thenReturn(Optional.empty());
+        when(userRepository.create(testUser)).thenReturn(userRegId);
         assertThat(userService.registration(testUser)).isEqualTo(userRegId);
     }
 
     @Test
     void registrationUserServiceExceptionTest() {
         testUser.setUserId(userRegId);
-        when(userBase.findUserByLogin(testUser.getUserLogin())).thenReturn(Optional.empty());
+
+        when(userRepository.findUserByLogin(testUser.getUserLogin()))
+                .thenReturn(Optional.empty());
+
         assertThatThrownBy(()->userService.registration(testUser))
                 .isInstanceOf(UserServiceException.class)
                 .hasMessageContaining("Логин: " + testUser.getUserLogin() +
-                                                "уже есть в системе или " +
+                                                " уже есть в системе или " +
                                                 "переданные данные содержат недопустимые значения, например ID!");
     }
 
     @Test
     void loginUserServiceGoodTest() {
-        when(userBase.findUserByLogin(testUser.getUserLogin())).thenReturn(Optional.of(testUser));
+        when(userRepository.findUserByLogin(testUser.getUserLogin())).thenReturn(Optional.of(testUser));
         assertThat(userService.login(testLogin, testPass)).isEqualTo(testUser);
     }
 
     @Test
     void loginUserServiceNonRegistrationExceptionTest() {
-        when(userBase.findUserByLogin("notExistLogin")).thenReturn(Optional.empty());
+        when(userRepository.findUserByLogin("notExistLogin")).thenReturn(Optional.empty());
         assertThatThrownBy(()->userService.login("nonExistLogin", "nonExistPass"))
                 .isInstanceOf(UserServiceException.class)
                 .hasMessageContaining("Пользователь не зарегистрирован!");
@@ -77,9 +80,31 @@ class UserServiceTest {
         String testPass = "2124";
         User testUser = new User(userRegId, testLogin, testPass, Role.ADMIN);
 
-        when(userBase.findUserByLogin(testUser.getUserLogin())).thenReturn(Optional.of(testUser));
+        when(userRepository.findUserByLogin(testUser.getUserLogin())).thenReturn(Optional.of(testUser));
         assertThatThrownBy(()->userService.login(testLogin, "nonExistPass"))
                 .isInstanceOf(UserServiceException.class)
                 .hasMessageContaining("Неверный пароль!");
+    }
+
+    @Test
+    void shouldReturnUser_findExistingUserByIdTest() {
+        Long userRegId = 1L;
+        testUser.setUserId(userRegId);
+
+        when(userRepository.findById(userRegId)).thenReturn(Optional.of(testUser));
+        assertThat(userService.getExistUserById(userRegId)).isEqualTo(testUser);
+
+        verify(userRepository, times(1)).findById(testUser.getUserId());
+    }
+
+    @Test
+    void shouldReturnException_findNonExistingUserByIdTest() {
+        when(userRepository.findById(userRegId)).thenReturn(Optional.empty());
+
+        assertThatThrownBy(()->userService.getExistUserById(userRegId))
+                .isInstanceOf(UserServiceException.class)
+                .hasMessageContaining("Пользователь c ID: " + userRegId + " не найден!");
+
+        verify(userRepository, times(1)).findById(userRegId);
     }
 }
