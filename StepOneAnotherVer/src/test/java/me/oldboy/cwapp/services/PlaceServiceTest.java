@@ -93,7 +93,9 @@ class PlaceServiceTest {
         when(placeRepository.findBySpeciesAndPlaceNumber(testPlace.getSpecies(),
                                                          testPlace.getPlaceNumber()))
                 .thenReturn(Optional.of(testPlace));
-        assertThat(placeService.getPlaceBySpeciesAndPlaceNumber(testPlace)).isEqualTo(testPlace);
+        assertThat(placeService.getPlaceBySpeciesAndPlaceNumber(testPlace.getSpecies(),
+                                                                testPlace.getPlaceNumber()))
+                .isEqualTo(testPlace);
     }
 
     @Test
@@ -101,7 +103,8 @@ class PlaceServiceTest {
         when(placeRepository.findBySpeciesAndPlaceNumber(testPlace.getSpecies(),
                                                          testPlace.getPlaceNumber()))
                 .thenReturn(Optional.ofNullable(null));
-        assertThatThrownBy(()->placeService.getPlaceBySpeciesAndPlaceNumber(testPlace))
+        assertThatThrownBy(()->placeService.getPlaceBySpeciesAndPlaceNumber(testPlace.getSpecies(),
+                                                                            testPlace.getPlaceNumber()))
                 .isInstanceOf(PlaceServiceException.class)
                 .hasMessageContaining(testPlace.getSpecies() + " с ID - " +
                                                 testPlace.getPlaceNumber() + " не существует!");
@@ -168,9 +171,11 @@ class PlaceServiceTest {
     @Test
     void shouldReturnTrue_DeleteExistPlaceGoodTest(){
         Long placeId = 1L;
+
+        when(reservationRepository.findByPlaceId(placeId)).thenReturn(Optional.of(List.of()));
         when(placeRepository.findById(placeId)).thenReturn(Optional.of(testPlace));
-        when(reservationRepository.findByPlaceId(placeId)).thenReturn(Optional.of(testReservationBase));
         when(placeRepository.delete(placeId)).thenReturn(true);
+
         assertThat(placeService.deletePlace(placeId)).isTrue();
     }
 
@@ -186,10 +191,42 @@ class PlaceServiceTest {
     @Test
     void shouldReturnException_DeleteExistButReservationPlaceTest(){
         Long placeId = 1L;
+
+        when(reservationRepository.findByPlaceId(placeId)).thenReturn(Optional.of(testReservationBase));
         when(placeRepository.findById(placeId)).thenReturn(Optional.of(testPlace));
-        when(reservationRepository.findByPlaceId(placeId)).thenReturn(Optional.of(emptyReservationBase));
+
         assertThatThrownBy(()->placeService.deletePlace(placeId))
                 .isInstanceOf(PlaceServiceException.class)
                 .hasMessageContaining("Удаление зарезервированного места/зала невозможно!");
+    }
+
+    /* I - Метод isPlaceExist - проверяем по ID есть ли Place в БД */
+
+    @Test
+    void shouldReturnTrue_isPlaceExistFindBySpeciesAndPlaceNumberTest(){
+        when(placeRepository.findBySpeciesAndPlaceNumber(any(Species.class), anyInt()))
+                .thenReturn(Optional.of(testPlace));
+        assertThat(placeService.isPlaceExist(testPlace.getSpecies(), testPlace.getPlaceNumber())).isTrue();
+    }
+
+    @Test
+    void shouldReturnFalse_isPlaceNonExistentFindBySpeciesAndPlaceNumberTest(){
+        when(placeRepository.findBySpeciesAndPlaceNumber(any(Species.class), anyInt()))
+                .thenReturn(Optional.empty());
+        assertThat(placeService.isPlaceExist(testPlace.getSpecies(), testPlace.getPlaceNumber())).isFalse();
+    }
+
+    @Test
+    void shouldReturnTrue_isPlaceExistFindByPlaceIdTest(){
+        when(placeRepository.findById(testPlace.getPlaceId()))
+                .thenReturn(Optional.of(testPlace));
+        assertThat(placeService.isPlaceExist(testPlace.getPlaceId())).isTrue();
+    }
+
+    @Test
+    void shouldReturnFalse_isPlaceNonExistentFindByPlaceIdTest(){
+        when(placeRepository.findById(testPlace.getPlaceId()))
+                .thenReturn(Optional.empty());
+        assertThat(placeService.isPlaceExist(testPlace.getPlaceId())).isFalse();
     }
 }
