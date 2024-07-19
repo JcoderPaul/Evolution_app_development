@@ -17,4 +17,14 @@ public class User {
         this.passWord = passWord;
         this.role = role;
     }
+
+    @Override
+    public String toString() {
+        return "User [" +
+                "userId: " + userId +
+                ", userLogin: '" + userLogin + '\'' +
+                ", passWord: '" + passWord + '\'' +
+                ", role: " + role +
+                ']';
+    }
 }
