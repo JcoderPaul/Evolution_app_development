@@ -132,10 +132,9 @@ class UserBaseTest {
     }
 
     @Test
-    void findNonExistentUserByLoginExceptionTest() {
+    void findNonExistentUserByLoginTest() {
         User findUser = new User(8L, "Lariska", "4321", USER);
-        assertThatThrownBy(()->userBase.findUserByLogin(findUser.getUserLogin()))
-                .isInstanceOf(UserBaseException.class)
-                .hasMessageContaining("Пользователь с таким логином не найден!");
+        assertThat(userBase.findUserByLogin(findUser.getUserLogin()))
+                .isEqualTo(Optional.empty());
     }
 }
