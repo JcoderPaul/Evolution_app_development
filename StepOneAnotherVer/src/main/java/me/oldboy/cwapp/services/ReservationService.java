@@ -3,10 +3,7 @@ package me.oldboy.cwapp.services;
 import lombok.RequiredArgsConstructor;
 import me.oldboy.cwapp.entity.Reservation;
 import me.oldboy.cwapp.exception.service_exception.ReservationServiceException;
-import me.oldboy.cwapp.store.base.ReservationBase;
-import me.oldboy.cwapp.store.repository.PlaceRepository;
 import me.oldboy.cwapp.store.repository.ReservationRepository;
-import me.oldboy.cwapp.store.repository.UserRepository;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -15,9 +12,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class ReservationService {
 
-    private ReservationRepository reservationRepository;
-    private PlaceRepository placeRepository;
-    private UserRepository userRepository;
+    private final ReservationRepository reservationRepository;
 
     public Long createReservation(Reservation newReservation){
         Optional<List<Reservation>> mayBeReservationList =
@@ -97,5 +92,9 @@ public class ReservationService {
             throw new ReservationServiceException("Брони с ID - " + reservationId + " не существует!");
         } else
             return reservationRepository.delete(reservationId);
+    }
+
+    public boolean isReservationConflict(Reservation checkReservation){
+        return reservationRepository.isReservationConflict(checkReservation);
     }
 }
