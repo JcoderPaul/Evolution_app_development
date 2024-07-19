@@ -55,4 +55,16 @@ public class Reservation {
                                                "раньше времени окончания!");
         }
     }
+
+    @Override
+    public String toString() {
+        return "Reservation [" +
+                "Id: " + reservationId +
+                ", Date: " + reservationDate +
+                ", PlaceId: " + reservationPlaceId +
+                ", UserId: " + reservationUserId +
+                ", startTime - " + startTime +
+                ", finishTime - " + finishTime +
+                ']';
+    }
 }
