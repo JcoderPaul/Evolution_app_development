@@ -35,11 +35,11 @@ public class PlaceService {
             return isPlaceList;
     }
 
-    public Place getPlaceBySpeciesAndPlaceNumber(Place place) {
+    public Place getPlaceBySpeciesAndPlaceNumber(Species species, Integer placeNumber) {
         Optional<Place> isPlaceExist =
-                placeRepository.findBySpeciesAndPlaceNumber(place.getSpecies(), place.getPlaceNumber());
+                placeRepository.findBySpeciesAndPlaceNumber(species, placeNumber);
         if(isPlaceExist.isEmpty()){
-            throw new PlaceServiceException(place.getSpecies() + " с ID - " + place.getPlaceNumber() + " не существует!");
+            throw new PlaceServiceException(species + " с ID - " + placeNumber + " не существует!");
         } else
             return isPlaceExist.get();
     }
@@ -73,11 +73,27 @@ public class PlaceService {
         Optional<List<Reservation>> isBasePresent = reservationRepository.findByPlaceId(placeId);
         if(placeRepository.findById(placeId).isEmpty()){
             throw new PlaceServiceException("Удаление несуществующего места/зала невозможно!");
-        } else if(isBasePresent.isPresent()){
-            if(isBasePresent.get().size() == 0) {
+        } else if(isBasePresent.isPresent() && isBasePresent.get().size() != 0){
                 throw new PlaceServiceException("Удаление зарезервированного места/зала невозможно!");
-            }
         }
         return placeRepository.delete(placeId);
+    }
+
+    public boolean isPlaceExist(Species species, Integer placeNumber) {
+        Optional<Place> isPlaceExist =
+                placeRepository.findBySpeciesAndPlaceNumber(species, placeNumber);
+        if(isPlaceExist.isEmpty()){
+            return false;
+        } else
+            return true;
+    }
+
+    public boolean isPlaceExist(Long placeId) {
+        Optional<Place> isPlaceExist =
+                placeRepository.findById(placeId);
+        if(isPlaceExist.isEmpty()){
+            return false;
+        } else
+            return true;
     }
 }
