@@ -98,11 +98,10 @@ public class UserBase implements UserRepository {
 
     @Override
     public Optional<User> findUserByLogin(String userLogin) {
-        return Optional.ofNullable(userBase.entrySet().stream()
+        return userBase.entrySet().stream()
                 .map(k -> k.getValue())
                 .filter(u -> u.getUserLogin().equals(userLogin))
-                .findAny()
-                .orElseThrow(() -> new UserBaseException("Пользователь с таким логином не найден!")));
+                .findAny();
     }
 
     @Override
