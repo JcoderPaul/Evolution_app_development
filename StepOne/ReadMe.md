@@ -56,7 +56,7 @@
   - [entity](https://github.com/JcoderPaul/Evolution_app_development/tree/master/StepOne/src/main/java/me/oldboy/input/entity) - основные рабочие элементы проекта с которыми происходят манипуляции (залы, рабочие места, 
 слот времени для резервирования, пользователи, записи о резервировании содержащие сведения о том, что, когда, 
 и на сколько было зарезервировано);
-  - [exceptions](https://github.com/JcoderPaul/Evolution_app_development/tree/master/StepOne/src/main/java/me/oldboy/input/exeptions) - папа с исключениями;
+  - [exceptions](https://github.com/JcoderPaul/Evolution_app_development/tree/master/StepOne/src/main/java/me/oldboy/input/exeptions) - папка с исключениями;
   - [repository](https://github.com/JcoderPaul/Evolution_app_development/tree/master/StepOne/src/main/java/me/oldboy/input/repository) - базы данных хранящие существующие в нашем коворкин-центре: залы, рабочие места, 
 зарегистрированные пользователей, записи о бронировании залов и рабочих мест.
 
