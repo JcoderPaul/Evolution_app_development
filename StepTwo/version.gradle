@@ -1,0 +1,11 @@
+ext {
+    versions = [
+            'testcontainers': '1.19.1',
+            'postgres': '42.6.0',
+            'liquibase': '4.28.0',
+            'jupiter': '5.8.1',
+            'mockito': '5.12.0',
+            'assertj': '3.26.0',
+            'maven_plugins': '3.3.0'
+    ]
+}

@@ -1,0 +1,39 @@
+plugins {
+    id 'java'
+    id "io.freefair.lombok" version "8.3"
+}
+
+group 'me.oldboy'
+version '1.0-SNAPSHOT'
+
+apply from: 'version.gradle'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation "org.postgresql:postgresql:${versions.postgres}"
+    implementation "org.liquibase:liquibase-core:${versions.liquibase}"
+
+    testImplementation "org.testcontainers:postgresql:${versions.testcontainers}"
+    testImplementation "org.testcontainers:junit-jupiter:${versions.testcontainers}"
+    testImplementation "org.testcontainers:postgresql:${versions.testcontainers}"
+
+    testImplementation "org.junit.jupiter:junit-jupiter-api:${versions.jupiter}"
+    testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:${versions.jupiter}"
+
+    testImplementation "org.apache.maven.plugins:maven-failsafe-plugin:${versions.maven_plugins}"
+    implementation "org.apache.maven.plugins:maven-surefire-plugin:${versions.maven_plugins}"
+
+    testImplementation "org.mockito:mockito-core:${versions.mockito}"
+    testRuntimeOnly "org.mockito:mockito-core:${versions.mockito}"
+    testImplementation "org.mockito:mockito-junit-jupiter:${versions.mockito}"
+    testImplementation "org.assertj:assertj-core:${versions.assertj}"
+    testRuntimeOnly "org.assertj:assertj-core:${versions.assertj}"
+
+}
+
+test {
+    useJUnitPlatform()
+}
