@@ -11,7 +11,6 @@ public interface SlotRepository {
     /* CRUD - Read */
     List<Slot> findAllSlots();
     Optional<Slot> findSlotById(Long placeId);
-
     Optional<Slot> findSlotByNumber(Integer slotNumber);
     /* CRUD - Update */
     boolean updateSlot(Slot slot);
