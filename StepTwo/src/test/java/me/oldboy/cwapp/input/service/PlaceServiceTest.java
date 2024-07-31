@@ -1,6 +1,5 @@
 package me.oldboy.cwapp.input.service;
 
-import me.oldboy.cwapp.exceptions.repositorys.PlaceRepositoryException;
 import me.oldboy.cwapp.exceptions.services.PlaceServiceException;
 import me.oldboy.cwapp.input.entity.Place;
 import me.oldboy.cwapp.input.entity.Reservation;
@@ -19,7 +18,6 @@ import java.util.Optional;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 
 class PlaceServiceTest {
