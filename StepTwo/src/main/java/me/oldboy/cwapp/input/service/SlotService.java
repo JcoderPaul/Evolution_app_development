@@ -27,13 +27,14 @@ public class SlotService {
      * @return new created (and save to base) slot ID
      */
     public Long createSlot(Slot slot){
-        Optional<Slot> mayBeCreate = slotRepository.createSlot(slot);
-        if(mayBeCreate.isEmpty()){
-            throw new SlotServiceException("Возможно" + "'" + slot.getSlotNumber() + "' : " +
-                                           slot.getTimeStart() + " - " + slot.getTimeFinish() +
-                                           " уже существует!");
+        if(isSlotConflict(slot)){
+            throw new SlotServiceException("Конфликт временного диапазона слота бронирования!");
+        } else if(slotRepository.findSlotByNumber(slot.getSlotNumber()).isPresent()){
+            throw new SlotServiceException("Возможно слот с номером " + "'" + slot.getSlotNumber() +
+                                           "' и временным интервалом: " + slot.getTimeStart() +
+                                           " - " + slot.getTimeFinish() + " уже существует!");
         } else
-            return mayBeCreate.get().getSlotId();
+            return slotRepository.createSlot(slot).get().getSlotId();
     }
 
     /**
@@ -87,7 +88,8 @@ public class SlotService {
      * Update existing slot.
      *
      * @param slot for update
-     * @throws SlotServiceException if nave no slot for update in base
+     * @throws SlotServiceException if have no slot for update in base
+     * @throws SlotServiceException if have time range conflict in slot update
      *
      * @return true if delete is success
      *         false if delete if fail
@@ -97,6 +99,8 @@ public class SlotService {
             throw new SlotServiceException("Слот - '" + slot.getSlotNumber() + "': " +
                                            slot.getTimeStart() + " - " + slot.getTimeFinish() +
                                            " нельзя обновить, т.к. слот не существует!");
+        } else if(isSlotConflict(slot)) {
+            throw new SlotServiceException("Конфликт временного диапазона при обновлении слота!");
         } else
             return slotRepository.updateSlot(slot);
     }
@@ -120,5 +124,13 @@ public class SlotService {
             throw new SlotServiceException("Удаление зарезервированного слота невозможно!");
         } else
             return slotRepository.deleteSlot(slotId);
+    }
+
+    private boolean isSlotConflict(Slot newSlot){
+        return slotRepository.findAllSlots()
+                .stream()
+                .anyMatch(existSlot ->
+                        existSlot.getTimeStart().isBefore(newSlot.getTimeFinish()) &&
+                                existSlot.getTimeFinish().isAfter(newSlot.getTimeStart()));
     }
 }
