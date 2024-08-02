@@ -26,10 +26,6 @@ public class ReserveService {
      * Create new reservation.
      *
      * @param reservation reservation to create with concrete parameters
-     * @throws ReserveServiceException have no user
-     * @throws ReserveServiceException have no place
-     * @throws ReserveServiceException have no slot
-     * @throws ReserveServiceException if try duplicate reservation
      *
      * @return create reservation ID
      */
@@ -225,6 +221,18 @@ public class ReserveService {
             return reservationRepository.deleteReservation(reservationId);
     }
 
+    /**
+     * Check the entered data for correctness.
+     *
+     * @param reservation reservation to create/update with concrete parameters
+     * @throws ReserveServiceException have no user
+     * @throws ReserveServiceException have no place
+     * @throws ReserveServiceException have no slot
+     * @throws ReserveServiceException if try duplicate reservation
+     *
+     * @return true - if entered data is correct
+     *         false - if entered data is not correct
+     */
     private boolean isReservationCorrect(Reservation reservation){
         Optional<User> mayBeUser = userRepository.findUserById(reservation.getUser().getUserId());
         Optional<Place> mayBePlace = placeRepository.findPlaceById(reservation.getPlace().getPlaceId());
