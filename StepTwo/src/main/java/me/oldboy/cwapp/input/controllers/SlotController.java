@@ -111,12 +111,12 @@ public class SlotController {
     private LocalTime[] setTimeRange(Scanner scanner){
         LocalTime[] newTimeRange = new LocalTime[2];
 
-        System.out.print("Выберите время начала диапазона (чч:мм): ");
+        System.out.print("Выберите время начала диапазона (hh:mm): ");
         String slotStartTimeForUpdate = scanner.nextLine();
         LocalTime slotStartTime = LocalTime.parse(slotStartTimeForUpdate);
         newTimeRange[0] = slotStartTime;
 
-        System.out.print("Выберите время конца диапазона (чч:мм): ");
+        System.out.print("Выберите время конца диапазона (hh:mm): ");
         String slotFinishTimeForUpdate = scanner.nextLine();
         LocalTime slotFinishTime = LocalTime.parse(slotFinishTimeForUpdate);
         newTimeRange[1] = slotFinishTime;
