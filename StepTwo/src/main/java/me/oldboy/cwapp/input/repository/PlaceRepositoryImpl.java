@@ -1,7 +1,6 @@
 package me.oldboy.cwapp.input.repository;
 
 import lombok.RequiredArgsConstructor;
-import me.oldboy.cwapp.exceptions.repositorys.PlaceRepositoryException;
 import me.oldboy.cwapp.input.entity.Place;
 import me.oldboy.cwapp.input.entity.Species;
 import me.oldboy.cwapp.input.repository.crud.PlaceRepository;
@@ -66,6 +65,7 @@ public class PlaceRepositoryImpl implements PlaceRepository {
 
     @Override
     public Optional<Place> createPlace(Place place) {
+        Place placeToBase = null;
         /*
         Для нас важно получить сгенерированный базой ID записи, поэтому мы передаем константу,
         которая указывает, что сгенерированные ключи должны быть доступны для извлечения. Акцент
@@ -84,109 +84,101 @@ public class PlaceRepositoryImpl implements PlaceRepository {
             */
             prepareStatement.executeUpdate();
             ResultSet generatedAutoId = prepareStatement.getGeneratedKeys();
-            Place placeToBase = null;
             if(generatedAutoId.next())
             {
                 long id = generatedAutoId.getLong("place_id");
                 placeToBase = new Place(id, place.getSpecies(), place.getPlaceNumber());
             }
-            return Optional.ofNullable(placeToBase);
         } catch (SQLException sqlException) {
-            throw new PlaceRepositoryException(sqlException.getMessage());
+            sqlException.printStackTrace();
         }
+        return Optional.ofNullable(placeToBase);
     }
 
     @Override
     public Optional<Place> findPlaceById(Long placeId){
+        Place mayBePlace = null;
         try(PreparedStatement preparedStatement = connection.prepareStatement(FIND_PLACE_BY_ID_SQL)) {
-
             preparedStatement.setLong(1, placeId);
-
             ResultSet resultSet = preparedStatement.executeQuery();
-            Place mayBePlace = null;
             if (resultSet.next()) {
                 mayBePlace = buildPlace(resultSet);
             }
-            return Optional.ofNullable(mayBePlace);
         } catch (SQLException sqlException) {
-            throw new PlaceRepositoryException(sqlException.getMessage());
+            sqlException.printStackTrace();
         }
+        return Optional.ofNullable(mayBePlace);
     }
 
     @Override
     public List<Place> findAllPlaces(){
+        List<Place> listPlace = new ArrayList<>();
         try(PreparedStatement preparedStatement = connection.prepareStatement(FIND_ALL_PLACES_SQL)) {
-
             ResultSet resultSet = preparedStatement.executeQuery();
-            List<Place> listPlace = new ArrayList<>();
             while (resultSet.next()) {
                 listPlace.add(buildPlace(resultSet));
             }
-            return listPlace;
         } catch (SQLException sqlException) {
-            throw new PlaceRepositoryException(sqlException.getMessage());
+            sqlException.printStackTrace();
         }
+        return listPlace;
     }
 
     @Override
     public boolean updatePlace(Place place) {
+        Boolean isUpdateCorrect = false;
         try(PreparedStatement prepareStatement = connection.prepareStatement(UPDATE_PLACE_SQL)) {
-
             prepareStatement.setString(1, place.getSpecies().name());
             prepareStatement.setInt(2, place.getPlaceNumber());
             prepareStatement.setLong(3, place.getPlaceId());
-
-            return prepareStatement.executeUpdate() > 0;
+            isUpdateCorrect = prepareStatement.executeUpdate() > 0;
         } catch (SQLException sqlException) {
-            throw new PlaceRepositoryException(sqlException.getMessage());
+            sqlException.printStackTrace();
         }
+        return isUpdateCorrect;
     }
 
     @Override
     public boolean deletePlace(Long placeId) {
+        Boolean isDeleteCorrect = false;
         try(PreparedStatement prepareStatement = connection.prepareStatement(DELETE_PLACE_BY_ID_SQL)) {
-
             prepareStatement.setLong(1, placeId);
-
-            return prepareStatement.executeUpdate() > 0;
+            isDeleteCorrect = prepareStatement.executeUpdate() > 0;
         } catch (SQLException sqlException) {
-            throw new PlaceRepositoryException(sqlException.getMessage());
+            sqlException.printStackTrace();
         }
+        return isDeleteCorrect;
     }
 
     @Override
     public Optional<Place> findPlaceBySpeciesAndNumber(Species species, Integer placeNumber){
+        Place mayBePlace = null;
         try(PreparedStatement preparedStatement = connection.prepareStatement(FIND_PLACE_BY_SPECIES_AND_NUMBER_SQL)) {
-
             preparedStatement.setString(1, species.name());
             preparedStatement.setInt(2, placeNumber);
-
             ResultSet resultSet = preparedStatement.executeQuery();
-            Place mayBePlace = null;
             if (resultSet.next()) {
                 mayBePlace = buildPlace(resultSet);
             }
-            return Optional.ofNullable(mayBePlace);
         } catch (SQLException sqlException) {
-            throw new PlaceRepositoryException(sqlException.getMessage());
+            sqlException.printStackTrace();
         }
+        return Optional.ofNullable(mayBePlace);
     }
 
     @Override
     public Optional<List<Place>> findAllPlacesBySpecies(Species species){
+        List<Place> mayBeListPlace = new ArrayList<>();
         try(PreparedStatement preparedStatement = connection.prepareStatement(FIND_ALL_PLACES_BY_SPECIES_SQL)) {
-
             preparedStatement.setString(1, species.name());
-
             ResultSet resultSet = preparedStatement.executeQuery();
-            List<Place> mayBeListPlace = new ArrayList<>();
             while (resultSet.next()) {
                 mayBeListPlace.add(buildPlace(resultSet));
             }
-            return Optional.ofNullable(mayBeListPlace);
         } catch (SQLException sqlException) {
-            throw new PlaceRepositoryException(sqlException.getMessage());
+            sqlException.printStackTrace();
         }
+        return Optional.ofNullable(mayBeListPlace);
     }
 
     private Place buildPlace(ResultSet resultSet) throws SQLException {
