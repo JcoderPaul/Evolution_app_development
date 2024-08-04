@@ -1,7 +1,6 @@
 package me.oldboy.cwapp.input.repository;
 
 import lombok.RequiredArgsConstructor;
-import me.oldboy.cwapp.exceptions.repositorys.SlotRepositoryException;
 import me.oldboy.cwapp.input.entity.Slot;
 import me.oldboy.cwapp.input.repository.crud.SlotRepository;
 
@@ -53,6 +52,7 @@ public class SlotRepositoryImpl implements SlotRepository {
 
     @Override
     public Optional<Slot> createSlot(Slot slot) {
+        Slot mayBeCreateSlot = null;
         /*
         Для нас важно получить сгенерированный базой ID записи, поэтому мы передаем константу,
         которая указывает, что сгенерированные ключи должны быть доступны для извлечения. Акцент
@@ -72,92 +72,88 @@ public class SlotRepositoryImpl implements SlotRepository {
             */
             preparedStatement.executeUpdate();
             ResultSet generatedAutoId = preparedStatement.getGeneratedKeys();
-            Slot mayBeCreateSlot = null;
             if(generatedAutoId.next())
             {
                 long id = generatedAutoId.getLong("slot_id");
                 mayBeCreateSlot = new Slot(id, slot.getSlotNumber(), slot.getTimeStart(), slot.getTimeFinish());
             }
-            return Optional.ofNullable(mayBeCreateSlot);
         } catch (SQLException sqlException) {
-            throw new SlotRepositoryException(sqlException);
+            sqlException.printStackTrace();
         }
+        return Optional.ofNullable(mayBeCreateSlot);
     }
 
     @Override
     public List<Slot> findAllSlots() {
+        List<Slot> newAllSlots = new ArrayList<>();
         try (PreparedStatement preparedStatement = connection.prepareStatement(FIND_ALL_SLOTS_SQL)) {
-
             ResultSet resultSet = preparedStatement.executeQuery();
-            List<Slot> newAllSlots = new ArrayList<>();
             while (resultSet.next()) {
                 newAllSlots.add(buildSlot(resultSet));
             }
-            return newAllSlots;
         } catch (SQLException sqlException) {
-            throw new SlotRepositoryException(sqlException);
+            sqlException.printStackTrace();
         }
+        return newAllSlots;
     }
 
     @Override
     public Optional<Slot> findSlotById(Long slotId){
+        Slot mayBeSlot = null;
         try(PreparedStatement preparedStatement = connection.prepareStatement(FIND_SLOT_BY_ID_SQL)) {
-
             preparedStatement.setLong(1, slotId);
-
             ResultSet resultSet = preparedStatement.executeQuery();
-            Slot mayBeSlot = null;
             if (resultSet.next()) {
                 mayBeSlot = buildSlot(resultSet);
             }
-            return Optional.ofNullable(mayBeSlot);
         } catch (SQLException sqlException) {
-            throw new SlotRepositoryException(sqlException);
+            sqlException.printStackTrace();
         }
+        return Optional.ofNullable(mayBeSlot);
     }
 
     @Override
     public Optional<Slot> findSlotByNumber(Integer slotNumber){
+        Slot mayBeSlot = null;
         try(PreparedStatement preparedStatement = connection.prepareStatement(FIND_SLOT_BY_NUMBER_SQL)) {
-
             preparedStatement.setInt(1, slotNumber);
-
             ResultSet resultSet = preparedStatement.executeQuery();
-            Slot mayBeSlot = null;
             if (resultSet.next()) {
                 mayBeSlot = buildSlot(resultSet);
             }
-            return Optional.ofNullable(mayBeSlot);
         } catch (SQLException sqlException) {
-            throw new SlotRepositoryException(sqlException);
+            sqlException.printStackTrace();
         }
+        return Optional.ofNullable(mayBeSlot);
     }
 
     @Override
     public boolean updateSlot(Slot slot) {
+        Boolean isSlotUpdated = false;
         try(PreparedStatement prepareStatement = connection.prepareStatement(UPDATE_SLOT_SQL)) {
-
             prepareStatement.setInt(1, slot.getSlotNumber());
             prepareStatement.setTime(2, Time.valueOf(slot.getTimeStart()));
             prepareStatement.setTime(3, Time.valueOf(slot.getTimeFinish()));
             prepareStatement.setLong(4, slot.getSlotId());
-
-            return prepareStatement.executeUpdate() > 0;
+            isSlotUpdated = prepareStatement.executeUpdate() > 0;
         } catch (SQLException sqlException) {
-            throw new SlotRepositoryException(sqlException);
+            sqlException.printStackTrace();
         }
+        return isSlotUpdated;
     }
 
     @Override
     public boolean deleteSlot(Long slotId) {
+        Boolean isSlotDeleted = false;
         try(PreparedStatement prepareStatement = connection.prepareStatement(DELETE_SLOT_SQL)) {
 
             prepareStatement.setLong(1, slotId);
 
-            return prepareStatement.executeUpdate() > 0;
+            isSlotDeleted = prepareStatement.executeUpdate() > 0;
         } catch (SQLException sqlException) {
-            throw new SlotRepositoryException(sqlException);
+            sqlException.printStackTrace();
         }
+        return isSlotDeleted;
     }
 
     private Slot buildSlot(ResultSet resultSet) throws SQLException {
