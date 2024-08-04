@@ -1,7 +1,6 @@
 package me.oldboy.cwapp.input.repository;
 
 import lombok.RequiredArgsConstructor;
-import me.oldboy.cwapp.exceptions.repositorys.ReserveRepositoryException;
 import me.oldboy.cwapp.input.entity.Place;
 import me.oldboy.cwapp.input.entity.Reservation;
 import me.oldboy.cwapp.input.entity.Slot;
@@ -106,65 +105,59 @@ public class ReserveRepositoryImp implements ReservationRepository {
 
     @Override
     public Optional<Reservation> createReservation(Reservation newReservation) {
+        Reservation newReserve = null;
         try (PreparedStatement preparedStatement =
                      connection.prepareStatement(CREATE_RESERVE_SQL, Statement.RETURN_GENERATED_KEYS)) {
-
             preparedStatement.setDate(1, Date.valueOf(newReservation.getReserveDate()));
             preparedStatement.setLong(2, newReservation.getUser().getUserId());
             preparedStatement.setLong(3, newReservation.getPlace().getPlaceId());
             preparedStatement.setLong(4, newReservation.getSlot().getSlotId());
-
             preparedStatement.executeUpdate();
             ResultSet generatedKeys = preparedStatement.getGeneratedKeys();
-            Reservation newReserve = null;
             if (generatedKeys.next()) {
                 newReserve = reserveBuilder(generatedKeys);
             }
-            return Optional.ofNullable(newReserve);
         } catch (SQLException sqlException) {
-            throw new ReserveRepositoryException(sqlException);
+            sqlException.printStackTrace();
         }
+        return Optional.ofNullable(newReserve);
     }
 
     @Override
     public Optional<Reservation> findReservationById(Long reserveId) {
+        Reservation findReserve = null;
         try (PreparedStatement preparedStatement = connection.prepareStatement(FIND_RESERVE_BY_ID_SQL)) {
-
             preparedStatement.setLong(1, reserveId);
             ResultSet resultSet = preparedStatement.executeQuery();
-            Reservation findReserve = null;
             if (resultSet.next()) {
                 findReserve = reserveBuilder(resultSet);
             }
-            return Optional.ofNullable(findReserve);
         } catch (SQLException sqlException) {
-            throw new ReserveRepositoryException(sqlException);
+            sqlException.printStackTrace();
         }
+        return Optional.ofNullable(findReserve);
     }
 
     @Override
     public Optional<List<Reservation>> findAllReservation() {
+        List<Reservation> newAllReserve = new ArrayList<>();
         try (PreparedStatement preparedStatement = connection.prepareStatement(FIND_ALL_RESERVE_SQL)) {
-
             ResultSet resultSet = preparedStatement.executeQuery();
-            List<Reservation> newAllReserve = new ArrayList<>();
             while (resultSet.next()) {
                 newAllReserve.add(reserveBuilder(resultSet));
             }
-            return Optional.ofNullable(newAllReserve);
         } catch (SQLException sqlException) {
-            throw new ReserveRepositoryException(sqlException);
+            sqlException.printStackTrace();
         }
+        return Optional.ofNullable(newAllReserve);
     }
 
     @Override
     public Optional<List<Reservation>> findReservationByDate(LocalDate date) {
+        List<Reservation> newAllReserve = new ArrayList<>();
         try (PreparedStatement preparedStatement = connection.prepareStatement(FIND_RESERVE_BY_DATE_SQL)) {
-
             preparedStatement.setDate(1, Date.valueOf(date));
-
             ResultSet resultSet = preparedStatement.executeQuery();
-            List<Reservation> newAllReserve = new ArrayList<>();
             /*
             В отличие от метода *.findReservationById(), где результатом может быть только одна запись в БД,
             тут мы ищем брони по дате, а значит, можем получить серьезный список таковых и поэтому применяется
@@ -173,110 +166,103 @@ public class ReserveRepositoryImp implements ReservationRepository {
             while (resultSet.next()) {
                 newAllReserve.add(reserveBuilder(resultSet));
             }
-            return Optional.ofNullable(newAllReserve);
         } catch (SQLException sqlException) {
-            throw new ReserveRepositoryException(sqlException);
+            sqlException.printStackTrace();
         }
+        return Optional.ofNullable(newAllReserve);
     }
 
     @Override
     public Optional<List<Reservation>> findReservationByPlaceId(Long placeId) {
+        List<Reservation> newAllReserve = new ArrayList<>();
         try (PreparedStatement preparedStatement = connection.prepareStatement(FIND_RESERVE_BY_PLACE_SQL)) {
-
             preparedStatement.setLong(1, placeId);
-
             ResultSet resultSet = preparedStatement.executeQuery();
-            List<Reservation> newAllReserve = new ArrayList<>();
             while (resultSet.next()) {
                 newAllReserve.add(reserveBuilder(resultSet));
             }
-            return Optional.ofNullable(newAllReserve);
         } catch (SQLException sqlException) {
-            throw new ReserveRepositoryException(sqlException);
+            sqlException.printStackTrace();
         }
+        return Optional.ofNullable(newAllReserve);
     }
 
     @Override
     public Optional<List<Reservation>> findReservationBySlotId(Long slotId) {
+        List<Reservation> newAllReserve = new ArrayList<>();
         try (PreparedStatement preparedStatement = connection.prepareStatement(FIND_RESERVE_BY_SLOT_SQL)) {
-
             preparedStatement.setLong(1, slotId);
-
             ResultSet resultSet = preparedStatement.executeQuery();
-            List<Reservation> newAllReserve = new ArrayList<>();
             while (resultSet.next()) {
                 newAllReserve.add(reserveBuilder(resultSet));
             }
-            return Optional.ofNullable(newAllReserve);
         } catch (SQLException sqlException) {
-            throw new ReserveRepositoryException(sqlException);
+            sqlException.printStackTrace();
         }
+        return Optional.ofNullable(newAllReserve);
     }
 
     @Override
     public Optional<Reservation> findReservationByDatePlaceAndSlot(LocalDate date,
                                                                    Long placeId,
                                                                    Long slotId) {
+        Reservation findReserve = null;
         try (PreparedStatement preparedStatement = connection.prepareStatement(FIND_RESERVE_BY_DATE_PLACE_SLOT_SQL)) {
-
             preparedStatement.setDate(1, Date.valueOf(date));
             preparedStatement.setLong(2, placeId);
             preparedStatement.setLong(3, slotId);
-
             ResultSet resultSet = preparedStatement.executeQuery();
-            Reservation findReserve = null;
             if (resultSet.next()) {
                 findReserve = reserveBuilder(resultSet);
             }
-            return Optional.ofNullable(findReserve);
+
         } catch (SQLException sqlException) {
-            throw new ReserveRepositoryException(sqlException);
+            sqlException.printStackTrace();
         }
+        return Optional.ofNullable(findReserve);
     }
 
     @Override
     public Optional<List<Reservation>> findReservationByUserId(Long userId) {
+        List<Reservation> findReserve = new ArrayList<>();
         try (PreparedStatement preparedStatement = connection.prepareStatement(FIND_RESERVE_BY_USER_ID_SQL)) {
-
             preparedStatement.setLong(1, userId);
-
             ResultSet resultSet = preparedStatement.executeQuery();
-            List<Reservation> findReserve = new ArrayList<>();
             while (resultSet.next()) {
                 findReserve.add(reserveBuilder(resultSet));
             }
-            return Optional.ofNullable(findReserve);
         } catch (SQLException sqlException) {
-            throw new ReserveRepositoryException(sqlException);
+            sqlException.printStackTrace();
         }
+        return Optional.ofNullable(findReserve);
     }
 
     @Override
     public boolean updateReservation(Reservation reservation){
+        Boolean isReservationUpdated = false;
         try(PreparedStatement prepareStatement = connection.prepareStatement(UPDATE_RESERVE_SQL)) {
-
             prepareStatement.setDate(1, Date.valueOf(reservation.getReserveDate()));
             prepareStatement.setLong(2, reservation.getUser().getUserId());
             prepareStatement.setLong(3, reservation.getPlace().getPlaceId());
             prepareStatement.setLong(4, reservation.getSlot().getSlotId());
             prepareStatement.setLong(5, reservation.getReserveId());
-
-            return prepareStatement.executeUpdate() > 0;
+            isReservationUpdated = prepareStatement.executeUpdate() > 0;
         } catch (SQLException sqlException) {
-            throw new ReserveRepositoryException(sqlException);
+            sqlException.printStackTrace();
         }
+        return isReservationUpdated;
     }
 
     @Override
     public boolean deleteReservation(Long reserve_id) {
+        Boolean isReservationDeleted = false;
         try(PreparedStatement prepareStatement = connection.prepareStatement(DELETE_RESERVE_BY_ID_SQL)) {
-
             prepareStatement.setLong(1, reserve_id);
-
-            return prepareStatement.executeUpdate() > 0;
+            isReservationDeleted = prepareStatement.executeUpdate() > 0;
         } catch (SQLException sqlException) {
-            throw new ReserveRepositoryException(sqlException);
+            sqlException.printStackTrace();
         }
+        return isReservationDeleted;
     }
 
     private Reservation reserveBuilder(ResultSet resultSet) throws SQLException {
