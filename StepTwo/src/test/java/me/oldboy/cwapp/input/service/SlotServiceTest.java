@@ -1,11 +1,9 @@
 package me.oldboy.cwapp.input.service;
 
 import me.oldboy.cwapp.exceptions.services.SlotServiceException;
-import me.oldboy.cwapp.input.entity.Place;
 import me.oldboy.cwapp.input.entity.Reservation;
 import me.oldboy.cwapp.input.entity.Slot;
-import me.oldboy.cwapp.input.entity.Species;
-import me.oldboy.cwapp.input.repository.crud.PlaceRepository;
+
 import me.oldboy.cwapp.input.repository.crud.ReservationRepository;
 import me.oldboy.cwapp.input.repository.crud.SlotRepository;
 import org.junit.jupiter.api.BeforeEach;
@@ -15,7 +13,6 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 import java.time.LocalTime;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -34,6 +31,7 @@ class SlotServiceTest {
     private SlotService slotService;
     private Slot testSlotWithThreeParam;
     private Slot testSlotWithId;
+    private Slot testSlotWithTimeRangeConflict;
     private Long testSlotId;
     private Integer testSlotNumber;
     private LocalTime testStartTime;
@@ -47,10 +45,16 @@ class SlotServiceTest {
         testSlotNumber = 19;
         testStartTime = LocalTime.parse("19:00");
         testFinishTime = LocalTime.parse("20:00");
-        testSlotList = List.of(new Slot(), new Slot(), new Slot());
+        testSlotList = List.of(
+                new Slot(9L, 18, LocalTime.parse("18:00"), LocalTime.parse("19:00")),
+                new Slot(11L, 20, LocalTime.parse("20:00"), LocalTime.parse("21:00")),
+                new Slot(8L, 17, LocalTime.parse("17:00"), LocalTime.parse("18:00")));
         emptyTestSlotBase = List.of();
         testSlotWithThreeParam = new Slot(testSlotNumber, testStartTime, testFinishTime);
         testSlotWithId = new Slot(testSlotId, testSlotNumber, testStartTime, testFinishTime);
+        testSlotWithTimeRangeConflict =
+                new Slot(10L, 19, LocalTime.parse("18:58"), LocalTime.parse("20:02"));
+
         MockitoAnnotations.openMocks(this);
     }
 
@@ -58,23 +62,37 @@ class SlotServiceTest {
 
     @Test
     void shouldReturnSlotId_createSlotTest() {
-        when(slotRepository.createSlot(testSlotWithThreeParam))
-                .thenReturn(Optional.of(testSlotWithId));
+        when(slotRepository.findAllSlots()).thenReturn(testSlotList);
+        when(slotRepository.findSlotByNumber(testSlotNumber)).thenReturn(Optional.empty());
+        when(slotRepository.createSlot(testSlotWithThreeParam)).thenReturn(Optional.of(testSlotWithId));
+
         assertThat(slotService.createSlot(testSlotWithThreeParam))
                 .isEqualTo(testSlotId);
     }
 
     @Test
-    void shouldReturnException_createSlotTest() {
-        when(slotRepository.createSlot(testSlotWithThreeParam))
-                .thenReturn(Optional.empty());
+    void shouldReturnExceptionDuplicateNumber_createSlotTest() {
+        when(slotRepository.findAllSlots())
+                .thenReturn(testSlotList);
+        when(slotRepository.findSlotByNumber(testSlotWithThreeParam.getSlotNumber()))
+                .thenReturn(Optional.of(testSlotWithId));
+
         assertThatThrownBy(() -> slotService.createSlot(testSlotWithThreeParam))
                 .isInstanceOf(SlotServiceException.class)
-                .hasMessageContaining("Возможно" +
-                                                "'" + testSlotWithThreeParam.getSlotNumber() +
-                                                "' : " + testSlotWithThreeParam.getTimeStart() +
-                                                " - " + testSlotWithThreeParam.getTimeFinish() +
-                                                " уже существует!");
+                .hasMessageContaining("Возможно слот с номером " + "'" +
+                        testSlotWithThreeParam.getSlotNumber() + "' и временным интервалом: " +
+                        testSlotWithThreeParam.getTimeStart() + " - " +
+                        testSlotWithThreeParam.getTimeFinish() + " уже существует!");
+    }
+
+    @Test
+    void shouldReturnExceptionTimeRangeConflict_createSlotTest() {
+        when(slotRepository.findAllSlots()).thenReturn(testSlotList);
+        when(slotRepository.findSlotByNumber(testSlotWithThreeParam.getSlotNumber()))
+                .thenReturn(Optional.empty());
+        assertThatThrownBy(() -> slotService.createSlot(testSlotWithTimeRangeConflict))
+                .isInstanceOf(SlotServiceException.class)
+                .hasMessageContaining("Конфликт временного диапазона слота бронирования!");
     }
 
     /* Тестируем метод *.findAllSlots() условного уровня сервисов */
@@ -153,7 +171,7 @@ class SlotServiceTest {
     }
 
     @Test
-    void shouldReturnException_updateSlotTest() {
+    void shouldReturnExceptionHaveNoSlotId_updateSlotTest() {
         when(slotRepository.findSlotById(testSlotId)).thenReturn(Optional.empty());
         assertThatThrownBy(() -> slotService.updateSlot(testSlotWithId))
                 .isInstanceOf(SlotServiceException.class)
@@ -161,6 +179,16 @@ class SlotServiceTest {
                                                 "': " + testSlotWithId.getTimeStart() +
                                                 " - " + testSlotWithId.getTimeFinish() +
                                                 " нельзя обновить, т.к. слот не существует!");
+    }
+
+    @Test
+    void shouldReturnExceptionTimeRangeConflict_updateSlotTest() {
+        when(slotRepository.findSlotById(testSlotWithTimeRangeConflict.getSlotId()))
+                .thenReturn(Optional.of(testSlotWithTimeRangeConflict));
+        when(slotRepository.findAllSlots()).thenReturn(testSlotList);
+        assertThatThrownBy(() -> slotService.updateSlot(testSlotWithTimeRangeConflict))
+                .isInstanceOf(SlotServiceException.class)
+                .hasMessageContaining("Конфликт временного диапазона при обновлении слота!");
     }
 
     /* Тестируем метод *.deleteSlot() условного уровня сервисов */
