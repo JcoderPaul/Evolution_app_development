@@ -1,12 +1,12 @@
-package me.oldboy.cwapp.input.service;
+package me.oldboy.cwapp.core.service;
 
 import lombok.RequiredArgsConstructor;
-import me.oldboy.cwapp.input.entity.Place;
+import me.oldboy.cwapp.core.entity.Place;
 import me.oldboy.cwapp.exceptions.services.PlaceServiceException;
-import me.oldboy.cwapp.input.entity.Reservation;
-import me.oldboy.cwapp.input.entity.Species;
-import me.oldboy.cwapp.input.repository.crud.PlaceRepository;
-import me.oldboy.cwapp.input.repository.crud.ReservationRepository;
+import me.oldboy.cwapp.core.entity.Reservation;
+import me.oldboy.cwapp.core.entity.Species;
+import me.oldboy.cwapp.core.repository.crud.PlaceRepository;
+import me.oldboy.cwapp.core.repository.crud.ReservationRepository;
 
 import java.util.List;
 import java.util.Optional;
