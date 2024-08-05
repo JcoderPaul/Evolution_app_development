@@ -89,6 +89,7 @@ public class PlaceRepositoryImpl implements PlaceRepository {
                 long id = generatedAutoId.getLong("place_id");
                 placeToBase = new Place(id, place.getSpecies(), place.getPlaceNumber());
             }
+            connection.commit();
         } catch (SQLException sqlException) {
             sqlException.printStackTrace();
         }
@@ -104,6 +105,7 @@ public class PlaceRepositoryImpl implements PlaceRepository {
             if (resultSet.next()) {
                 mayBePlace = buildPlace(resultSet);
             }
+            connection.commit();
         } catch (SQLException sqlException) {
             sqlException.printStackTrace();
         }
@@ -118,6 +120,7 @@ public class PlaceRepositoryImpl implements PlaceRepository {
             while (resultSet.next()) {
                 listPlace.add(buildPlace(resultSet));
             }
+            connection.commit();
         } catch (SQLException sqlException) {
             sqlException.printStackTrace();
         }
@@ -132,6 +135,7 @@ public class PlaceRepositoryImpl implements PlaceRepository {
             prepareStatement.setInt(2, place.getPlaceNumber());
             prepareStatement.setLong(3, place.getPlaceId());
             isUpdateCorrect = prepareStatement.executeUpdate() > 0;
+            connection.commit();
         } catch (SQLException sqlException) {
             sqlException.printStackTrace();
         }
@@ -144,6 +148,7 @@ public class PlaceRepositoryImpl implements PlaceRepository {
         try(PreparedStatement prepareStatement = connection.prepareStatement(DELETE_PLACE_BY_ID_SQL)) {
             prepareStatement.setLong(1, placeId);
             isDeleteCorrect = prepareStatement.executeUpdate() > 0;
+            connection.commit();
         } catch (SQLException sqlException) {
             sqlException.printStackTrace();
         }
@@ -160,6 +165,7 @@ public class PlaceRepositoryImpl implements PlaceRepository {
             if (resultSet.next()) {
                 mayBePlace = buildPlace(resultSet);
             }
+            connection.commit();
         } catch (SQLException sqlException) {
             sqlException.printStackTrace();
         }
@@ -175,6 +181,7 @@ public class PlaceRepositoryImpl implements PlaceRepository {
             while (resultSet.next()) {
                 mayBeListPlace.add(buildPlace(resultSet));
             }
+            connection.commit();
         } catch (SQLException sqlException) {
             sqlException.printStackTrace();
         }
