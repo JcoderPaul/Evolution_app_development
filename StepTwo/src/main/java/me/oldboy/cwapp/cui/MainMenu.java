@@ -16,11 +16,11 @@ public class MainMenu {
     private static SlotsCrudMenuItem slotsCrudMenuItem;
     private static ReservationMenuItem reservationMenuItem;
     private static CwAppContext cwAppContext;
-    private MainMenu(Connection connection) {}
+    private MainMenu() {}
 
     public static MainMenu getInstance(Connection connection) {
         if(instance == null){
-            instance = new MainMenu(connection);
+            instance = new MainMenu();
         }
         cwAppContext = CwAppContext.getInstance(connection);
         userAuthMenuItem =
