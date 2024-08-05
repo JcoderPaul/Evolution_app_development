@@ -1,6 +1,6 @@
-package me.oldboy.cwapp.input.repository.crud;
+package me.oldboy.cwapp.core.repository.crud;
 
-import me.oldboy.cwapp.input.entity.User;
+import me.oldboy.cwapp.core.entity.User;
 
 import java.util.List;
 import java.util.Optional;
