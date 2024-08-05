@@ -113,6 +113,7 @@ public class UserRepositoryImpl implements UserRepository {
                 long id = generatedAutoId.getLong("user_id");
                 userToBase = new User(id, user.getLogin(), user.getPassword());
             }
+            connection.commit();
 
         } catch (SQLException sqlException) {
             sqlException.printStackTrace();
@@ -128,7 +129,7 @@ public class UserRepositoryImpl implements UserRepository {
             while (resultOfQuery.next()){
                 findAllUsers.add(buildUser(resultOfQuery));
             }
-
+            connection.commit();
         } catch (SQLException sqlException) {
             sqlException.printStackTrace();
         }
@@ -144,7 +145,7 @@ public class UserRepositoryImpl implements UserRepository {
             if (resultSet.next()) {
                 mayBeUser = buildUser(resultSet);
             }
-
+            connection.commit();
         } catch (SQLException sqlException) {
             sqlException.printStackTrace();
         }
@@ -160,6 +161,7 @@ public class UserRepositoryImpl implements UserRepository {
             if (resultSet.next()) {
                 mayBeUser = buildUser(resultSet);
             }
+            connection.commit();
         } catch (SQLException sqlException) {
             sqlException.printStackTrace();
         }
@@ -176,6 +178,7 @@ public class UserRepositoryImpl implements UserRepository {
             if (resultSet.next()) {
                 mayBeUser = buildUser(resultSet);
             }
+            connection.commit();
         } catch (SQLException sqlException) {
             sqlException.printStackTrace();
         }
@@ -193,6 +196,7 @@ public class UserRepositoryImpl implements UserRepository {
             prepareStatement.setLong(4, user.getUserId());
 
             isUserUpdated = prepareStatement.executeUpdate() > 0;
+            connection.commit();
         } catch (SQLException sqlException) {
             sqlException.printStackTrace();
         }
@@ -205,6 +209,7 @@ public class UserRepositoryImpl implements UserRepository {
         try(PreparedStatement prepareStatement = connection.prepareStatement(DELETE_USER_BY_ID_SQL)) {
             prepareStatement.setLong(1, userId);
             isUserDeleted = prepareStatement.executeUpdate() > 0;
+            connection.commit();
         } catch (SQLException sqlException) {
             sqlException.printStackTrace();
         }
