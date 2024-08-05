@@ -1,11 +1,11 @@
-package me.oldboy.cwapp.input.controllers;
+package me.oldboy.cwapp.core.controllers;
 
 import lombok.RequiredArgsConstructor;
 import me.oldboy.cwapp.exceptions.controllers.SlotControllerException;
-import me.oldboy.cwapp.input.entity.*;
-import me.oldboy.cwapp.input.service.ReserveService;
-import me.oldboy.cwapp.input.service.SlotService;
-import me.oldboy.cwapp.input.service.UserService;
+import me.oldboy.cwapp.core.entity.*;
+import me.oldboy.cwapp.core.service.ReserveService;
+import me.oldboy.cwapp.core.service.SlotService;
+import me.oldboy.cwapp.core.service.UserService;
 
 import java.time.LocalTime;
 import java.util.Scanner;
