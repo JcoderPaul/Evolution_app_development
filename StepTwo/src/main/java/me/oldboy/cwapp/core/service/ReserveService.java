@@ -1,15 +1,15 @@
-package me.oldboy.cwapp.input.service;
+package me.oldboy.cwapp.core.service;
 
 import lombok.RequiredArgsConstructor;
 import me.oldboy.cwapp.exceptions.services.ReserveServiceException;
-import me.oldboy.cwapp.input.entity.Place;
-import me.oldboy.cwapp.input.entity.Reservation;
-import me.oldboy.cwapp.input.entity.Slot;
-import me.oldboy.cwapp.input.entity.User;
-import me.oldboy.cwapp.input.repository.crud.PlaceRepository;
-import me.oldboy.cwapp.input.repository.crud.ReservationRepository;
-import me.oldboy.cwapp.input.repository.crud.SlotRepository;
-import me.oldboy.cwapp.input.repository.crud.UserRepository;
+import me.oldboy.cwapp.core.entity.Place;
+import me.oldboy.cwapp.core.entity.Reservation;
+import me.oldboy.cwapp.core.entity.Slot;
+import me.oldboy.cwapp.core.entity.User;
+import me.oldboy.cwapp.core.repository.crud.PlaceRepository;
+import me.oldboy.cwapp.core.repository.crud.ReservationRepository;
+import me.oldboy.cwapp.core.repository.crud.SlotRepository;
+import me.oldboy.cwapp.core.repository.crud.UserRepository;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -175,7 +175,7 @@ public class ReserveService {
         } else if(mayBeSlot.isEmpty()){
             throw new ReserveServiceException("Слот с ID - " + slotId  + " не найден!");
         } else if(mayBeListReservation.isEmpty()){
-            throw new ReserveServiceException("Бронь на: " + date + " с такими параметрами не найдена!");
+            return null;
         } else
             return mayBeListReservation.get();
     }
