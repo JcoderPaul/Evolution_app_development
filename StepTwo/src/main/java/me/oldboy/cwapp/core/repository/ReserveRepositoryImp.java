@@ -117,6 +117,7 @@ public class ReserveRepositoryImp implements ReservationRepository {
             if (generatedKeys.next()) {
                 newReserve = reserveBuilder(generatedKeys);
             }
+            connection.commit();
         } catch (SQLException sqlException) {
             sqlException.printStackTrace();
         }
@@ -132,6 +133,7 @@ public class ReserveRepositoryImp implements ReservationRepository {
             if (resultSet.next()) {
                 findReserve = reserveBuilder(resultSet);
             }
+            connection.commit();
         } catch (SQLException sqlException) {
             sqlException.printStackTrace();
         }
@@ -146,6 +148,7 @@ public class ReserveRepositoryImp implements ReservationRepository {
             while (resultSet.next()) {
                 newAllReserve.add(reserveBuilder(resultSet));
             }
+            connection.commit();
         } catch (SQLException sqlException) {
             sqlException.printStackTrace();
         }
@@ -166,6 +169,7 @@ public class ReserveRepositoryImp implements ReservationRepository {
             while (resultSet.next()) {
                 newAllReserve.add(reserveBuilder(resultSet));
             }
+            connection.commit();
         } catch (SQLException sqlException) {
             sqlException.printStackTrace();
         }
@@ -181,6 +185,7 @@ public class ReserveRepositoryImp implements ReservationRepository {
             while (resultSet.next()) {
                 newAllReserve.add(reserveBuilder(resultSet));
             }
+            connection.commit();
         } catch (SQLException sqlException) {
             sqlException.printStackTrace();
         }
@@ -196,6 +201,7 @@ public class ReserveRepositoryImp implements ReservationRepository {
             while (resultSet.next()) {
                 newAllReserve.add(reserveBuilder(resultSet));
             }
+            connection.commit();
         } catch (SQLException sqlException) {
             sqlException.printStackTrace();
         }
@@ -215,7 +221,7 @@ public class ReserveRepositoryImp implements ReservationRepository {
             if (resultSet.next()) {
                 findReserve = reserveBuilder(resultSet);
             }
-
+            connection.commit();
         } catch (SQLException sqlException) {
             sqlException.printStackTrace();
         }
@@ -231,6 +237,7 @@ public class ReserveRepositoryImp implements ReservationRepository {
             while (resultSet.next()) {
                 findReserve.add(reserveBuilder(resultSet));
             }
+            connection.commit();
         } catch (SQLException sqlException) {
             sqlException.printStackTrace();
         }
@@ -247,6 +254,7 @@ public class ReserveRepositoryImp implements ReservationRepository {
             prepareStatement.setLong(4, reservation.getSlot().getSlotId());
             prepareStatement.setLong(5, reservation.getReserveId());
             isReservationUpdated = prepareStatement.executeUpdate() > 0;
+            connection.commit();
         } catch (SQLException sqlException) {
             sqlException.printStackTrace();
         }
@@ -259,6 +267,7 @@ public class ReserveRepositoryImp implements ReservationRepository {
         try(PreparedStatement prepareStatement = connection.prepareStatement(DELETE_RESERVE_BY_ID_SQL)) {
             prepareStatement.setLong(1, reserve_id);
             isReservationDeleted = prepareStatement.executeUpdate() > 0;
+            connection.commit();
         } catch (SQLException sqlException) {
             sqlException.printStackTrace();
         }
