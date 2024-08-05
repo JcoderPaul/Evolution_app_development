@@ -1,14 +1,14 @@
-package me.oldboy.cwapp.input.repository;
+package me.oldboy.cwapp.core.repository;
 
 import lombok.RequiredArgsConstructor;
-import me.oldboy.cwapp.input.entity.Place;
-import me.oldboy.cwapp.input.entity.Reservation;
-import me.oldboy.cwapp.input.entity.Slot;
-import me.oldboy.cwapp.input.entity.User;
-import me.oldboy.cwapp.input.repository.crud.PlaceRepository;
-import me.oldboy.cwapp.input.repository.crud.ReservationRepository;
-import me.oldboy.cwapp.input.repository.crud.SlotRepository;
-import me.oldboy.cwapp.input.repository.crud.UserRepository;
+import me.oldboy.cwapp.core.entity.Place;
+import me.oldboy.cwapp.core.entity.Reservation;
+import me.oldboy.cwapp.core.entity.Slot;
+import me.oldboy.cwapp.core.entity.User;
+import me.oldboy.cwapp.core.repository.crud.PlaceRepository;
+import me.oldboy.cwapp.core.repository.crud.ReservationRepository;
+import me.oldboy.cwapp.core.repository.crud.SlotRepository;
+import me.oldboy.cwapp.core.repository.crud.UserRepository;
 
 import java.sql.*;
 import java.time.LocalDate;
