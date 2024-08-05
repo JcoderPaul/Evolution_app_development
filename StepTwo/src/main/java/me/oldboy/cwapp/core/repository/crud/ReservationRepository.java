@@ -1,6 +1,6 @@
-package me.oldboy.cwapp.input.repository.crud;
+package me.oldboy.cwapp.core.repository.crud;
 
-import me.oldboy.cwapp.input.entity.Reservation;
+import me.oldboy.cwapp.core.entity.Reservation;
 
 import java.time.LocalDate;
 import java.util.List;
