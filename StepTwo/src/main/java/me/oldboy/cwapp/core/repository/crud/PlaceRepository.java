@@ -1,7 +1,7 @@
-package me.oldboy.cwapp.input.repository.crud;
+package me.oldboy.cwapp.core.repository.crud;
 
-import me.oldboy.cwapp.input.entity.Place;
-import me.oldboy.cwapp.input.entity.Species;
+import me.oldboy.cwapp.core.entity.Place;
+import me.oldboy.cwapp.core.entity.Species;
 
 import java.util.List;
 import java.util.Optional;
