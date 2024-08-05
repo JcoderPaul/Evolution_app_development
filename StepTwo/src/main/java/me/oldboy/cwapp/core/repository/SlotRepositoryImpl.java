@@ -1,8 +1,8 @@
-package me.oldboy.cwapp.input.repository;
+package me.oldboy.cwapp.core.repository;
 
 import lombok.RequiredArgsConstructor;
-import me.oldboy.cwapp.input.entity.Slot;
-import me.oldboy.cwapp.input.repository.crud.SlotRepository;
+import me.oldboy.cwapp.core.entity.Slot;
+import me.oldboy.cwapp.core.repository.crud.SlotRepository;
 
 import java.sql.*;
 import java.util.*;
