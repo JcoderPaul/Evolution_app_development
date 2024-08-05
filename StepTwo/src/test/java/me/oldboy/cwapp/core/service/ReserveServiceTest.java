@@ -1,11 +1,11 @@
-package me.oldboy.cwapp.input.service;
+package me.oldboy.cwapp.core.service;
 
 import me.oldboy.cwapp.exceptions.services.ReserveServiceException;
-import me.oldboy.cwapp.input.entity.*;
-import me.oldboy.cwapp.input.repository.crud.PlaceRepository;
-import me.oldboy.cwapp.input.repository.crud.ReservationRepository;
-import me.oldboy.cwapp.input.repository.crud.SlotRepository;
-import me.oldboy.cwapp.input.repository.crud.UserRepository;
+import me.oldboy.cwapp.core.entity.*;
+import me.oldboy.cwapp.core.repository.crud.PlaceRepository;
+import me.oldboy.cwapp.core.repository.crud.ReservationRepository;
+import me.oldboy.cwapp.core.repository.crud.SlotRepository;
+import me.oldboy.cwapp.core.repository.crud.UserRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -377,7 +377,7 @@ class ReserveServiceTest {
     }
 
     @Test
-    void shouldReturnExceptionHaveNoReservationOnDate_findReservationsByDatePlaceAndSlotIdTest() {
+    void shouldReturnNullHaveNoReservationOnDate_findReservationsByDatePlaceAndSlotIdTest() {
         when(placeRepository.findPlaceById(testPlace.getPlaceId()))
                 .thenReturn(Optional.of(testPlace));
         when(slotRepository.findSlotById(testSlot.getSlotId()))
@@ -387,12 +387,10 @@ class ReserveServiceTest {
                                                                      testSlot.getSlotId()))
                 .thenReturn(Optional.empty());
 
-        assertThatThrownBy(() -> reserveService.findReservationsByDatePlaceAndSlotId(testReservationDate,
-                testPlace.getPlaceId(),
-                testSlot.getSlotId()))
-                .isInstanceOf(ReserveServiceException.class)
-                .hasMessageContaining("Бронь на: " + testReservationDate +
-                                                " с такими параметрами не найдена!");
+        assertThat(reserveService.findReservationsByDatePlaceAndSlotId(testReservationDate,
+                                                                       testPlace.getPlaceId(),
+                                                                       testSlot.getSlotId()))
+                .isEqualTo(null);
     }
 
     @Test

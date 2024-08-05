@@ -1,10 +1,10 @@
-package me.oldboy.cwapp.input.controllers;
+package me.oldboy.cwapp.core.controllers;
 
 import me.oldboy.cwapp.exceptions.controllers.PlaceControllerException;
-import me.oldboy.cwapp.input.entity.*;
-import me.oldboy.cwapp.input.service.PlaceService;
-import me.oldboy.cwapp.input.service.ReserveService;
-import me.oldboy.cwapp.input.service.UserService;
+import me.oldboy.cwapp.core.entity.*;
+import me.oldboy.cwapp.core.service.PlaceService;
+import me.oldboy.cwapp.core.service.ReserveService;
+import me.oldboy.cwapp.core.service.UserService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;

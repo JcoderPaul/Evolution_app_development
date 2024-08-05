@@ -1,8 +1,8 @@
-package me.oldboy.cwapp.input.controllers;
+package me.oldboy.cwapp.core.controllers;
 
 import me.oldboy.cwapp.exceptions.controllers.UserControllerException;
-import me.oldboy.cwapp.input.entity.User;
-import me.oldboy.cwapp.input.service.UserService;
+import me.oldboy.cwapp.core.entity.User;
+import me.oldboy.cwapp.core.service.UserService;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

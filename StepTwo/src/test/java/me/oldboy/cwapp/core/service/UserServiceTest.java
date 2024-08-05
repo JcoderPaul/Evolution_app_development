@@ -1,10 +1,10 @@
-package me.oldboy.cwapp.input.service;
+package me.oldboy.cwapp.core.service;
 
 import me.oldboy.cwapp.exceptions.services.UserServiceException;
-import me.oldboy.cwapp.input.entity.Reservation;
-import me.oldboy.cwapp.input.entity.User;
-import me.oldboy.cwapp.input.repository.crud.ReservationRepository;
-import me.oldboy.cwapp.input.repository.crud.UserRepository;
+import me.oldboy.cwapp.core.entity.Reservation;
+import me.oldboy.cwapp.core.entity.User;
+import me.oldboy.cwapp.core.repository.crud.ReservationRepository;
+import me.oldboy.cwapp.core.repository.crud.UserRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;

@@ -1,11 +1,11 @@
-package me.oldboy.cwapp.input.service;
+package me.oldboy.cwapp.core.service;
 
 import me.oldboy.cwapp.exceptions.services.SlotServiceException;
-import me.oldboy.cwapp.input.entity.Reservation;
-import me.oldboy.cwapp.input.entity.Slot;
+import me.oldboy.cwapp.core.entity.Reservation;
+import me.oldboy.cwapp.core.entity.Slot;
 
-import me.oldboy.cwapp.input.repository.crud.ReservationRepository;
-import me.oldboy.cwapp.input.repository.crud.SlotRepository;
+import me.oldboy.cwapp.core.repository.crud.ReservationRepository;
+import me.oldboy.cwapp.core.repository.crud.SlotRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -137,12 +137,10 @@ class SlotServiceTest {
     }
 
     @Test
-    void shouldReturnExceptionIfHaveNoSlotWithDefiniteNumber_findSlotByNumberTest() {
+    void shouldReturnExceptionHaveNoSlotWithDefiniteNumber_findSlotByNumberTest() {
         when(slotRepository.findSlotByNumber(testSlotNumber))
                 .thenReturn(Optional.empty());
-        assertThatThrownBy(() -> slotService.findSlotByNumber(testSlotNumber))
-                .isInstanceOf(SlotServiceException.class)
-                .hasMessageContaining("Слот с номером - " + testSlotNumber + " не найден!");
+        assertThat(slotService.findSlotByNumber(testSlotNumber)).isEqualTo(null);
     }
 
     /* Тестируем метод *.updateSlot() условного уровня сервисов */

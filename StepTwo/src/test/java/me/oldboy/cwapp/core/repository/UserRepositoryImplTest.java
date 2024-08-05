@@ -1,11 +1,10 @@
-package me.oldboy.cwapp.input.repository;
+package me.oldboy.cwapp.core.repository;
 
-import me.oldboy.cwapp.config.ConnectionManager;
+import me.oldboy.cwapp.config.connection.ConnectionManager;
 import me.oldboy.cwapp.config.liquibase.LiquibaseManager;
-import me.oldboy.cwapp.input.entity.Place;
-import me.oldboy.cwapp.input.entity.Role;
-import me.oldboy.cwapp.input.entity.User;
-import me.oldboy.cwapp.input.repository.crud.UserRepository;
+import me.oldboy.cwapp.core.entity.Role;
+import me.oldboy.cwapp.core.entity.User;
+import me.oldboy.cwapp.core.repository.crud.UserRepository;
 import org.junit.jupiter.api.*;
 import org.testcontainers.containers.PostgreSQLContainer;
 import org.testcontainers.junit.jupiter.Container;
@@ -15,8 +14,6 @@ import java.sql.Connection;
 import java.util.List;
 import java.util.Optional;
 
-import static me.oldboy.cwapp.input.entity.Species.HALL;
-import static me.oldboy.cwapp.input.entity.Species.WORKPLACE;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 

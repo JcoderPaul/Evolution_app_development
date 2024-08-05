@@ -1,9 +1,9 @@
-package me.oldboy.cwapp.input.repository;
+package me.oldboy.cwapp.core.repository;
 
-import me.oldboy.cwapp.config.ConnectionManager;
+import me.oldboy.cwapp.config.connection.ConnectionManager;
 import me.oldboy.cwapp.config.liquibase.LiquibaseManager;
-import me.oldboy.cwapp.input.entity.Slot;
-import me.oldboy.cwapp.input.repository.crud.SlotRepository;
+import me.oldboy.cwapp.core.entity.Slot;
+import me.oldboy.cwapp.core.repository.crud.SlotRepository;
 import org.junit.jupiter.api.*;
 import org.testcontainers.containers.PostgreSQLContainer;
 import org.testcontainers.junit.jupiter.Container;
