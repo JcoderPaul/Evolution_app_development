@@ -1,9 +1,9 @@
-package me.oldboy.cwapp.input.repository;
+package me.oldboy.cwapp.core.repository;
 
 import lombok.RequiredArgsConstructor;
-import me.oldboy.cwapp.input.entity.Place;
-import me.oldboy.cwapp.input.entity.Species;
-import me.oldboy.cwapp.input.repository.crud.PlaceRepository;
+import me.oldboy.cwapp.core.entity.Place;
+import me.oldboy.cwapp.core.entity.Species;
+import me.oldboy.cwapp.core.repository.crud.PlaceRepository;
 
 import java.sql.*;
 import java.util.ArrayList;
