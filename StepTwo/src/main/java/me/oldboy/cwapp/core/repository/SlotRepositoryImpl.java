@@ -77,6 +77,7 @@ public class SlotRepositoryImpl implements SlotRepository {
                 long id = generatedAutoId.getLong("slot_id");
                 mayBeCreateSlot = new Slot(id, slot.getSlotNumber(), slot.getTimeStart(), slot.getTimeFinish());
             }
+            connection.commit();
         } catch (SQLException sqlException) {
             sqlException.printStackTrace();
         }
@@ -91,6 +92,7 @@ public class SlotRepositoryImpl implements SlotRepository {
             while (resultSet.next()) {
                 newAllSlots.add(buildSlot(resultSet));
             }
+            connection.commit();
         } catch (SQLException sqlException) {
             sqlException.printStackTrace();
         }
@@ -106,6 +108,7 @@ public class SlotRepositoryImpl implements SlotRepository {
             if (resultSet.next()) {
                 mayBeSlot = buildSlot(resultSet);
             }
+            connection.commit();
         } catch (SQLException sqlException) {
             sqlException.printStackTrace();
         }
@@ -121,6 +124,7 @@ public class SlotRepositoryImpl implements SlotRepository {
             if (resultSet.next()) {
                 mayBeSlot = buildSlot(resultSet);
             }
+            connection.commit();
         } catch (SQLException sqlException) {
             sqlException.printStackTrace();
         }
@@ -136,6 +140,7 @@ public class SlotRepositoryImpl implements SlotRepository {
             prepareStatement.setTime(3, Time.valueOf(slot.getTimeFinish()));
             prepareStatement.setLong(4, slot.getSlotId());
             isSlotUpdated = prepareStatement.executeUpdate() > 0;
+            connection.commit();
         } catch (SQLException sqlException) {
             sqlException.printStackTrace();
         }
@@ -146,10 +151,9 @@ public class SlotRepositoryImpl implements SlotRepository {
     public boolean deleteSlot(Long slotId) {
         Boolean isSlotDeleted = false;
         try(PreparedStatement prepareStatement = connection.prepareStatement(DELETE_SLOT_SQL)) {
-
             prepareStatement.setLong(1, slotId);
-
             isSlotDeleted = prepareStatement.executeUpdate() > 0;
+            connection.commit();
         } catch (SQLException sqlException) {
             sqlException.printStackTrace();
         }
