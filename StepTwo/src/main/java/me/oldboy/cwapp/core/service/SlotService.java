@@ -1,11 +1,11 @@
-package me.oldboy.cwapp.input.service;
+package me.oldboy.cwapp.core.service;
 
 import lombok.RequiredArgsConstructor;
 import me.oldboy.cwapp.exceptions.services.SlotServiceException;
-import me.oldboy.cwapp.input.entity.Reservation;
-import me.oldboy.cwapp.input.entity.Slot;
-import me.oldboy.cwapp.input.repository.crud.ReservationRepository;
-import me.oldboy.cwapp.input.repository.crud.SlotRepository;
+import me.oldboy.cwapp.core.entity.Reservation;
+import me.oldboy.cwapp.core.entity.Slot;
+import me.oldboy.cwapp.core.repository.crud.ReservationRepository;
+import me.oldboy.cwapp.core.repository.crud.SlotRepository;
 
 import java.util.*;
 
@@ -79,7 +79,7 @@ public class SlotService {
     public Slot findSlotByNumber(Integer slotNumber){
         Optional<Slot> mayBeSlot = slotRepository.findSlotByNumber(slotNumber);
         if(mayBeSlot.isEmpty()){
-            throw new SlotServiceException("Слот с номером - " + slotNumber + " не найден!");
+            return null;
         } else
             return mayBeSlot.get();
     }
