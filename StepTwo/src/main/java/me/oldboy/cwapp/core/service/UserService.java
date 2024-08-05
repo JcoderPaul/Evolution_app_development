@@ -1,10 +1,10 @@
-package me.oldboy.cwapp.input.service;
+package me.oldboy.cwapp.core.service;
 
 import lombok.RequiredArgsConstructor;
-import me.oldboy.cwapp.input.entity.User;
+import me.oldboy.cwapp.core.entity.User;
 import me.oldboy.cwapp.exceptions.services.UserServiceException;
-import me.oldboy.cwapp.input.repository.crud.ReservationRepository;
-import me.oldboy.cwapp.input.repository.crud.UserRepository;
+import me.oldboy.cwapp.core.repository.crud.ReservationRepository;
+import me.oldboy.cwapp.core.repository.crud.UserRepository;
 
 import java.util.List;
 import java.util.Optional;
