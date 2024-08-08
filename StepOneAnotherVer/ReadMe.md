@@ -23,8 +23,8 @@
 задания, и все уже покрыто тестами. Делаем CLI интерфейс. В отличие от первой версии программы [StepOne](https://github.com/JcoderPaul/Evolution_app_development/tree/master/StepOne)
 структура меню как бы размазана по [слою обработчиков](https://github.com/JcoderPaul/Evolution_app_development/tree/master/StepOneAnotherVer/src/main/java/me/oldboy/cwapp/handlers) и
 ['слою меню'](https://github.com/JcoderPaul/Evolution_app_development/tree/master/StepOneAnotherVer/src/main/java/me/oldboy/cwapp/out).
-- Шаг 7 - Меню готово. Покрываем тестами меню (общее покрытие 96% всего проекта, из них: 
-классы 96% - 62/64, методы 98% - 308/314, строки 96% 1356/1400).
+- Шаг 7 - Меню готово. Покрываем тестами меню, общее покрытие 96% всего проекта, из них: 
+классы 96% - (62/64), методы 98% - (308/314), строки 96% (1356/1400).
 
 Как и в [StepOne](https://github.com/JcoderPaul/Evolution_app_development/tree/master/StepOne):
 - Функциональные требования выполнены полностью.
