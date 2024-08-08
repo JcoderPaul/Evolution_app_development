@@ -1,6 +1,9 @@
 package me.oldboy.cwapp.config.liquibase;
 
 import liquibase.Liquibase;
+import liquibase.command.CommandScope;
+import liquibase.command.core.UpdateCommandStep;
+import liquibase.command.core.helpers.DbUrlConnectionArgumentsCommandStep;
 import liquibase.database.Database;
 import liquibase.database.DatabaseFactory;
 import liquibase.database.jvm.JdbcConnection;
@@ -47,16 +50,17 @@ public class LiquibaseManager {
      * @param connection The database connection (соединение с БД).
      */
     public void migrationsStart(Connection connection) {
-        try (PreparedStatement preparedStatement =
-                     connection.prepareStatement(SQL_CREATE_SCHEMA)){
+        try (PreparedStatement preparedStatement = connection.prepareStatement(SQL_CREATE_SCHEMA)){
             preparedStatement.execute();
             Database database =
                     DatabaseFactory.getInstance()
                             .findCorrectDatabaseImplementation(new JdbcConnection(connection));
             database.setLiquibaseSchemaName(SCHEMA_NAME);
-            Liquibase liquibase =
-                    new Liquibase(CHANGELOG_PATH, new ClassLoaderResourceAccessor(), database);
-            liquibase.update();
+            CommandScope updateCommand = new CommandScope(UpdateCommandStep.COMMAND_NAME);
+            updateCommand.addArgumentValue(DbUrlConnectionArgumentsCommandStep.DATABASE_ARG, database);
+            updateCommand.addArgumentValue(UpdateCommandStep.CHANGELOG_FILE_ARG, CHANGELOG_PATH);
+            updateCommand.execute();
+
             System.out.println("Migration is completed successfully");
         } catch (SQLException | LiquibaseException exception) {
             System.out.println("SQL Exception in migration:" + exception.getMessage());
