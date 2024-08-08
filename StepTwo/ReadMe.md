@@ -111,7 +111,9 @@ CRUD операции ему не доступны;
 ### Применение Docker-Compose.
 
 Применение декларативного подхода упрощает настройку проекта - [docker-compose.yaml](https://github.com/JcoderPaul/Evolution_app_development/blob/master/StepTwo/docker-compose.yaml).
-Фактически в одном файле мы описываем, что будет происходить при его запуске (см. комментарии) командой: docker-compose up.
+Фактически в одном файле мы описываем, что будет происходить при его запуске (см. комментарии) командой: 
+
+      docker-compose up
 
 Файл [.env](https://github.com/JcoderPaul/Evolution_app_development/blob/master/StepTwo/.env) описывает переменные, 
 которые будут переданы в контейнеры (login / password)
