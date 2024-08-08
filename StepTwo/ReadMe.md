@@ -173,6 +173,21 @@ CRUD операции ему не доступны;
 внесенные данные сохранились и доступны. Теперь тот же фокус проделаем с контейнером в котором находится PgAdmin4 и так же
 проводим настройку раздела Volumes в [compose.yaml файле](https://github.com/JcoderPaul/Evolution_app_development/blob/master/StepTwo/docker-compose.yaml) с указанием папки куда будет смонтирован образ нужных нам разделов.
 
+После запуска нашего docker-compose.yaml, в корне проекта появятся две папки, согласно наших настроек Volumes обоих контейнеров:
+- БД
+
+        volumes:
+          - ./db-data:/var/lib/postgresql/data
+
+- PgAdmin4
+
+        volumes:
+          - ./db-ui/pgadmin:/var/lib/pgadmin
+
+В итоге мы увидим:
+
+![MountFolders](https://github.com/JcoderPaul/Evolution_app_development/blob/master/StepTwo/JPG/MountFolder.png)
+
 ### Настройка соединения PgAdmin4 с БД PostgreSQL 13 развернутых в контейнерах.
 
 И так, у нас есть два контейнера с БД PostgreSQL 13 и программой WebUI PgAdmin4 для работы с теми же БД. Контейнер с PgAdmin4 
