@@ -231,3 +231,5 @@ CRUD операции ему не доступны;
 4. Заполняем нужные поля и жмем Save:
 
 ![Set Main Base Param](https://github.com/JcoderPaul/Evolution_app_development/blob/master/StepTwo/JPG/NewServer_StepTwo_AddHostName_Port_BaseName.png)
+
+Есть контакт! Работайте братья!
