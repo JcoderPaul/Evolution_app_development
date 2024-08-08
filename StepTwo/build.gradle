@@ -23,9 +23,6 @@ dependencies {
     testImplementation "org.junit.jupiter:junit-jupiter-api:${versions.jupiter}"
     testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:${versions.jupiter}"
 
-    testImplementation "org.apache.maven.plugins:maven-failsafe-plugin:${versions.maven_plugins}"
-    implementation "org.apache.maven.plugins:maven-surefire-plugin:${versions.maven_plugins}"
-
     testImplementation "org.mockito:mockito-core:${versions.mockito}"
     testRuntimeOnly "org.mockito:mockito-core:${versions.mockito}"
     testImplementation "org.mockito:mockito-junit-jupiter:${versions.mockito}"
