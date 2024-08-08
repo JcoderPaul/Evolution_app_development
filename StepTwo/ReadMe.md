@@ -61,11 +61,6 @@ CRUD операции ему не доступны;
 - [exceptions](https://github.com/JcoderPaul/Evolution_app_development/tree/master/StepTwo/src/main/java/me/oldboy/cwapp/exceptions) - папка с исключениями;
 - [CwMainApp.java](https://github.com/JcoderPaul/Evolution_app_development/blob/master/StepTwo/src/main/java/me/oldboy/cwapp/CwMainApp.java) - запускаемый модуль.
 
-
-- [resources](https://github.com/JcoderPaul/Evolution_app_development/tree/master/StepTwo/src/main/resources) - папка ресурсов и фалов настроек:
-  - [db/changelog](https://github.com/JcoderPaul/Evolution_app_development/tree/master/StepTwo/src/main/resources/db/changelog) - файлы миграции Liquibase;
-  - [application.properties](https://github.com/JcoderPaul/Evolution_app_development/blob/master/StepTwo/src/main/resources/application.properties) - файл настроек (см. комментарии);
-
 #### [Тесты](https://github.com/JcoderPaul/Evolution_app_development/tree/master/StepTwo/src/test/java/me/oldboy/cwapp) согласно расчетам IDE покрывают:
   - Классы 97% (70/72);
   - Методы 97% (392/402);
@@ -236,5 +231,3 @@ CRUD операции ему не доступны;
 4. Заполняем нужные поля и жмем Save:
 
 ![Set Main Base Param](https://github.com/JcoderPaul/Evolution_app_development/blob/master/StepTwo/JPG/NewServer_StepTwo_AddHostName_Port_BaseName.png)
-
-Есть контакт! Работайте братья!
