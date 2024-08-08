@@ -1,0 +1,27 @@
+name: oldboy_coworking_center_step_two # Присваиваем имя нашему docker проекту (необязательно, будет дано автоматом)
+services: # Элемент высшего уровня см. https://docs.docker.com/compose/compose-file/05-services/
+  postgresql: # Первый контейнер в нашем проекте - тут будет БД
+    image: postgres:13 # Нам нужен конкретный образ БД - PostgreSQL v.13 для нашего контейнера
+    container_name: cw_db # Имя первого контейнера (необязательно, будет дано автоматом из метки postgresql)
+    environment: # Задаем параметры окружения
+      POSTGRES_USER: ${POSTGRES_USER} # Задаем логин к БД (берется из файла .env в корне проекта)
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD} # Задаем пароль к БД (берется из файла .env в корне проекта)
+      POSTGRES_DB: coworking_db # Даем имя будущей БД
+    ports: # Пробрасываем порты host (наша локальная машина) - 5436 на docker (контейнер с БД) - 5432
+      - "5436:5432"
+    volumes:
+      - ./db-data:/var/lib/postgresql/data
+
+  pgadmin: # Второй контейнер в нашем проекте - тут будет web-интерфейс управления БД
+    image: dpage/pgadmin4
+    container_name: pgadmin_ui_db # Имя второго контейнера (необязательно, будет дано автоматом из метки pgadmin)
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL} # Задаем логин к PgAdmin_4 (берется из файла .env в корне проекта)
+      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD} # Задаем пароль к PgAdmin_4 (берется из файла .env в корне проекта)
+    ports:
+      - "5050:80"
+    volumes:
+      - ./db-ui/pgadmin:/var/lib/pgadmin
+    depends_on:
+      - postgresql
