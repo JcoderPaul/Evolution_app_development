@@ -185,7 +185,34 @@ CRUD операции ему не доступны;
 Т.е. при обращении через браузер к локальному адресу и порту: [http://127.0.0.1:5050/](http://127.0.0.1:5050/) мы попадем 
 на станицу аутентификации PgAdmin4, где вводим нами же заданный логин/пароль и получаем доступ web интерфейсу позволяющему
 легко и удобно работать с нашей БД. Осталось ее подключить:
-- Вводим email и пароль из .env файла:
+1. Вводим email и пароль из .env файла:
 
 ![Auth menu](https://github.com/JcoderPaul/Evolution_app_development/blob/master/StepTwo/JPG/PgAdminMenu.png)
 
+2. Выбираем Add New Server:
+
+![Add New Server](https://github.com/JcoderPaul/Evolution_app_development/blob/master/StepTwo/JPG/AdNewServer.png)
+
+3. Даем название нашему серверу в WebUI:
+
+![Set Base Name](https://github.com/JcoderPaul/Evolution_app_development/blob/master/StepTwo/JPG/NewServer_StepOne_AddName.png)
+
+Теперь самое интересное, нам нужен IP нашей БД. Для этого снова используем команду, для контейнера с БД:
+
+    docker inspect cw_db
+
+Ищем раздел "Networks", в нем находим два ключа со значениями (у нас это):
+
+    "Gateway": "172.18.0.1",
+    "IPAddress": "172.18.0.2",
+
+Теперь у нас есть все для подключения к БД удобного интерфейса:
+- Host name/address (он может меняться, при создании нового контейнера): 172.18.0.1
+- Port (его мы сами задали): 5436
+- Maintenance database (его мы задали сами): coworking_db
+- Username (его мы задали сами): admin
+- Password (его мы задали сами): admin
+
+4. Заполняем нужные поля и жмем Save:
+
+![Set Main Base Param](https://github.com/JcoderPaul/Evolution_app_development/blob/master/StepTwo/JPG/NewServer_StepTwo_AddHostName_Port_BaseName.png)
