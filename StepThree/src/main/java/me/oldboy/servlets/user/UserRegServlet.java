@@ -16,7 +16,7 @@ import me.oldboy.exception.UserControllerException;
 import javax.validation.ConstraintViolationException;
 import java.io.IOException;
 
-@WebServlet(value = "/cw_api/v1/user/register", name = "RegServlet")
+@WebServlet(value = "/cw_api/v1/users/register", name = "RegServlet")
 public class  UserRegServlet extends HttpServlet {
 
     private UserController userController;
