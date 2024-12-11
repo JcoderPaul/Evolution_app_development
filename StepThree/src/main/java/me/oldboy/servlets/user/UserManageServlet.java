@@ -21,7 +21,7 @@ import java.io.IOException;
 import java.nio.file.AccessDeniedException;
 import java.util.List;
 
-@WebServlet(value = "/cw_api/v1/user", name = "UserManageServlet")
+@WebServlet(value = "/cw_api/v1/users", name = "UserManageServlet")
 public class UserManageServlet extends HttpServlet {
     private UserController userController;
     private ObjectMapper objectMapper;
