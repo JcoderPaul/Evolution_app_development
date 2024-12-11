@@ -1,0 +1,8 @@
+<aspectj>
+    <aspects>
+        <aspect name="javax.transaction.Transactional" />
+    </aspects>
+    <weaver options="-verbose -showWeaveInfo">
+        <include within="me.oldboy.core.model.service.*"/>
+    </weaver>
+</aspectj>
