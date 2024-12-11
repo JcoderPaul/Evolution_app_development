@@ -279,7 +279,7 @@ class SlotsManageServletTest {
     void shouldReturnSlotByIdParam_doGetTest() throws IOException, SlotControllerException {
         when(servletContext.getAttribute("authentication")).thenReturn(jwtAuthUserAdmin);
 
-        /* В строке запроса мы можем передать только оди параметр, в данном тесте задаем slotId */
+        /* В строке запроса мы можем передать только один параметр, в данном тесте задаем slotId */
         when(req.getParameter("slotId")).thenReturn(slotId);
         when(req.getParameter("slotNumber")).thenReturn(null);
         when(slotController.readSlotById(anyLong())).thenReturn(slotReadUpdateDto);
@@ -300,7 +300,7 @@ class SlotsManageServletTest {
     void shouldReturnSlotByNumberParam_doGetTest() throws IOException, SlotControllerException {
         when(servletContext.getAttribute("authentication")).thenReturn(jwtAuthUserAdmin);
 
-        /* В строке запроса мы можем передать только оди параметр, в данном тесте задаем slotId */
+        /* В строке запроса мы можем передать только один параметр, в данном тесте задаем slotNumber */
         when(req.getParameter("slotId")).thenReturn(null);
         when(req.getParameter("slotNumber")).thenReturn(slotNumber);
         when(slotController.readSlotByNumber(anyInt())).thenReturn(slotReadUpdateDto);
@@ -321,7 +321,6 @@ class SlotsManageServletTest {
     void shouldThrowExceptionNotValidIdParam_doGetTest() throws IOException, SlotControllerException {
         when(servletContext.getAttribute("authentication")).thenReturn(jwtAuthUserAdmin);
 
-        /* В строке запроса мы можем передать только оди параметр, в данном тесте задаем slotId */
         when(req.getParameter("slotId")).thenReturn(notValidSlotId);
         when(req.getParameter("slotNumber")).thenReturn(null);
 
@@ -341,7 +340,6 @@ class SlotsManageServletTest {
     void shouldThrowExceptionNotValidNumberParam_doGetTest() throws IOException, SlotControllerException {
         when(servletContext.getAttribute("authentication")).thenReturn(jwtAuthUserAdmin);
 
-        /* В строке запроса мы можем передать только оди параметр, в данном тесте задаем slotId */
         when(req.getParameter("slotId")).thenReturn(null);
         when(req.getParameter("slotNumber")).thenReturn(notValidSlotNumber);
 
@@ -361,7 +359,6 @@ class SlotsManageServletTest {
     void shouldThrowExceptionTowParamRequest_doGetTest() throws IOException, SlotControllerException {
         when(servletContext.getAttribute("authentication")).thenReturn(jwtAuthUserAdmin);
 
-        /* В строке запроса мы можем передать только оди параметр, в данном тесте задаем slotId */
         when(req.getParameter("slotId")).thenReturn(slotId);
         when(req.getParameter("slotNumber")).thenReturn(slotNumber);
 
