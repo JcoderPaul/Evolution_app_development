@@ -18,7 +18,7 @@ import me.oldboy.validate.ValidatorDto;
 import javax.validation.*;
 import java.io.IOException;
 
-@WebServlet(value = "/cw_api/v1/user/login", name = "LoginServlet")
+@WebServlet(value = "/cw_api/v1/users/login", name = "LoginServlet")
 public class UserLoginServlet extends HttpServlet {
 
     private UserController userController;
