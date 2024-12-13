@@ -1,0 +1,310 @@
+Исх. (ENG): https://www.javaguides.net/2023/10/mockito-doanswer.html
+________________________________________________________________________________________________________________________
+*** Mockito doAnswer() ***
+
+Метод doAnswer() в Mockito используется для указания пользовательского поведения для вызова метода на фиктивном объекте.
+Это особенно полезно, когда вам нужно выполнить более сложные операции или обработать особые случаи, которые нельзя легко
+обработать с помощью doReturn(), doThrow() или when(). Он позволяет вам определить, что должно произойти при вызове
+метода на фиктивном объекте.
+
+*** Когда использовать doAnswer() ***
+
+Используйте doAnswer(), когда вам нужно:
+- Выполнять сложную логику: когда поведение метода нельзя легко определить простыми возвращаемыми значениями или
+                            исключениями.
+- Захват аргументов метода: когда вам нужно проверить или изменить аргументы, переданные в фиктивный метод.
+- Вызов обратного вызова (callback) или слушателя (listener): когда ваш метод должен инициировать какое-либо действие
+                                                              в ответ на вызов.
+- Объединение нескольких поведений: когда вам нужно выполнить несколько действий в ответ на один вызов метода.
+
+*** Как работает doAnswer() ***
+
+Метод doAnswer() позволяет вам определить пользовательскую реализацию Answer, которая указывает, что должно произойти
+при вызове метода. Этот Answer может получить доступ к аргументам, переданным в метод, выполнить любую необходимую
+логику и вернуть значение или выдать исключение.
+
+________________________________________________________________________________________________________________________
+*** Пример сценария ***
+
+Мы создадим класс UserService, который имеет зависимость от UserRepository. Наша цель — протестировать методы UserService
+с помощью метода doAnswer() в Mockito для обработки пользовательского поведения.
+
+Сначала создадим класс User:
+
+************************************************************************************************************************
+
+public class User {
+    private String name;
+    private String email;
+
+    // Constructor, getters, and setters
+    public User(String name, String email) {
+        this.name = name;
+        this.email = email;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+}
+
+************************************************************************************************************************
+
+Теперь интерфейс UserRepository:
+
+************************************************************************************************************************
+
+public interface UserRepository {
+    void saveUser(User user);
+    User findUserByEmail(String email);
+}
+
+************************************************************************************************************************
+
+И наконец класс UserService:
+
+************************************************************************************************************************
+
+public class UserService {
+    private final UserRepository userRepository;
+
+    public UserService(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
+
+    public void registerUser(String name, String email) {
+        User user = new User(name, email);
+        userRepository.saveUser(user);
+    }
+
+    public User getUserByEmail(String email) {
+        return userRepository.findUserByEmail(email);
+    }
+}
+
+************************************************************************************************************************
+________________________________________________________________________________________________________________________
+*** Тесты JUnit 5 с Mockito ***
+
+Создаем тестовый класс для UserService используя функционал JUnit 5 и Mockito.
+
+************************************************************************************************************************
+
+import static org.mockito.Mockito.*;
+import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.invocation.InvocationOnMock;
+import org.mockito.stubbing.Answer;
+import org.mockito.junit.jupiter.MockitoExtension;
+import org.junit.jupiter.api.extension.ExtendWith;
+
+@ExtendWith(MockitoExtension.class)
+public class UserServiceTest {
+
+    @Mock
+    private UserRepository userRepository;
+
+    @InjectMocks
+    private UserService userService;
+
+    @Test
+    public void testRegisterUser() {
+        // Given
+        String name = "Ramesh Fadatare";
+        String email = "ramesh.fadatare@example.com";
+
+        doAnswer(new Answer<Void>() {
+            @Override
+            public Void answer(InvocationOnMock invocation) throws Throwable {
+                User user = invocation.getArgument(0);
+                assertEquals("Ramesh Fadatare", user.getName());
+                assertEquals("ramesh.fadatare@example.com", user.getEmail());
+                return null;
+            }
+        }).when(userRepository).saveUser(any(User.class));
+
+        // When
+        userService.registerUser(name, email);
+
+        // Then
+        verify(userRepository).saveUser(any(User.class));
+    }
+
+    @Test
+    public void testGetUserByEmail() {
+        // Given
+        String email = "anita.patil@example.com";
+        User user = new User("Anita Patil", email);
+        doAnswer(new Answer<User>() {
+            @Override
+            public User answer(InvocationOnMock invocation) throws Throwable {
+                String email = invocation.getArgument(0);
+                if ("anita.patil@example.com".equals(email)) {
+                    return user;
+                } else {
+                    return null;
+                }
+            }
+        }).when(userRepository).findUserByEmail(anyString());
+
+        // When
+        User result = userService.getUserByEmail(email);
+
+        // Then
+        assertNotNull(result);
+        assertEquals("Anita Patil", result.getName());
+        assertEquals(email, result.getEmail());
+    }
+}
+
+************************************************************************************************************************
+
+Повторим, что произошло по шагам:
+- Шаг 1. - Создание Mock с помощью аннотации @Mock: Аннотация @Mock создает фиктивный экземпляр интерфейса UserRepository.
+                                                    Этот фиктивный экземпляр можно использовать для контролируемой имитации
+                                                    поведения UserRepository.
+
+- Шаг 2. - Внедрение Mock с помощью @InjectMocks: Аннотация @InjectMocks внедряет фиктивный UserRepository в экземпляр
+                                                  UserService для обеспечения контролируемой тестовой среды. Это позволяет
+                                                  тестировать методы UserService изолированно от фактической реализации
+                                                  UserRepository.
+
+- Шаг 3. - Определение пользовательского поведения с помощью doAnswer():
+
+           doAnswer(new Answer<Void>() { ... }).when(userRepository).saveUser(any(User.class));
+
+           - Метод настраивает фиктивный UserRepository для выполнения пользовательского поведения при вызове метода
+           saveUser с любым объектом User.
+
+           - Внутри метода answer мы извлекаем аргументы, переданные методу saveUser, и выполняем asserts для
+           проверки имени и адреса электронной почты пользователя. Это позволяет нам проверить, что метод registerUser
+           класса UserService правильно взаимодействует с UserRepository.
+
+           - Аналогично, метод:
+
+           doAnswer(new Answer<User>() { ... }).when(userRepository).findUserByEmail(anyString());
+
+           Настраивает фиктивный UserRepository на возврат определенного объекта User при вызове метода findUserByEmail
+           с указанным адресом электронной почты. Это позволяет нам проверить, что метод getUserByEmail класса UserService
+           правильно взаимодействует с UserRepository.
+
+- Шаг 4. - Проверка взаимодействий с помощью verify():
+
+           verify(userRepository).saveUser(any(User.class));
+
+           Проверяет, был ли вызван метод saveUser в UserRepository с любым объектом User. Это гарантирует, что метод
+           registerUser класса UserService правильно взаимодействует с UserRepository.
+
+________________________________________________________________________________________________________________________
+*** Варианты использования ***
+
+- Вариант использования 1: Выполнение сложной логики.
+
+************************************************************************************************************************
+
+@Test
+public void testComplexLogicInMethodCall() {
+    // Given
+    String email = "ravi.kumar@example.com";
+    User user = new User("Ravi Kumar", email);
+
+    doAnswer(new Answer<User>() {
+        @Override
+        public User answer(InvocationOnMock invocation) throws Throwable {
+            String email = invocation.getArgument(0);
+            // Perform complex logic
+            if ("ravi.kumar@example.com".equals(email)) {
+                return user;
+            } else {
+                return null;
+            }
+        }
+    }).when(userRepository).findUserByEmail(anyString());
+
+    // When
+    User result = userService.getUserByEmail(email);
+
+    // Then
+    assertNotNull(result);
+    assertEquals("Ravi Kumar", result.getName());
+    assertEquals(email, result.getEmail());
+}
+
+************************************************************************************************************************
+
+Вариант использования 2: Захват и изменение аргументов.
+
+************************************************************************************************************************
+
+@Test
+public void testCaptureAndModifyArguments() {
+    // Given
+    String name = "Anjali Sharma";
+    String email = "anjali.sharma@example.com";
+
+    doAnswer(new Answer<Void>() {
+        @Override
+        public Void answer(InvocationOnMock invocation) throws Throwable {
+            User user = invocation.getArgument(0);
+            user.setName(user.getName().toUpperCase());
+            return null;
+        }
+    }).when(userRepository).saveUser(any(User.class));
+
+    // When
+    userService.registerUser(name, email);
+
+    // Then
+    verify(userRepository).saveUser(argThat(user -> "ANJALI SHARMA".equals(user.getName()) && email.equals(user.getEmail())));
+}
+
+************************************************************************************************************************
+
+Вариант использования 3: Вызов обратного вызова (callback).
+
+************************************************************************************************************************
+
+@Test
+public void testInvokeCallback() {
+    // Given
+    String name = "Rajesh Verma";
+    String email = "rajesh.verma@example.com";
+
+    doAnswer(new Answer<Void>() {
+        @Override
+        public Void answer(InvocationOnMock invocation) throws Throwable {
+            // Invoke a callback
+            Runnable callback = invocation.getArgument(1);
+            callback.run();
+            return null;
+        }
+    }).when(userRepository).saveUser(any(User.class), any(Runnable.class));
+
+    // When
+    userService.registerUser(name, email);
+
+    // Then
+    verify(userRepository).saveUser(any(User.class), any(Runnable.class));
+}
+
+************************************************************************************************************************
+
+*** Заключение ***
+
+Метод doAnswer() в Mockito упрощает настройку пользовательского поведения для вызовов методов на фиктивных объектах для
+модульного тестирования. Используя doAnswer(), вы можете обрабатывать сложные сценарии и выполнять определенные действия
+при вызове методов на фиктивных объектах.
