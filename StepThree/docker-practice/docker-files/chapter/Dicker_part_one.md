@@ -26,15 +26,15 @@
 нам не нужен - это фактически *.rar архив - нам нужно его содержимое. В рабочей папке, которая является еще и контекстом при
 создании Docker образов, создаем пакет cw и распаковываем туда содержимое нашего cw.war.
 
-Перед созданием нашего WAR файла мы не вносили изменений в application.properties и hibernate.cfg.xml в разрезе связи с БД - делаем.
+Перед созданием нашего WAR файла мы не вносили изменений в [application.properties](https://github.com/JcoderPaul/Evolution_app_development/blob/master/StepThree/src/main/resources/application.properties) и [hibernate.cfg.xml](https://github.com/JcoderPaul/Evolution_app_development/blob/master/StepThree/src/main/resources/hibernate.cfg.xml) в разрезе связи с БД - делаем.
 Мы точно знаем, что имя контейнера БД - cw_db, а порт 5432 стандартный (нам не понадобится порт проброшенный во вне, т.к. оба
 контейнера будут в рамках одной подсети внутри виртуальной машины), поэтому переписываем соответствующие строки в файлах:
-- application.properties:
+- [application.properties](https://github.com/JcoderPaul/Evolution_app_development/blob/master/StepThree/docker-practice/project-files-changes/application.properties):
 
         # Database url
         db.url=jdbc:postgresql://cw_db:5432/coworking_db
 
-- hibernate.cfg.xml:
+- [hibernate.cfg.xml](https://github.com/JcoderPaul/Evolution_app_development/blob/master/StepThree/docker-practice/project-files-changes/HibernateUtil.java):
 
         <hibernate-configuration>
             <session-factory>
@@ -97,7 +97,7 @@ PostgreSQL контейнер (ну, да, название сети то еще
 При первичном размещения приложения в контейнере с TomCat оно запускалось, но тут же "падало", без внятных объяснений причин.
 Однако на Stackoverflow в статье ["Tomcat: One or more listeners failed to start"](https://stackoverflow.com/questions/48639816/tomcat-one-or-more-listeners-failed-to-start) предложен вариант дополнительного логирования процессов (полная трассировка стека ошибок):
 
-Шаг 1. - В WEB-INF/classes каталоге приложения создайте новый файл: logging.properties.
+Шаг 1. - В WEB-INF/classes каталоге приложения создайте новый файл: [logging.properties](https://github.com/JcoderPaul/Evolution_app_development/blob/master/StepThree/docker-practice/logging.properties).
 
 Шаг 2. - Добавьте в этот файл следующие строки:
 
@@ -109,5 +109,5 @@ PostgreSQL контейнер (ну, да, название сети то еще
 Как и положено мы разместили наше приложение в: /usr/local/tomcat/webapps/cw - контейнера, проделываем эти три шага и получаем
 наглядные данные что происходит с нашим приложением и почему оно "ложиться" при запуске. В нашем случае это была проблема связи
 с контейнером БД, т.к. изначально в приложении использовался "connection.url" с локальным адресом и проброшенным во вне из
-контейнера портом, а не подсетью и портами Docker-a, что мы исправили и учли при написании docker-compose файла и создании нового
+контейнера портом, а не подсетью и портами Docker-a, что мы исправили и учли при написании [docker-compose файла](https://github.com/JcoderPaul/Evolution_app_development/blob/master/StepThree/docker-practice/docker-compose-file/docker-compose.yaml) и создании нового
 WAR архива.
