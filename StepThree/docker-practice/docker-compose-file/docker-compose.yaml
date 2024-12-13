@@ -35,7 +35,7 @@ services: # Элемент высшего уровня см. https://docs.docker
       HIBERNATE_USERNAME: ${HIBERNATE_USERNAME} # Задаем логин к БД (берется из файла .env в корне проекта)
       HIBERNATE_PASSWORD: ${HIBERNATE_PASSWORD} # Задаем пароль к БД (берется из файла .env в корне проекта)
       POSTGRESQL_CONTAINER_NAME: ${POSTGRESQL_CONTAINER_NAME} # Задаем имя контейнера с БД к которому хотим подключиться
-      DB_CONTAINER_PORT: "5432"
+      DB_CONTAINER_PORT: ${DB_CONTAINER_PORT}
       POSTGRES_DB: ${POSTGRES_DB} # Подключаемся к БД с именем
     ports: # Пробрасываем порты host (наша локальная машина) - 8080 на docker (контейнер с приложением) - 8081
       - "8081:8080"
