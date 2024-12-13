@@ -43,7 +43,7 @@
             </session-factory>
         </hibernate-configuration>
 
-Шаг 5. - Создаем контейнер из образа созданного на третьем шаге (пробрасываем порт во вне, чтобы достучаться к нашему
+Шаг 5. - Создаем контейнер [из образа созданного на третьем шаге](https://github.com/JcoderPaul/Evolution_app_development/blob/master/StepThree/docker-practice/docker-files/noble.Dockerfile) (пробрасываем порт во вне, чтобы достучаться к нашему
 приложению из браузера или Postman-a):
 
     docker run --name WebAppCw -p 8081:8080 -d webapp:3.0
