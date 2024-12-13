@@ -124,7 +124,7 @@ ________________________________________________________________________________
 данного вывода берет на себя метод *.findAllFreeSlotsByDate(LocalDate date) класса ReservationService.java. И тут полет фантазии
 на реализацию обширен, просто на коллекциях и циклах (многословно и запутанно) или с применением StreamAPI. 
 
-Один из вариантов (можно сравнить с текущей реализацией):
+Один из вариантов ([можно сравнить с текущей реализацией](https://github.com/JcoderPaul/Evolution_app_development/blob/5f92d5dc124623a0a48d4f0cf5014d6136f9f391/StepThree/src/main/java/me/oldboy/core/model/service/ReservationService.java#L236)):
 
     List<Reservation> reservationList =
                 reservationRepository.findReservationByDate(LocalDate.of(2029, 7, 28)).get();
