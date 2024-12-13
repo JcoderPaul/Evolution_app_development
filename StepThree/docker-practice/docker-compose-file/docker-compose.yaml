@@ -1,0 +1,49 @@
+name: cw_v_three # Присваиваем имя нашему docker проекту (необязательно, будет дано автоматом)
+services: # Элемент высшего уровня см. https://docs.docker.com/compose/compose-file/05-services/
+  postgresql: # Первый контейнер в нашем проекте - тут будет БД
+    image: postgres:13 # Нам нужен конкретный образ БД - PostgreSQL v.13 для нашего контейнера
+    container_name: ${POSTGRESQL_CONTAINER_NAME} # Имя первого контейнера (необязательно, будет дано автоматом из метки postgresql)
+    restart: always
+    environment: # Задаем параметры окружения
+      POSTGRES_USER: ${POSTGRES_USER} # Задаем логин к БД (берется из файла .env в корне проекта)
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD} # Задаем пароль к БД (берется из файла .env в корне проекта)
+      POSTGRES_DB: ${POSTGRES_DB} # Даем имя будущей БД
+    ports: # Пробрасываем порты host (наша локальная машина) - 5436 на docker (контейнер с БД) - 5432
+      - "5436:5432"
+    volumes: # Создаем volume в разделе volumes нашего локального docker-a
+      - db-data:/var/lib/postgresql/data # Если вдруг хотим сохранить данные в папке где запускается compose файл то: ./db-data:/var/lib/postgresql/data
+
+  pgadmin: # Второй контейнер в нашем проекте - тут будет web-интерфейс управления БД
+    image: dpage/pgadmin4
+    container_name: pgadmin_ui # Имя второго контейнера (необязательно, будет дано автоматом из метки pgadmin)
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL} # Задаем логин к PgAdmin_4 (берется из файла .env в корне проекта)
+      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD} # Задаем пароль к PgAdmin_4 (берется из файла .env в корне проекта)
+    ports:
+      - "5050:80"
+    volumes: # Создаем volume в разделе volumes нашего локального docker-a
+      - db-ui:/var/lib/pgadmin # Если вдруг хотим сохранить данные в папке где запускается compose файл то: ./db-ui/pgadmin:/var/lib/pgadmin
+    depends_on:
+      - postgresql
+
+  webapp:
+    image: jcoderpaul/webapp:3.0
+    container_name: WebAppCw # Имя третьего контейнера (наше приложение)
+    restart: always
+    environment: # Задаем параметры окружения
+      HIBERNATE_USERNAME: ${HIBERNATE_USERNAME} # Задаем логин к БД (берется из файла .env в корне проекта)
+      HIBERNATE_PASSWORD: ${HIBERNATE_PASSWORD} # Задаем пароль к БД (берется из файла .env в корне проекта)
+      POSTGRESQL_CONTAINER_NAME: ${POSTGRESQL_CONTAINER_NAME} # Задаем имя контейнера с БД к которому хотим подключиться
+      DB_CONTAINER_PORT: "5432"
+      POSTGRES_DB: ${POSTGRES_DB} # Подключаемся к БД с именем
+    ports: # Пробрасываем порты host (наша локальная машина) - 8080 на docker (контейнер с приложением) - 8081
+      - "8081:8080"
+    depends_on: # Прописываем зависимость от контейнера БД и порядок запуска (сначала БД, затем приложение)
+      postgresql:
+        condition: service_started
+        restart: true
+
+volumes: # Задаем volume-ы для хранения данных
+  db-ui:
+  db-data:
