@@ -4,7 +4,7 @@
 чтобы и наше приложение упакованное в контейнер тоже позволяло, как-то взаимодействовать с собой и принимать некие параметры,
 для более гибкого взаимодействия с пользователем и внешней БД.
 
-Шаг 1. - Переписываем temurin.Dockerfile (добавляем строки с переменными и копированием содержимого WAR архива в папку webapps TomCat-a):
+Шаг 1. - Переписываем [temurin.Dockerfile](https://github.com/JcoderPaul/Evolution_app_development/blob/master/StepThree/docker-practice/docker-files/temurin.Dockerfile) (добавляем строки с переменными и копированием содержимого WAR архива в папку webapps TomCat-a):
 
     ENV HIBERNATE_USERNAME=admin HIBERNATE_PASSWORD=admin POSTGRESQL_CONTAINER_NAME=cw_db DB_CONTAINER_PORT=5432 POSTGRES_DB=coworking_db
     COPY cw /usr/local/tomcat/webapps/cw
@@ -13,7 +13,7 @@
 Теперь нам нужно изменить код в нескольких классах и файлах свойств, чтобы получать параметры для нашего приложения из
 переменных окружения смонтированного контейнера.
 
-Шаг 2. - Изменяем ConnectionManager используем System.getenv() (привожу отличия от оригинала настроенного на localhost):
+Шаг 2. - Изменяем ConnectionManager используем [System.getenv()](https://docs.oracle.com/javase/tutorial/essential/environment/env.html) (привожу отличия от оригинала настроенного на localhost):
 
     ...
     private final static String BASEURL_KEY = "jdbc:postgresql://" +
@@ -24,7 +24,7 @@
     private final static String PASS_KEY = System.getenv("HIBERNATE_PASSWORD");
     ...
 
-Шаг 3. - Изменяем HibernateUtil используем System.getenv() (привожу отличия от оригинала настроенного на localhost и файл свойств):
+Шаг 3. - Изменяем [HibernateUtil](https://github.com/JcoderPaul/Evolution_app_development/blob/master/StepThree/src/main/java/me/oldboy/config/util/HibernateUtil.java) используем [System.getenv()](https://docs.oracle.com/javase/tutorial/essential/environment/env.html) (привожу отличия от оригинала настроенного на localhost и файл свойств):
 
     ...
     private final static String BASEURL_KEY = "jdbc:postgresql://" +
@@ -50,17 +50,17 @@
         return configuration;
     }
 
-Шаг 4. - В файле application.properties удаляем строки жестко задающие параметры соединения с БД (адрес, пароль и логин).
+Шаг 4. - В файле [application.properties](https://github.com/JcoderPaul/Evolution_app_development/blob/master/StepThree/src/main/resources/application.properties) удаляем строки жестко задающие параметры соединения с БД (адрес, пароль и логин).
 
-Шаг 5. - В файле log4j.xml переписываем путь для логирования работы приложения в файл внутри контейнера:
+Шаг 5. - В файле [log4j.xml](https://github.com/JcoderPaul/Evolution_app_development/blob/master/StepThree/src/main/resources/log4j.xml) переписываем путь для логирования работы приложения в файл внутри контейнера:
 
     <param name="file" value="logs/app_log_files/logging.log"/>
 
 Шаг 6. - Пересобираем наш WAR архив и забрасываем его содержимое в папку cw.
 
-Шаг 7. - Добавляем в /cw/META-INF/ файл для логирования стека вызовов исключений logging.properties
+Шаг 7. - Добавляем в /cw/META-INF/ файл для логирования стека вызовов исключений [logging.properties](https://github.com/JcoderPaul/Evolution_app_development/blob/master/StepThree/docker-practice/logging.properties)
 
-Шаг 8. - Запускаем сборку образа из temurin.Dockerfile (он меньше чем предыдущий noble.Dockerfile):
+Шаг 8. - Запускаем сборку образа из [temurin.Dockerfile](https://github.com/JcoderPaul/Evolution_app_development/blob/master/StepThree/docker-practice/docker-files/temurin.Dockerfile) (он меньше чем предыдущий [noble.Dockerfile](https://github.com/JcoderPaul/Evolution_app_development/blob/master/StepThree/docker-practice/docker-files/noble.Dockerfile)):
 
     docker build -t jcoderpaul/webapp:3.0 -f temurin.Dockerfile .
 
@@ -69,10 +69,10 @@
 приложение - ведь оно должно подключиться к БД, контейнер PgAdmin тоже должен цепляться к БД, но его "падение" не критично.
 
 Если первый [docker-compose](https://github.com/JcoderPaul/Evolution_app_development/blob/master/StepTwo/docker-compose.yaml) файл в процессе своего выполнения монтировал volume-ы к БД и PgAdmin в рабочую папку приложения,
-то теперь мы настроем docker-compose файл так, чтобы при создании контейнера БД и PgAdmin их volume-ы монтировались в
+то теперь мы настроем [docker-compose](https://github.com/JcoderPaul/Evolution_app_development/blob/master/StepThree/docker-practice/docker-compose-file/docker-compose.yaml) файл так, чтобы при создании контейнера БД и PgAdmin их volume-ы монтировались в
 /var/lib/docker/volumes виртуальной машины, где запущен Docker сервер (у нас Windows).
 
-Готовим файл .ENV с соответствующими параметрами запуска приложения и доступа к БД (отличных от дефолтных прописанных в Dockerfile).
+Готовим файл [.ENV](https://github.com/JcoderPaul/Evolution_app_development/blob/master/StepThree/docker-practice/docker-compose-file/.env) с соответствующими параметрами запуска приложения и доступа к БД (отличных от дефолтных прописанных в Dockerfile).
 
 Шаг 9. - Запускаем наш docker-compose файл:
 
