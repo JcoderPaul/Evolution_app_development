@@ -209,6 +209,17 @@ ________________________________________________________________________________
 | GET (doGet)                 | /cw_api/v1/reservations/          | http://localhost:8081/cw_api/v1/reservations/?reservationDate=2029-07-28 |                                                                                                        | Посмотреть брони на конкретную дату           |
 | GET (doGet)                 | /cw_api/v1/reservations/          | http://localhost:8081/cw_api/v1/reservations/?placeId=3                  |                                                                                                        | Посмотреть все брони конкретного места/зала   |
 
+Для тестирования приложения можно использовать Postman (простая проверка - запустилось или нет обратиться к HelloWorld 
+странице приложения): http://localhost:8081/cw_api/hello
+
+Приложение для аутентификации используем JWT ключ, посему не забываем его применять. После авторизации сервис (пользователь) 
+получает его в ответ, пример:
+
+![JWT_Token_example](https://github.com/JcoderPaul/Evolution_app_development/blob/master/StepThree/Doc/pic/JWT_Token_example.jpg)
+
+Далее при формировании запроса через Postman выбираем тип аутентификации и добавляем полученный JWT ключ в соответствующее поле:
+
+![Request_with_jwt_token](https://github.com/JcoderPaul/Evolution_app_development/blob/master/StepThree/Doc/pic/Request_with_jwt_token.jpg)
 ________________________________________________________________________________________________________________________
 ### Применение Docker.
 
@@ -224,4 +235,4 @@ ________________________________________________________________________________
 это размещение Volumes не в рабочей папке приложения запускающейся из Intellij IDEA, а размещение их внутри виртуальной 
 машины Docker-a:
 
-![VolumeLS](https://github.com/JcoderPaul/Evolution_app_development/blob/master/StepThree/Doc/VolumeLS.jpg)
+![VolumeLS](https://github.com/JcoderPaul/Evolution_app_development/blob/master/StepThree/Doc/pic/VolumeLS.jpg)
