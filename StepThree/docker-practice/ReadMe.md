@@ -11,7 +11,7 @@
 2. [Docker контейнер с переменными окружения](https://github.com/JcoderPaul/Evolution_app_development/blob/master/StepThree/docker-practice/docker-files/chapter/Dicker_part_two.md)
 3. [Оптимизация размера Docker образа](https://github.com/JcoderPaul/Evolution_app_development/blob/master/StepThree/docker-practice/docker-files/chapter/Dicker_part_three.md)
 
-Оптимизированный образ заливаем на [DockerHub](https://hub.docker.com/):
+Оптимизированный образ заливаем на [DockerHub](https://hub.docker.com/r/jcoderpaul/webapp/tags):
 
 Шаг 1. - Логинимся в системе Docker-a из терминала (из под Windows Docker Desktop залить образ пока проблема):
 
