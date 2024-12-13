@@ -29,12 +29,12 @@
 Перед созданием нашего WAR файла мы не вносили изменений в [application.properties](https://github.com/JcoderPaul/Evolution_app_development/blob/master/StepThree/src/main/resources/application.properties) и [hibernate.cfg.xml](https://github.com/JcoderPaul/Evolution_app_development/blob/master/StepThree/src/main/resources/hibernate.cfg.xml) в разрезе связи с БД - делаем.
 Мы точно знаем, что имя контейнера БД - cw_db, а порт 5432 стандартный (нам не понадобится порт проброшенный во вне, т.к. оба
 контейнера будут в рамках одной подсети внутри виртуальной машины), поэтому переписываем соответствующие строки в файлах:
-- [application.properties](https://github.com/JcoderPaul/Evolution_app_development/blob/master/StepThree/docker-practice/project-files-changes/application.properties):
+- [application.properties](https://github.com/JcoderPaul/Evolution_app_development/blob/master/StepThree/src/main/resources/application.properties):
 
         # Database url
         db.url=jdbc:postgresql://cw_db:5432/coworking_db
 
-- [hibernate.cfg.xml](https://github.com/JcoderPaul/Evolution_app_development/blob/master/StepThree/docker-practice/project-files-changes/HibernateUtil.java):
+- [hibernate.cfg.xml](https://github.com/JcoderPaul/Evolution_app_development/blob/master/StepThree/src/main/resources/hibernate.cfg.xml):
 
         <hibernate-configuration>
             <session-factory>
