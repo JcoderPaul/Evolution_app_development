@@ -112,7 +112,7 @@ ________________________________________________________________________________
     Don’t mock everything
     Show love with your tests!
 
-Любопытным показался вариант использования метода doAnswer [см. тест](https://github.com/JcoderPaul/Evolution_app_development/blob/master/StepThree/src/test/java/me/oldboy/servlets/reservation/ReservationManageServletTest.java).
+Любопытным показался вариант использования метода doAnswer [см. тест](https://github.com/JcoderPaul/Evolution_app_development/blob/master/StepThree/src/test/java/me/oldboy/servlets/reservation/ReservationManageServletTest.java). Пара [статей по вопросу](https://github.com/JcoderPaul/Evolution_app_development/tree/master/StepThree/Doc/doAnswerExample) применения doAnswer.
 
 ________________________________________________________________________________________________________________________
 ### Применение StreamAPI при работе с коллекциями:
@@ -121,7 +121,7 @@ ________________________________________________________________________________
 Мы решили выводить информацию в формате коллекции - на конкретную дату будет существовать список наших Places (рабочих мест и 
 залов) и каждый из них будет иметь ограниченное количество слотов, которые можно забронировать (возможно останутся и свободные) - 
 вот их мы и выводим. Если у Place (места/зала) нет резервирования на конкретную дату - все слоты свободны - логично. Реализацию
-данного вывода берет на себя метод *.findAllFreeSlotsByDate(LocalDate date) класса ReservationService.java. И тут полет фантазии
+данного вывода берет на себя метод *.findAllFreeSlotsByDate(LocalDate date) класса [ReservationService.java](https://github.com/JcoderPaul/Evolution_app_development/blob/master/StepThree/src/main/java/me/oldboy/core/model/service/ReservationService.java). И тут полет фантазии
 на реализацию обширен, просто на коллекциях и циклах (многословно и запутанно) или с применением StreamAPI. 
 
 Один из вариантов ([можно сравнить с текущей реализацией](https://github.com/JcoderPaul/Evolution_app_development/blob/5f92d5dc124623a0a48d4f0cf5014d6136f9f391/StepThree/src/main/java/me/oldboy/core/model/service/ReservationService.java#L236)):
