@@ -43,7 +43,16 @@ services: # Элемент высшего уровня см. https://docs.docker
       postgresql:
         condition: service_started
         restart: true
+    # Если бы мы задали явно общую сеть, то нам бы понадобилось ее тут прописать, а так же и для остальных контейнеров
+    # networks:
+      # - cw_net
 
-volumes: # Задаем volume-ы для хранения данных
+volumes: # Задаем volume-ы для хранения данных (без явных имен, compose задаст имена сам исходя из имени проекта)
   db-ui:
+    # name: pg_admin_ui - так можно явно задать имена для volume
   db-data:
+
+# Сеть, compose сгенерирует сам, хотя по феншую, лучше бы ее задать нам самим явно. Но мы хотим глянуть, что сделает compose
+# networks:
+  # cw_network:
+    # name: cw_net
