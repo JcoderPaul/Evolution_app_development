@@ -1,0 +1,30 @@
+plugins {
+    id 'java'
+    id 'war'
+    id "io.freefair.lombok" version "8.3"
+    id "com.github.ben-manes.versions" version "0.51.0"
+}
+
+apply from: 'version.gradle'
+
+war {
+    enabled=true
+}
+
+group 'me.me.oldboy'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation "org.springframework:spring-context:${versions.spring}"
+    implementation "org.springframework:spring-webmvc:${versions.spring}"
+
+    compileOnly "jakarta.servlet:jakarta.servlet-api:${versions.jakarta_servlet_api}"
+}
+
+test {
+    useJUnitPlatform()
+}

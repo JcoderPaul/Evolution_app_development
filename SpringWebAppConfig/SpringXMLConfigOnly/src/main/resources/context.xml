@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="baseImitation" class="me.oldboy.base_imitation.LikeBase" />
+
+    <bean id="userDao" class="me.oldboy.dao_imitation.UserDao" >
+        <constructor-arg name="baseImitation" ref="baseImitation"/>
+    </bean>
+
+    <bean id="userService" class="me.oldboy.service_imitation.UserService" >
+        <constructor-arg name="userDao" ref="userDao"/>
+    </bean>
+
+</beans>

@@ -1,0 +1,5 @@
+Сконфигурировать Spring Web приложение можно по-разному, приведем 4-и возможных варианта:
+- [SpringXMLConfigOnly](https://github.com/JcoderPaul/Evolution_app_development/tree/SpringWebAppConfig/SpringWebAppConfig/SpringXMLConfigOnly) - приложение сконфигурированное только используя XML файл;
+- [SpringAnnotationAndXMLConfig](https://github.com/JcoderPaul/Evolution_app_development/tree/SpringWebAppConfig/SpringWebAppConfig/SpringAnnotationAndXMLConfig) - проложение сконфигурированное с применением аннотаций и XML файла;
+- [SpringJavaConfig](https://github.com/JcoderPaul/Evolution_app_development/tree/SpringWebAppConfig/SpringWebAppConfig/SpringJavaConfig) - приложение сконфигурированное средствами Java и аннотаций;
+- [SpringWebMvcConfig](https://github.com/JcoderPaul/Evolution_app_development/tree/SpringWebAppConfig/SpringWebAppConfig/SpringWebMvcConfig) - приложение сконфигурированное с применением Spring MVC;  
