@@ -1,7 +1,7 @@
 Spring MVC приложение работает по тем же принципам и имеет под капотом те же Servlet-ы. Прежде чем перейти к нашему 
 четвертому шагу, т.е. реализовать функционал Коворкинг-центра, сделаем последний маленький шажок - перепишем наши 
 прежние три маленьких шажочка с применением только средств Spring-a (при этом, будь у нас желание оставить в текущем
-приложении папки servlets и listeners, мы бы с легкостью смогли использовать сервлеты параллельно возможностям Spring-a).
+приложении папки [servlets](https://github.com/JcoderPaul/Evolution_app_development/tree/SpringWebAppConfig/SpringWebAppConfig/SpringJavaConfig/src/main/java/me/oldboy/servlets) и [listeners](https://github.com/JcoderPaul/Evolution_app_development/tree/SpringWebAppConfig/SpringWebAppConfig/SpringJavaConfig/src/main/java/me/oldboy/listeners), мы бы с легкостью смогли использовать сервлеты параллельно возможностям Spring-a).
 ________________________________________________________________________________________________________________________
 ### 4 and 4/4 (Spring MVC Context with Java config file and annotation)
 
