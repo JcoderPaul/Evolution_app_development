@@ -16,19 +16,19 @@ ________________________________________________________________________________
 Как и на первом микро шаге, демонстрационное приложение - имитация работы более масштабного WEB сервиса. 
 
 Структура проекта осталась неизменной, как и было отмечено ранее:
-- LikeBase.java - имитация БД (добавили аннотацию @Component);
-- UserDao.java - имитация слоя DAO (применили аннотацию @Component и @Autowired);
-- User.java - сущность с которой работает приложение;
-- ContextBuilder.java - фактически это слушатель, который будет запущен контейнером сервлетов в первую очередь, именно в нем будет вызван Spring контекст;
-- UserService.java - имитация слоя сервисов (применили аннотацию @Component и @Autowired);
-- GetServletWithSpringContext.java - сервлет обрабатывающий запрос от пользователя на получение имени User-a по его ID;
-- context.xml - файл, как и в прошлом микро проекте задает структуру bean-ов, в текущей версии просто указывает каким 
+- [LikeBase.java](https://github.com/JcoderPaul/Evolution_app_development/blob/SpringWebAppConfig/SpringWebAppConfig/SpringAnnotationAndXMLConfig/src/main/java/me/oldboy/base_imitation/LikeBase.java) - имитация БД (добавили аннотацию @Component);
+- [UserDao.java](https://github.com/JcoderPaul/Evolution_app_development/blob/SpringWebAppConfig/SpringWebAppConfig/SpringAnnotationAndXMLConfig/src/main/java/me/oldboy/dao_imitation/UserDao.java) - имитация слоя DAO (применили аннотацию @Component и @Autowired);
+- [User.java](https://github.com/JcoderPaul/Evolution_app_development/blob/SpringWebAppConfig/SpringWebAppConfig/SpringAnnotationAndXMLConfig/src/main/java/me/oldboy/like_entity/User.java) - сущность с которой работает приложение;
+- [ContextBuilder.java](https://github.com/JcoderPaul/Evolution_app_development/blob/SpringWebAppConfig/SpringWebAppConfig/SpringAnnotationAndXMLConfig/src/main/java/me/oldboy/listeners/ContextBuilder.java) - фактически это слушатель, который будет запущен контейнером сервлетов в первую очередь, именно в нем будет вызван Spring контекст;
+- [UserService.java](https://github.com/JcoderPaul/Evolution_app_development/blob/SpringWebAppConfig/SpringWebAppConfig/SpringAnnotationAndXMLConfig/src/main/java/me/oldboy/service_imitation/UserService.java) - имитация слоя сервисов (применили аннотацию @Component и @Autowired);
+- [GetServletWithSpringContext.java](https://github.com/JcoderPaul/Evolution_app_development/blob/SpringWebAppConfig/SpringWebAppConfig/SpringAnnotationAndXMLConfig/src/main/java/me/oldboy/servlets/GetServletWithSpringContext.java) - сервлет обрабатывающий запрос от пользователя на получение имени User-a по его ID;
+- [context.xml](https://github.com/JcoderPaul/Evolution_app_development/blob/SpringWebAppConfig/SpringWebAppConfig/SpringAnnotationAndXMLConfig/src/main/resources/context.xml) - файл, как и в прошлом микро проекте задает структуру bean-ов, в текущей версии просто указывает каким 
 образом это делать - сканированием содержимого проекта для поиска необходимых аннотаций, хотя мы все еще можем описывать 
 тут bean-ы классическим способом;
 
 Конфигурация зависимостей:
-- build.gradle - для работы нам понадобились две зависимости, как и в прошлый раз;
-- version.gradle - версии зависимостей;
+- [build.gradle](https://github.com/JcoderPaul/Evolution_app_development/blob/SpringWebAppConfig/SpringWebAppConfig/SpringAnnotationAndXMLConfig/build.gradle) - для работы нам понадобились две зависимости, как и в прошлый раз;
+- [version.gradle](https://github.com/JcoderPaul/Evolution_app_development/blob/SpringWebAppConfig/SpringWebAppConfig/SpringAnnotationAndXMLConfig/version.gradle) - версии зависимостей;
 
 Приложение разворачивается локально. Для запуска приложения нужен web-сервер приложений или контейнер сервлетов - 
 используем TomCat.
