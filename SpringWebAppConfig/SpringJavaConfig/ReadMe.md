@@ -14,20 +14,20 @@ ________________________________________________________________________________
 - Для получения и отображения информации все еще используем функционал Servlet-ов.
 
 Структура проекта немного изменилась:
-- AppContextConfig.java - файл конфигуратор Spring контекста (аннотируем его, как @Configuration и задаем пакет для 
+- [AppContextConfig.java](https://github.com/JcoderPaul/Evolution_app_development/blob/SpringWebAppConfig/SpringWebAppConfig/SpringJavaConfig/src/main/java/me/oldboy/config/AppContextConfig.java) - файл конфигуратор Spring контекста (аннотируем его, как @Configuration и задаем пакет для 
 поиска соответствующих аннотаций @ComponentScan);
-- LikeBase.java - имитация БД (убираем аннотацию @Component и в качестве демонстрации возлагаем заботу о создании bean-a
+- [LikeBase.java](https://github.com/JcoderPaul/Evolution_app_development/blob/SpringWebAppConfig/SpringWebAppConfig/SpringJavaConfig/src/main/java/me/oldboy/base_imitation/LikeBase.java) - имитация БД (убираем аннотацию @Component и в качестве демонстрации возлагаем заботу о создании bean-a
 на конфигурационный класс приложения и аннотацию @Bean, см. класс выше);
-- UserDao.java - имитация слоя DAO (применяем аннотацию @Component);
-- User.java - сущность с которой работает приложение;
-- ContextBuilder.java - слушатель, который будет запущен контейнером сервлетов в первую очередь, именно в нем будет 
+- [UserDao.java](https://github.com/JcoderPaul/Evolution_app_development/blob/SpringWebAppConfig/SpringWebAppConfig/SpringJavaConfig/src/main/java/me/oldboy/dao_imitation/UserDao.java) - имитация слоя DAO (применяем аннотацию @Component);
+- [User.java](https://github.com/JcoderPaul/Evolution_app_development/blob/SpringWebAppConfig/SpringWebAppConfig/SpringJavaConfig/src/main/java/me/oldboy/like_entity/User.java) - сущность с которой работает приложение;
+- [ContextBuilder.java](https://github.com/JcoderPaul/Evolution_app_development/blob/SpringWebAppConfig/SpringWebAppConfig/SpringJavaConfig/src/main/java/me/oldboy/listeners/ContextBuilder.java) - слушатель, который будет запущен контейнером сервлетов в первую очередь, именно в нем будет 
 вызван Spring контекст и задан контекст сервлетов;
-- UserService.java - имитация слоя сервисов (применяем аннотацию @Component);
-- GetServletWithSpringContext.java - сервлет обрабатывающий запрос от пользователя на получение имени User-a по его ID;
+- [UserService.java](https://github.com/JcoderPaul/Evolution_app_development/blob/SpringWebAppConfig/SpringWebAppConfig/SpringJavaConfig/src/main/java/me/oldboy/service_imitation/UserService.java) - имитация слоя сервисов (применяем аннотацию @Component);
+- [GetServletWithSpringContext.java](https://github.com/JcoderPaul/Evolution_app_development/blob/SpringWebAppConfig/SpringWebAppConfig/SpringJavaConfig/src/main/java/me/oldboy/servlets/GetServletWithSpringContext.java) - сервлет обрабатывающий запрос от пользователя на получение имени User-a по его ID;
 
 Конфигурация зависимостей (те же, что и на первых двух малых шагах):
-- build.gradle - для работы нам понадобились две зависимости;
-- version.gradle - версии зависимостей;
+- [build.gradle](https://github.com/JcoderPaul/Evolution_app_development/blob/SpringWebAppConfig/SpringWebAppConfig/SpringJavaConfig/build.gradle) - для работы нам понадобились две зависимости;
+- [version.gradle](https://github.com/JcoderPaul/Evolution_app_development/blob/SpringWebAppConfig/SpringWebAppConfig/SpringJavaConfig/version.gradle) - версии зависимостей;
 
 Приложение разворачивается локально. Для запуска приложения нужен web-сервер приложений или контейнер сервлетов - 
 используем TomCat.
