@@ -1,0 +1,6 @@
+ext {
+    versions = [
+            'spring': '6.2.0',
+            'jakarta_servlet_api':'6.1.0'
+    ]
+}
