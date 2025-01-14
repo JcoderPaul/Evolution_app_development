@@ -18,17 +18,17 @@ XML, до конфигурирования исключительно средс
 описываются bean-ы, как они интегрируются друг с другом и т.п. 
 
 Структура проекта:
-- LikeBase.java - имитация БД;
-- UserDao.java - имитация слоя DAO;
-- User.java - сущность с которой работает приложение;
-- ContextBuilder.java - фактически это слушатель, который будет запущен контейнером сервлетов в первую очередь, именно в нем будет вызван Spring контекст;
-- UserService.java - имитация слоя сервисов;
-- GetServletWithSpringContext.java - сервлет обрабатывающий запрос от пользователя на получение имени User-a по его ID;
-- context.xml - файл описывающий структуру bean-ов и их взаимосвязь (XML конфигурация контекста приложения);
+- [LikeBase.java](https://github.com/JcoderPaul/Evolution_app_development/blob/SpringWebAppConfig/SpringWebAppConfig/SpringXMLConfigOnly/src/main/java/me/oldboy/base_imitation/LikeBase.java) - имитация БД;
+- [UserDao.java](https://github.com/JcoderPaul/Evolution_app_development/blob/SpringWebAppConfig/SpringWebAppConfig/SpringXMLConfigOnly/src/main/java/me/oldboy/dao_imitation/UserDao.java) - имитация слоя DAO;
+- [User.java](https://github.com/JcoderPaul/Evolution_app_development/blob/SpringWebAppConfig/SpringWebAppConfig/SpringXMLConfigOnly/src/main/java/me/oldboy/like_entity/User.java) - сущность с которой работает приложение;
+- [ContextBuilder.java](https://github.com/JcoderPaul/Evolution_app_development/blob/SpringWebAppConfig/SpringWebAppConfig/SpringXMLConfigOnly/src/main/java/me/oldboy/listeners/ContextBuilder.java) - фактически это слушатель, который будет запущен контейнером сервлетов в первую очередь, именно в нем будет вызван Spring контекст;
+- [UserService.java](https://github.com/JcoderPaul/Evolution_app_development/blob/SpringWebAppConfig/SpringWebAppConfig/SpringXMLConfigOnly/src/main/java/me/oldboy/service_imitation/UserService.java) - имитация слоя сервисов;
+- [GetServletWithSpringContext.java](https://github.com/JcoderPaul/Evolution_app_development/blob/SpringWebAppConfig/SpringWebAppConfig/SpringXMLConfigOnly/src/main/java/me/oldboy/servlets/GetServletWithSpringContext.java) - сервлет обрабатывающий запрос от пользователя на получение имени User-a по его ID;
+- [context.xml](https://github.com/JcoderPaul/Evolution_app_development/blob/SpringWebAppConfig/SpringWebAppConfig/SpringXMLConfigOnly/src/main/resources/context.xml) - файл описывающий структуру bean-ов и их взаимосвязь (XML конфигурация контекста приложения);
 
 Конфигурация зависимостей:
-- build.gradle - для работы нам понадобились две зависимости;
-- version.gradle - версии зависимостей;
+- [build.gradle](https://github.com/JcoderPaul/Evolution_app_development/blob/SpringWebAppConfig/SpringWebAppConfig/SpringXMLConfigOnly/build.gradle) - для работы нам понадобились две зависимости;
+- [version.gradle](https://github.com/JcoderPaul/Evolution_app_development/blob/SpringWebAppConfig/SpringWebAppConfig/SpringXMLConfigOnly/version.gradle) - версии зависимостей;
 
 Приложение разворачивается локально. Для запуска приложения нужен web-сервер приложений или контейнер сервлетов - 
 используем TomCat.
