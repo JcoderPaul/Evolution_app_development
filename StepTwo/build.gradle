@@ -18,7 +18,6 @@ dependencies {
 
     testImplementation "org.testcontainers:postgresql:${versions.testcontainers}"
     testImplementation "org.testcontainers:junit-jupiter:${versions.testcontainers}"
-    testImplementation "org.testcontainers:postgresql:${versions.testcontainers}"
 
     testImplementation "org.junit.jupiter:junit-jupiter-api:${versions.jupiter}"
     testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:${versions.jupiter}"
