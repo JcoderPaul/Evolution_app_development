@@ -11,7 +11,7 @@ war {
     enabled=true
 }
 
-group 'me.me.oldboy'
+group 'me.oldboy'
 version '1.0-SNAPSHOT'
 
 repositories {
