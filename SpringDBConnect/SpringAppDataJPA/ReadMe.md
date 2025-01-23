@@ -43,21 +43,21 @@ ________________________________________________________________________________
 
 Что мы добавим и что изменим:
 - config - раздел конфигурации всего приложения:
-  - YamlPropertySourceFactory.java - файл позволяющий читать свойства из application.yml;
-  - AppContextConfig.java - файл конфигурации приложения;
-  - WebContextInitializer - файл формирующий web-контекст;
-  - DataSourceConfig.java - файл отвечающий за настройку связи с БД, фактически, тут формируется источник данных для 
+  - [YamlPropertySourceFactory.java](https://github.com/JcoderPaul/Evolution_app_development/blob/SpringDBConnect/SpringDBConnect/SpringAppDataJPA/src/main/java/me/oldboy/config/yml_properties_reader/YamlPropertySourceFactory.java) - файл позволяющий читать свойства из application.yml;
+  - [AppContextConfig.java](https://github.com/JcoderPaul/Evolution_app_development/blob/SpringDBConnect/SpringDBConnect/SpringAppDataJPA/src/main/java/me/oldboy/config/AppContextConfig.java) - файл конфигурации приложения;
+  - [WebContextInitializer](https://github.com/JcoderPaul/Evolution_app_development/blob/SpringDBConnect/SpringDBConnect/SpringAppDataJPA/src/main/java/me/oldboy/config/WebContextInitializer.java) - файл формирующий web-контекст;
+  - [DataSourceConfig.java](https://github.com/JcoderPaul/Evolution_app_development/blob/SpringDBConnect/SpringDBConnect/SpringAppDataJPA/src/main/java/me/oldboy/config/DataSourceConfig.java) - файл отвечающий за настройку связи с БД, фактически, тут формируется источник данных для 
 всего приложения и настраивается менеджер транзакций;
-- application.yml - файл настроек;
-- controller - папка контроллеров обрабатывающих запросы;
-- User.java - класс (сущность, model), "схема" ключевого объекта которым манипулирует наше приложение;
-- UserReadDto.java - т.н. "межслойный" объект передачи данных, в нем мы отсекаем "лишнюю" информацию для передачи отображению;
-- UserRepository.java - самый "магический" из слоев приложения, т.к. не имеет видимой реализации применяемых с него 
+- [application.yml](https://github.com/JcoderPaul/Evolution_app_development/blob/SpringDBConnect/SpringDBConnect/SpringAppDataJPA/src/main/resources/application.yml) - файл настроек;
+- [controller](https://github.com/JcoderPaul/Evolution_app_development/tree/SpringDBConnect/SpringDBConnect/SpringAppDataJPA/src/main/java/me/oldboy/controller) - папка контроллеров обрабатывающих запросы;
+- [User.java](https://github.com/JcoderPaul/Evolution_app_development/blob/SpringDBConnect/SpringDBConnect/SpringAppDataJPA/src/main/java/me/oldboy/entity/User.java) - класс (сущность, model), "схема" ключевого объекта которым манипулирует наше приложение;
+- [UserReadDto.java](https://github.com/JcoderPaul/Evolution_app_development/blob/SpringDBConnect/SpringDBConnect/SpringAppDataJPA/src/main/java/me/oldboy/dto/UserReadDto.java) - т.н. "межслойный" объект передачи данных, в нем мы отсекаем "лишнюю" информацию для передачи отображению;
+- [UserRepository.java ](https://github.com/JcoderPaul/Evolution_app_development/blob/SpringDBConnect/SpringDBConnect/SpringAppDataJPA/src/main/java/me/oldboy/repository/UserRepository.java)- самый "магический" из слоев приложения, т.к. не имеет видимой реализации применяемых с него 
 методов, файл получающий данные из БД;
-- UserService.java - слой бизнес логики приложения (в текущем приложении она минимальна);
+- [UserService.java](https://github.com/JcoderPaul/Evolution_app_development/blob/SpringDBConnect/SpringDBConnect/SpringAppDataJPA/src/main/java/me/oldboy/service/UserService.java) - слой бизнес логики приложения (в текущем приложении она минимальна);
 
 Конфигурация зависимостей:
-- build.gradle - для работы нам понадобились новые зависимости:
+- [build.gradle](https://github.com/JcoderPaul/Evolution_app_development/blob/SpringDBConnect/SpringDBConnect/SpringAppDataJPA/build.gradle) - для работы нам понадобились новые зависимости:
 
       /* Зависимость позволяющая использовать функционал Spring JPA */
       implementation "org.springframework.data:spring-data-jpa:${versions.data_jpa}"
@@ -68,7 +68,7 @@ ________________________________________________________________________________
       /* Зависимость позволяющая читать YAML файлы */
       implementation 'org.yaml:snakeyaml:2.3'
   
-- version.gradle - версии зависимостей;
+- [version.gradle](https://github.com/JcoderPaul/Evolution_app_development/blob/SpringDBConnect/SpringDBConnect/SpringAppDataJPA/version.gradle) - версии зависимостей;
 
 Основную хитрость в данном мини-приложении составлял момент чтения *.YML файла, т.к. в Spring Boot эту возможность мы 
 получаем "из коробки", то в Spring Framework (используемой версии) должны написать некую реализацию "конвертера" - 
