@@ -12,7 +12,7 @@
 ________________________________________________________________________________________________________________________
 
 Соединить наше Spring Web MVC приложение и PostgreSQL БД, для сохранения и получения данных, можно по-разному (технологически обрабатывать запросы и ответы к/из БД), приведем 4-и возможных варианта:
-- SpringWebJDBC - приложение использует "прямое соединение" по JDBC, не использует технологию ORM, слой взаимодействия с БД использует SQL запросы и PreparedStatement;
-- SpringWebJDBCTemplate - проложение использует JDBC без применения технологии ORM, как и предыдущее, но теперь мы используем JDBC шаблоны - JdbcTemplate, из пакета org.springframework.jdbc.core;
-- SpringWebHibernate - приложение взаимодействует с БД с применением ORM Framework Hibernate;
-- SpringAppDataJPA - приложение взаимодействует с БД используя возможности Spring Data Jpa и Hibernate;  
+- [SpringWebJDBC](https://github.com/JcoderPaul/Evolution_app_development/tree/SpringWebAppConfig/SpringDBConnect/SpringWebJDBC) - приложение использует "прямое соединение" по JDBC, не использует технологию ORM, слой взаимодействия с БД использует SQL запросы и PreparedStatement;
+- [SpringWebJDBCTemplate](https://github.com/JcoderPaul/Evolution_app_development/tree/SpringWebAppConfig/SpringDBConnect/SpringWebJDBCTemplate) - проложение использует JDBC без применения технологии ORM, как и предыдущее, но теперь мы используем JDBC шаблоны - JdbcTemplate, из пакета org.springframework.jdbc.core;
+- [SpringWebHibernate](https://github.com/JcoderPaul/Evolution_app_development/tree/SpringWebAppConfig/SpringDBConnect/SpringWebHibernate) - приложение взаимодействует с БД с применением ORM Framework Hibernate;
+- [SpringAppDataJPA](https://github.com/JcoderPaul/Evolution_app_development/tree/SpringWebAppConfig/SpringDBConnect/SpringAppDataJPA) - приложение взаимодействует с БД используя возможности [Spring Data Jpa](https://spring.io/projects/spring-data-jpa) и [Hibernate](https://hibernate.org/orm/documentation/6.6/);  
