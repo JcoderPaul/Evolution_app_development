@@ -35,20 +35,20 @@ ________________________________________________________________________________
 Будем использовать каркас приложения из раздела [SpringWebMvcConfig](https://github.com/JcoderPaul/Evolution_app_development/tree/master/SpringWebAppConfig/SpringWebMvcConfig)
 
 Что мы добавим и что изменим:
-- HibernateConfig.java - файл отвечающий за настройку связи с БД;
-- hibernate.cfg.xml - файл настроек для Hibernate (в данной реализации мы не используем файл application.properties);
-- WebContextInitializer - файл формирующий web-контекст, существенное отличие от предыдущей версии наличие необходимых аннотаций;
-- AppContextConfig.java - файл конфигурации приложения;
-- controller - папка контроллеров обрабатывающих запросы;
-- UserRepositoryImpl.java - файл получающий данные (используем несколько вариантов запросов);
+- [HibernateConfig.java](https://github.com/JcoderPaul/Evolution_app_development/blob/SpringDBConnect/SpringDBConnect/SpringWebHibernate/src/main/java/me/oldboy/config/HibernateConfig.java) - файл отвечающий за настройку связи с БД;
+- [hibernate.cfg.xml](https://github.com/JcoderPaul/Evolution_app_development/blob/SpringDBConnect/SpringDBConnect/SpringWebHibernate/src/main/resources/hibernate.cfg.xml) - файл настроек для Hibernate (в данной реализации мы не используем файл application.properties);
+- [WebContextInitializer](https://github.com/JcoderPaul/Evolution_app_development/blob/SpringDBConnect/SpringDBConnect/SpringWebHibernate/src/main/java/me/oldboy/config/WebContextInitializer.java) - файл формирующий web-контекст, существенное отличие от предыдущей версии наличие необходимых аннотаций;
+- [AppContextConfig.java](https://github.com/JcoderPaul/Evolution_app_development/blob/SpringDBConnect/SpringDBConnect/SpringWebHibernate/src/main/java/me/oldboy/config/AppContextConfig.java) - файл конфигурации приложения;
+- [controller](https://github.com/JcoderPaul/Evolution_app_development/tree/SpringDBConnect/SpringDBConnect/SpringWebHibernate/src/main/java/me/oldboy/controller) - папка контроллеров обрабатывающих запросы;
+- [UserRepositoryImpl.java](https://github.com/JcoderPaul/Evolution_app_development/blob/SpringDBConnect/SpringDBConnect/SpringWebHibernate/src/main/java/me/oldboy/repository/UserRepositoryImpl.java) - файл получающий данные (используем несколько вариантов запросов);
 
 Конфигурация зависимостей:
-- build.gradle - для работы нам понадобились новые зависимости:
+- [build.gradle](https://github.com/JcoderPaul/Evolution_app_development/blob/SpringDBConnect/SpringDBConnect/SpringWebHibernate/build.gradle) - для работы нам понадобились новые зависимости:
 
       /* Подключаем функционал Hibernate */
       implementation "org.hibernate:hibernate-core:${versions.hibernate}"
   
-- version.gradle - версии зависимостей;
+- [version.gradle](https://github.com/JcoderPaul/Evolution_app_development/blob/SpringDBConnect/SpringDBConnect/SpringWebHibernate/version.gradle) - версии зависимостей;
 
 Приложение разворачивается локально. Для запуска приложения нужен web-сервер приложений или контейнер сервлетов - 
 используем TomCat.
