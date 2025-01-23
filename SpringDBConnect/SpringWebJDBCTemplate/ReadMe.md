@@ -34,16 +34,16 @@ ________________________________________________________________________________
 Будем использовать каркас приложения из раздела [SpringWebMvcConfig](https://github.com/JcoderPaul/Evolution_app_development/tree/master/SpringWebAppConfig/SpringWebMvcConfig)
 
 Что мы добавим и что изменим:
-- ConnectionManager.java - файл формирующий DataSource bean и отвечающий за настройку связи с БД;
-- application.properties - файл настроек для JDBC драйвера;
-- WebContextInitializer - файл формирующий web-контекст, существенное отличие от предыдущей версии наличие необходимых аннотаций;
-- AppContextConfig.java - файл конфигурации приложения, для разнообразия мы вынесли сюда создание JdbcTemplate bean-a;
-- UserRestController.java - контроллер обрабатывающий запросы: просмотр user-a по id, удаление user-a по id, просмотр всех user-ов, создание user-a;
-- UserRepositoryImpl.java - файл получающий данные (теперь уже из PostgreSQL БД);
+- [ConnectionManager.java](https://github.com/JcoderPaul/Evolution_app_development/blob/SpringDBConnect/SpringDBConnect/SpringWebJDBCTemplate/src/main/java/me/oldboy/config/ConnectionManager.java) - файл формирующий DataSource bean и отвечающий за настройку связи с БД;
+- [application.properties](https://github.com/JcoderPaul/Evolution_app_development/blob/SpringDBConnect/SpringDBConnect/SpringWebJDBCTemplate/src/main/resources/application.properties) - файл настроек для JDBC драйвера;
+- [WebContextInitializer](https://github.com/JcoderPaul/Evolution_app_development/blob/SpringDBConnect/SpringDBConnect/SpringWebJDBCTemplate/src/main/java/me/oldboy/config/WebContextInitializer.java) - файл формирующий web-контекст, существенное отличие от предыдущей версии наличие необходимых аннотаций;
+- [AppContextConfig.java](https://github.com/JcoderPaul/Evolution_app_development/blob/SpringDBConnect/SpringDBConnect/SpringWebJDBCTemplate/src/main/java/me/oldboy/config/AppContextConfig.java) - файл конфигурации приложения, для разнообразия мы вынесли сюда создание JdbcTemplate bean-a;
+- [UserRestController.java](https://github.com/JcoderPaul/Evolution_app_development/blob/SpringDBConnect/SpringDBConnect/SpringWebJDBCTemplate/src/main/java/me/oldboy/controller/UserRestController.java) - контроллер обрабатывающий запросы: просмотр user-a по id, удаление user-a по id, просмотр всех user-ов, создание user-a;
+- [UserRepositoryImpl.java](https://github.com/JcoderPaul/Evolution_app_development/blob/SpringDBConnect/SpringDBConnect/SpringWebJDBCTemplate/src/main/java/me/oldboy/repository/UserRepositoryImpl.java) - файл получающий данные (теперь уже из PostgreSQL БД);
 
 Конфигурация зависимостей:
-- build.gradle;
-- version.gradle - версии зависимостей;
+- [build.gradle](https://github.com/JcoderPaul/Evolution_app_development/blob/SpringDBConnect/SpringDBConnect/SpringWebJDBCTemplate/build.gradle);
+- [version.gradle](https://github.com/JcoderPaul/Evolution_app_development/blob/SpringDBConnect/SpringDBConnect/SpringWebJDBCTemplate/version.gradle) - версии зависимостей;
 
 Приложение разворачивается локально. Для запуска приложения нужен web-сервер приложений или контейнер сервлетов - 
 используем TomCat.
