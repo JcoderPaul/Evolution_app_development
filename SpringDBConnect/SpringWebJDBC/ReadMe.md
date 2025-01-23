@@ -35,22 +35,22 @@ ________________________________________________________________________________
 Будем использовать каркас приложения из раздела [SpringWebMvcConfig](https://github.com/JcoderPaul/Evolution_app_development/tree/master/SpringWebAppConfig/SpringWebMvcConfig)
 
 Что мы добавим и что изменим:
-- ConnectionManager.java - файл отвечающий за настройку связи с БД;
-- application.properties - файл настроек для JDBC драйвера;
-- WebContextInitializer - файл формирующий web-контекст, существенное отличие от предыдущей версии наличие необходимых аннотаций;
-- AppContextConfig.java - файл конфигурации приложения;
-- UserRestController.java - контроллер обрабатывающий запросы, отличие от предыдущей версии - добавление метода записи данных в БД;
-- UserRepositoryImpl.java - файл получающий данные (теперь уже из PostgreSQL БД);
+- [ConnectionManager.java](https://github.com/JcoderPaul/Evolution_app_development/blob/SpringDBConnect/SpringDBConnect/SpringWebJDBC/src/main/java/me/oldboy/base_connect_config/ConnectionManager.java) - файл отвечающий за настройку связи с БД;
+- [application.properties](https://github.com/JcoderPaul/Evolution_app_development/blob/SpringDBConnect/SpringDBConnect/SpringWebJDBC/src/main/resources/application.properties) - файл настроек для JDBC драйвера;
+- [WebContextInitializer](https://github.com/JcoderPaul/Evolution_app_development/blob/SpringDBConnect/SpringDBConnect/SpringWebJDBC/src/main/java/me/oldboy/config/WebContextInitializer.java) - файл формирующий web-контекст, существенное отличие от предыдущей версии наличие необходимых аннотаций;
+- [AppContextConfig.java](https://github.com/JcoderPaul/Evolution_app_development/blob/SpringDBConnect/SpringDBConnect/SpringWebJDBC/src/main/java/me/oldboy/config/AppContextConfig.java) - файл конфигурации приложения;
+- [UserRestController.java](https://github.com/JcoderPaul/Evolution_app_development/blob/SpringDBConnect/SpringDBConnect/SpringWebJDBC/src/main/java/me/oldboy/controller/UserRestController.java) - контроллер обрабатывающий запросы, отличие от предыдущей версии - добавление метода записи данных в БД;
+- [UserRepositoryImpl.java](https://github.com/JcoderPaul/Evolution_app_development/blob/SpringDBConnect/SpringDBConnect/SpringWebJDBC/src/main/java/me/oldboy/repository/UserRepositoryImpl.java) - файл получающий данные (теперь уже из PostgreSQL БД);
 
 Конфигурация зависимостей:
-- build.gradle - для работы нам понадобились новые зависимости:
+- [build.gradle](https://github.com/JcoderPaul/Evolution_app_development/blob/SpringDBConnect/SpringDBConnect/SpringWebJDBC/build.gradle) - для работы нам понадобились новые зависимости:
 
       /* Зависимость PostgreSQL */
       implementation "org.postgresql:postgresql:${versions.postgres}"
       /* Зависимость позволяющая в контроллерах принимать JSON запросы */
       implementation "com.fasterxml.jackson.core:jackson-databind:${versions.jackson}"
 
-- version.gradle - версии зависимостей;
+- [version.gradle](https://github.com/JcoderPaul/Evolution_app_development/blob/SpringDBConnect/SpringDBConnect/SpringWebJDBC/version.gradle) - версии зависимостей;
 
 Приложение разворачивается локально. Для запуска приложения нужен web-сервер приложений или контейнер сервлетов - 
 используем TomCat.
