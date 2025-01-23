@@ -126,6 +126,7 @@ public class UserRepositoryImpl implements CrudRepository<Long, User> {
     private Session getSession(){
         return sessionFactory.openSession();
     }
+    
     private User miniMapper(User userTo){
         return User.builder()
                 .userId(userTo.getUserId())
