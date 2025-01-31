@@ -2,7 +2,7 @@
 его с фреймворком Swagger UI. Спецификация OpenAPI предоставляет один из способов описания REST API, а Swagger и подобные
 ему фреймворки предоставляют нам удобный способ реализации этой спецификации. 
 ________________________________________________________________________________________________________________________
-### 4 and 10/4 ((non Boot) Spring application integration with SpringDog OpenApi 3.0 - "Swagger")
+### 4 and 10/4 ((non Boot) Spring application integration with SpringDoc OpenApi 3.0 - "Swagger")
 
 На данном шаге применим более свежий набор библиотек SpringDoc-OpenApi, который помогает автоматизировать создание 
 документации API с использованием проектов Spring Framework и Spring Boot. ([см. документацию](https://springdoc.org/)).
