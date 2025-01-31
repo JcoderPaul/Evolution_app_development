@@ -20,18 +20,18 @@ ________________________________________________________________________________
 
 Структура проекта:
 - config:
-  - YamlPropertySourceFactory - файл позволяющий читать данные из нашего application.yml;
-  - DataSourceConfig.java - файл конфигурирующий связь приложения с БД;
-  - OpenApiConfig.java - файл конфигурирующий настройки OpenApi (и Swagger UI);
-  - WebContextInitializer.java - файл конфигурирующий контекст приложения;
-- UserRestController.java - файл контроллера - взаимодействие пользователя приложением и нашего сервиса (приложения);
-- User.java - сущность с которой работает приложение;
-- UserReadDto.java - объект передачи данных между слоями приложения;
-- UserRepository - "магический" интерфейс репозитория - взаимодействие приложения и БД;
-- UserService.java - слой бизнес логики;
+  - [YamlPropertySourceFactory](https://github.com/JcoderPaul/Evolution_app_development/blob/SpringAndSwagger/SpringAndSwagger/SpringSwaggerJakarta/src/main/java/me/oldboy/config/yml_properties_reader/YamlPropertySourceFactory.java) - файл позволяющий читать данные из нашего application.yml;
+  - [DataSourceConfig.java](https://github.com/JcoderPaul/Evolution_app_development/blob/SpringAndSwagger/SpringAndSwagger/SpringSwaggerJakarta/src/main/java/me/oldboy/config/DataSourceConfig.java) - файл конфигурирующий связь приложения с БД;
+  - [OpenApiConfig.java](https://github.com/JcoderPaul/Evolution_app_development/blob/SpringAndSwagger/SpringAndSwagger/SpringSwaggerJakarta/src/main/java/me/oldboy/config/OpenApiConfig.java) - файл конфигурирующий настройки OpenApi (и Swagger UI);
+  - [WebContextInitializer.java](https://github.com/JcoderPaul/Evolution_app_development/blob/SpringAndSwagger/SpringAndSwagger/SpringSwaggerJakarta/src/main/java/me/oldboy/config/WebContextInitializer.java) - файл конфигурирующий контекст приложения;
+- [UserRestController.java](https://github.com/JcoderPaul/Evolution_app_development/blob/SpringAndSwagger/SpringAndSwagger/SpringSwaggerJakarta/src/main/java/me/oldboy/controller/UserRestController.java) - файл контроллера - взаимодействие пользователя приложением и нашего сервиса (приложения);
+- [User.java](https://github.com/JcoderPaul/Evolution_app_development/blob/SpringAndSwagger/SpringAndSwagger/SpringSwaggerJakarta/src/main/java/me/oldboy/entity/User.java) - сущность с которой работает приложение;
+- [UserReadDto.java](https://github.com/JcoderPaul/Evolution_app_development/blob/SpringAndSwagger/SpringAndSwagger/SpringSwaggerJakarta/src/main/java/me/oldboy/dto/UserReadDto.java) - объект передачи данных между слоями приложения;
+- [UserRepository](https://github.com/JcoderPaul/Evolution_app_development/blob/SpringAndSwagger/SpringAndSwagger/SpringSwaggerJakarta/src/main/java/me/oldboy/repository/UserRepository.java) - "магический" интерфейс репозитория - взаимодействие приложения и БД;
+- [UserService.java](https://github.com/JcoderPaul/Evolution_app_development/blob/SpringAndSwagger/SpringAndSwagger/SpringSwaggerJakarta/src/main/java/me/oldboy/service/UserService.java) - слой бизнес логики;
 
 Конфигурация зависимостей:
-- build.gradle - описание зависимостей (из нового нам понадобились):
+- [build.gradle](https://github.com/JcoderPaul/Evolution_app_development/blob/SpringAndSwagger/SpringAndSwagger/SpringSwaggerJakarta/build.gradle) - описание зависимостей (из нового нам понадобились):
 
       plugins {
         id "org.springframework.boot" version "3.1.2"
@@ -46,7 +46,7 @@ ________________________________________________________________________________
       implementation "jakarta.persistence:jakarta.persistence-api:3.2.0"
       implementation "jakarta.annotation:jakarta.annotation-api:3.0.0"
 
-- version.gradle - версии зависимостей;
+- [version.gradle](https://github.com/JcoderPaul/Evolution_app_development/blob/SpringAndSwagger/SpringAndSwagger/SpringSwaggerJakarta/version.gradle) - версии зависимостей;
 
 Из особенностей настройки взаимосвязи (non Boot) Spring приложения со SpringDoc-OpenApi это, то что мы применяем
 библиотеку, которая использует и транзитивно подтягивает Spring Boot зависимости, что может слегка обескуражить новичка. 
