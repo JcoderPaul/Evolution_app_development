@@ -23,18 +23,18 @@ ________________________________________________________________________________
 
 Структура проекта:
 - config:
-  - YamlPropertySourceFactory - файл позволяющий читать данные из нашего application.yml;
-  - DataSourceConfig.java - файл конфигурирующий связь приложения с БД;
-  - SwaggerConfig.java - файл конфигурирующий настройки Swagger-а;
-  - WebContextInitializer.java - файл конфигурирующий контекст приложения;
-- UserRestController.java - файл контроллера - взаимодействие пользователя приложением и нашего сервиса (приложения);
-- User.java - сущность с которой работает приложение;
-- UserReadDto.java - объект передачи данных между слоями приложения;
-- UserRepository - "магический" интерфейс репозитория - взаимодействие приложения и БД;
-- UserService.java - слой бизнес логики;
+  - [YamlPropertySourceFactory](https://github.com/JcoderPaul/Evolution_app_development/blob/SpringAndSwagger/SpringAndSwagger/SpringSwaggerJavax/src/main/java/me/oldboy/config/yml_properties_reader/YamlPropertySourceFactory.java) - файл позволяющий читать данные из нашего application.yml;
+  - [DataSourceConfig.java](https://github.com/JcoderPaul/Evolution_app_development/blob/SpringAndSwagger/SpringAndSwagger/SpringSwaggerJavax/src/main/java/me/oldboy/config/DataSourceConfig.java) - файл конфигурирующий связь приложения с БД;
+  - [SwaggerConfig.java](https://github.com/JcoderPaul/Evolution_app_development/blob/SpringAndSwagger/SpringAndSwagger/SpringSwaggerJavax/src/main/java/me/oldboy/config/SwaggerConfig.java) - файл конфигурирующий настройки Swagger-а;
+  - [WebContextInitializer.java](https://github.com/JcoderPaul/Evolution_app_development/blob/SpringAndSwagger/SpringAndSwagger/SpringSwaggerJavax/src/main/java/me/oldboy/config/WebContextInitializer.java) - файл конфигурирующий контекст приложения;
+- [UserRestController.java](https://github.com/JcoderPaul/Evolution_app_development/blob/SpringAndSwagger/SpringAndSwagger/SpringSwaggerJavax/src/main/java/me/oldboy/controller/UserRestController.java) - файл контроллера - взаимодействие пользователя приложением и нашего сервиса (приложения);
+- [User.java](https://github.com/JcoderPaul/Evolution_app_development/blob/SpringAndSwagger/SpringAndSwagger/SpringSwaggerJavax/src/main/java/me/oldboy/entity/User.java) - сущность с которой работает приложение;
+- [UserReadDto.java](https://github.com/JcoderPaul/Evolution_app_development/blob/SpringAndSwagger/SpringAndSwagger/SpringSwaggerJavax/src/main/java/me/oldboy/dto/UserReadDto.java) - объект передачи данных между слоями приложения;
+- [UserRepository](https://github.com/JcoderPaul/Evolution_app_development/blob/SpringAndSwagger/SpringAndSwagger/SpringSwaggerJavax/src/main/java/me/oldboy/repository/UserRepository.java) - "магический" интерфейс репозитория - взаимодействие приложения и БД;
+- [UserService.java](https://github.com/JcoderPaul/Evolution_app_development/blob/SpringAndSwagger/SpringAndSwagger/SpringSwaggerJavax/src/main/java/me/oldboy/service/UserService.java) - слой бизнес логики;
 
 Конфигурация зависимостей:
-- build.gradle - описание зависимостей (из нового нам понадобились):
+- [build.gradle](https://github.com/JcoderPaul/Evolution_app_development/blob/SpringAndSwagger/SpringAndSwagger/SpringSwaggerJavax/build.gradle) - описание зависимостей (из нового нам понадобились):
 
       /* Подключим зависимость Swagger-a */
       implementation 'io.springfox:springfox-swagger2:3.0.0'
@@ -46,7 +46,7 @@ ________________________________________________________________________________
       implementation 'javax.servlet:javax.servlet-api:4.0.1'
       implementation 'javax.validation:validation-api:2.0.1.Final'
 
-- version.gradle - версии зависимостей;
+- [version.gradle](https://github.com/JcoderPaul/Evolution_app_development/blob/SpringAndSwagger/SpringAndSwagger/SpringSwaggerJavax/version.gradle) - версии зависимостей;
 
 Приложение разворачивается локально. Для запуска приложения нужен web-сервер приложений или контейнер сервлетов -
 используем TomCat 9 или 10.
