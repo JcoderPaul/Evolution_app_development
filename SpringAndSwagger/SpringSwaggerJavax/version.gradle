@@ -1,0 +1,14 @@
+ext {
+    versions = [
+            'spring': '5.3.39',
+            'data_jpa':'2.6.10',
+            'javax':'4.0.1',
+            'javax_validation':'2.0.1.Final',
+            'jackson':'2.17.2',
+            'postgres':'42.6.0',
+            'hibernate':'5.5.9.Final',
+            'snakeyaml':'2.3',
+            'swagger': '3.0.0',
+            'slf4j_log4j_binding':'2.0.16'
+    ]
+}
