@@ -31,5 +31,5 @@ REST API-интерфейсы фокусируются на ресурсах (т
 ________________________________________________________________________________________________________________________
 Тут мы рассмотрим только вариант генерации документации по уже готовому коду. Для примера возьмем две Open Source библиотеки 
 для документирования (использующих в своей основе Swagger):
-- SpringSwaggerJakarta - пример (non Boot) Spring приложения интегрированного с SpringDoc-OpenApi использующие актуальные версии библиотек и фреймворков;
-- SpringSwaggerJavax - пример (non Boot) Spring приложения интегрированного со SpringFox - устаревшая, но активно используемая кодовая база;
+- [SpringSwaggerJakarta](https://github.com/JcoderPaul/Evolution_app_development/tree/SpringAndSwagger/SpringAndSwagger/SpringSwaggerJakarta) - пример (non Boot) Spring приложения интегрированного с [SpringDoc-OpenApi](https://springdoc.org/) использующие актуальные версии библиотек и фреймворков;
+- [SpringSwaggerJavax](https://github.com/JcoderPaul/Evolution_app_development/tree/SpringAndSwagger/SpringAndSwagger/SpringSwaggerJavax) - пример (non Boot) Spring приложения интегрированного со [SpringFox](https://springfox.github.io/springfox/docs/current/) - устаревшая, но активно используемая кодовая база;
