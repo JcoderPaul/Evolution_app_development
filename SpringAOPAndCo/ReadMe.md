@@ -17,24 +17,24 @@ ________________________________________________________________________________
 - Применить библиотеку MapStruct (для преобразования UserCreateDto в User, и User в UserReadDto).
 
 Структура проекта:
-- annotations - папка с аннотациями (@Measurable - ей мы аннотируем методы скорость которых хотим рассчитать);
-- aspects - папка с аспектами (MethodSpeedCalcAspect.java - класс аспект описывающий логику работы и подключения "измерителя скорости методов");
+- annotations - папка с аннотациями ([@Measurable](https://github.com/JcoderPaul/Evolution_app_development/blob/master/SpringAOPAndCo/src/main/java/me/oldboy/annotations/Measurable.java) - ей мы аннотируем методы скорость которых хотим рассчитать);
+- aspects - папка с аспектами ([MethodSpeedCalcAspect.java](https://github.com/JcoderPaul/Evolution_app_development/blob/master/SpringAOPAndCo/src/main/java/me/oldboy/aspects/MethodSpeedCalcAspect.java) - класс аспект описывающий логику работы и подключения "измерителя скорости методов");
 - config:
-  - YamlPropertySourceFactory - файл позволяющий читать данные из нашего application.yml;
-  - DataSourceConfig.java - файл конфигурирующий связь приложения с БД;
-  - OpenApiConfig.java - файл конфигурирующий настройки OpenApi (и Swagger UI);
-  - WebContextInitializer.java - файл конфигурирующий контекст приложения;
-  - LiquibaseConfig.java - файл конфигуратор подключенного миграционного фреймворка Liquibase;
-- UserRestController.java - файл контроллера - взаимодействие пользователя приложением и нашего сервиса (приложения);
+  - [YamlPropertySourceFactory](https://github.com/JcoderPaul/Evolution_app_development/blob/master/SpringAOPAndCo/src/main/java/me/oldboy/config/yml_properties_reader/YamlPropertySourceFactory.java) - файл позволяющий читать данные из нашего application.yml;
+  - [DataSourceConfig.java](https://github.com/JcoderPaul/Evolution_app_development/blob/master/SpringAOPAndCo/src/main/java/me/oldboy/config/DataSourceConfig.java) - файл конфигурирующий связь приложения с БД;
+  - [OpenApiConfig.java](https://github.com/JcoderPaul/Evolution_app_development/blob/master/SpringAOPAndCo/src/main/java/me/oldboy/config/OpenApiConfig.java) - файл конфигурирующий настройки OpenApi (и Swagger UI);
+  - [WebContextInitializer.java](https://github.com/JcoderPaul/Evolution_app_development/blob/master/SpringAOPAndCo/src/main/java/me/oldboy/config/WebContextInitializer.java) - файл конфигурирующий контекст приложения;
+  - [LiquibaseConfig.java](https://github.com/JcoderPaul/Evolution_app_development/blob/master/SpringAOPAndCo/src/main/java/me/oldboy/config/LiquibaseConfig.java) - файл конфигуратор подключенного миграционного фреймворка Liquibase;
+- [UserRestController.java](https://github.com/JcoderPaul/Evolution_app_development/blob/master/SpringAOPAndCo/src/main/java/me/oldboy/controller/UserRestController.java) - файл контроллера - взаимодействие пользователя приложением и нашего сервиса (приложения);
 - dto:
-  - UserReadDto.java - класс передачи данных между слоями приложения (условно со слоя работы с данными "наверх");
-  - UserCreateDto.java - класс передачи данных между слоями (условно со слоя контроллеров (отображения) на "нижние" слои сервисов/данных);
-- User.java - сущность с которой работает приложение (модель);
-- UserRepository - "магический" интерфейс репозитория - взаимодействие приложения и БД;
-- UserService.java - слой бизнес логики;
+  - [UserReadDto.java](https://github.com/JcoderPaul/Evolution_app_development/blob/master/SpringAOPAndCo/src/main/java/me/oldboy/dto/UserReadDto.java) - класс передачи данных между слоями приложения (условно со слоя работы с данными "наверх");
+  - [UserCreateDto.java](https://github.com/JcoderPaul/Evolution_app_development/blob/master/SpringAOPAndCo/src/main/java/me/oldboy/dto/UserCreateDto.java) - класс передачи данных между слоями (условно со слоя контроллеров (отображения) на "нижние" слои сервисов/данных);
+- [User.java](https://github.com/JcoderPaul/Evolution_app_development/blob/master/SpringAOPAndCo/src/main/java/me/oldboy/entity/User.java) - сущность с которой работает приложение (модель);
+- [UserRepository](https://github.com/JcoderPaul/Evolution_app_development/blob/master/SpringAOPAndCo/src/main/java/me/oldboy/repository/UserRepository.java) - "магический" интерфейс репозитория - взаимодействие приложения и БД;
+- [UserService.java](https://github.com/JcoderPaul/Evolution_app_development/blob/master/SpringAOPAndCo/src/main/java/me/oldboy/service/UserService.java) - слой бизнес логики;
 
 Конфигурация зависимостей:
-- build.gradle - описание зависимостей (из нового нам понадобились):
+- [build.gradle](https://github.com/JcoderPaul/Evolution_app_development/blob/master/SpringAOPAndCo/build.gradle) - описание зависимостей (из нового нам понадобились):
 
       /* Зависимость отвечающая за работу AOP функционала */
       implementation "org.aspectj:aspectjweaver:1.9.22.1"
@@ -52,7 +52,7 @@ ________________________________________________________________________________
       annotationProcessor "org.mapstruct:mapstruct-processor:1.6.3",
                           "org.projectlombok:lombok-mapstruct-binding:0.2.0"
 
-- version.gradle - версии зависимостей;
+- [version.gradle](https://github.com/JcoderPaul/Evolution_app_development/blob/master/SpringAOPAndCo/version.gradle) - версии зависимостей;
 
 Как и ранее приложение разворачивается локально. Для запуска нужен web-сервер приложений или контейнер сервлетов - используем TomCat 10 или выше.
 
