@@ -1,0 +1,59 @@
+plugins {
+    id 'java'
+    id 'war'
+    id "io.freefair.lombok" version "8.3"
+    id "com.github.ben-manes.versions" version "0.51.0"
+    id "org.springframework.boot" version "3.1.2"
+    id "org.springdoc.openapi-gradle-plugin" version "1.9.0"
+}
+
+apply from: 'version.gradle'
+apply plugin: 'war'
+
+war {
+    enabled=true
+}
+
+group 'me.oldboy'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    /* Основные зависимости Spring */
+    implementation "org.springframework:spring-context:${versions.spring}"
+    implementation "org.springframework:spring-webmvc:${versions.spring}"
+    implementation "org.springframework:spring-beans:${versions.spring}"
+
+    /* Зависимость позволяющая использовать функционал Spring JPA */
+    implementation "org.springframework.data:spring-data-jpa:${versions.data_jpa}"
+
+    /* Подключаем функционал Hibernate */
+    implementation "org.hibernate:hibernate-core:${versions.hibernate}"
+
+    /* Зависимость PostgreSQL */
+    implementation "org.postgresql:postgresql:${versions.postgres}"
+
+    /* Подключим зависимость Swagger-a */
+    implementation "org.springdoc:springdoc-openapi-starter-webmvc-ui:${versions.swagger_open_api}"
+
+    /* Зависимость позволяющая в контроллерах принимать JSON запросы */
+    implementation "com.fasterxml.jackson.core:jackson-databind:${versions.jackson}"
+
+    /* Зависимость позволяющая читать YAML файлы */
+    implementation "org.yaml:snakeyaml:${versions.snakeyaml}"
+
+    /* Зависимость отвечающая за работу аннотаций и сервлетов */
+    implementation "jakarta.servlet:jakarta.servlet-api:${versions.jakarta_servlet_api}"
+    implementation "jakarta.persistence:jakarta.persistence-api:${versions.jakarta_persistence_api}"
+    implementation "jakarta.annotation:jakarta.annotation-api:${versions.jakarta_annotation}"
+
+    /* Подключим log4j */
+    implementation "org.slf4j:slf4j-log4j12:${versions.slf4j_log4j_binding}"
+}
+
+test {
+    useJUnitPlatform()
+}
