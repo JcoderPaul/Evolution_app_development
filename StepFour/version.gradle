@@ -1,0 +1,21 @@
+ext {
+    versions = [
+            'spring': '6.2.8',
+            'security':'6.5.1',
+            'data_jpa':'3.4.2',
+            'postgres':'42.6.0',
+            'hibernate':'6.6.5.Final',
+            'validator':'8.0.2.Final',
+            'jakarta_api':'6.1.0',
+            'jakarta_validation':'3.1.1',
+            'mapstruct':'1.6.0',
+            'lombok_map_struct':'0.2.0',
+            'slf4j_log4j_binding':'2.0.16',
+            'liquibase':'4.32.0',
+            'testcontainers': '1.19.1',
+            'mockito': '5.12.0',
+            'assertj': '3.26.0',
+            'jupiter': '5.11.4',
+            'glassfish':'4.0.2'
+    ]
+}
