@@ -19,8 +19,6 @@ public interface ReservationRepository extends JpaRepository<Reservation, Long> 
             nativeQuery = true)
     public Optional<List<Reservation>> findByDate(@Param("date") LocalDate date);
 
-//    public <E extends CwEntity> Optional<List<Reservation>> findByCwEntity(E entity);
-
     @Query(value = "SELECT res.* " +
             "FROM coworking.all_reserves AS res " +
             "WHERE res.place_id = :placeId",
