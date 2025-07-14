@@ -2,10 +2,10 @@
 
 --changeset oldboy:1
 INSERT INTO coworking.users (user_id, login, password, role)
-VALUES (1, 'Admin', '1234', 'ADMIN'),
-       (2, 'User', '1234', 'USER'),
-       (3, 'UserThree', '4321', 'USER'),
-       (4, 'UserTwo', '1234', 'USER');
+VALUES (1, 'Admin', '$2y$10$OZZhrg6W3oekdIgsLjtJJO.NmgTVBV6jGNWnN9UVD2OnbXvX8.4I2', 'ADMIN'),
+       (2, 'User', '$2y$10$Y7/d1fA/f6v0B1O5bYZzvutMgoYThaqCvg.J9O3DdwYRU70EP..WO', 'USER'),
+       (3, 'UserThree', '$2y$10$U1kgGBVqHFJ4AcnawvUdmeBxRE3593XZ4U0lEJCV2RWI/J3DW/f.G', 'USER'),
+       (4, 'UserTwo', '$2y$10$YIKMHeHT0kCqB.PZHNDTF..PG3cFeymimZ48wGkxFeFMWmmE5dW46', 'USER');
 --rollback delete from coworking.users
 
 --changeset oldboy:2
