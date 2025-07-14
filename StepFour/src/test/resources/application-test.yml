@@ -23,3 +23,7 @@ liquibase:
   enabled: true
   change_log: classpath:db/changelog/db.changelog-master.yaml
   default_schema: coworking
+
+security:
+  jwt:
+    secret: 4261656C64756E674261656C64756E674261656C64756E674261656C64756E67
