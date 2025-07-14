@@ -16,6 +16,8 @@ ext {
             'mockito': '5.12.0',
             'assertj': '3.26.0',
             'jupiter': '5.11.4',
-            'glassfish':'4.0.2'
+            'glassfish':'4.0.2',
+            'jsonwebtoken':'0.12.6',
+            'jackson':'2.17.2'
     ]
 }
