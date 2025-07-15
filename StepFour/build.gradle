@@ -61,13 +61,15 @@ dependencies {
     /* Зависимость миграционного фреймворка */
     implementation "org.liquibase:liquibase-core:${versions.liquibase}"
 
+    /* Зависимость позволяющая в контроллерах принимать JSON запросы */
+    implementation "com.fasterxml.jackson.core:jackson-databind:${versions.jackson}"
+    implementation "com.fasterxml.jackson.core:jackson-annotations:${versions.jackson}"
+    implementation "com.fasterxml.jackson.datatype:jackson-datatype-jsr310:${versions.jackson}"
+
     /* Подключим функционал позволяющий нам работать с JWT */
     runtimeOnly "io.jsonwebtoken:jjwt-impl:${versions.jsonwebtoken}"
     implementation "io.jsonwebtoken:jjwt-api:${versions.jsonwebtoken}"
     runtimeOnly "io.jsonwebtoken:jjwt-jackson:${versions.jsonwebtoken}"
-
-    /* Зависимость позволяющая в контроллерах принимать JSON запросы */
-    implementation "com.fasterxml.jackson.core:jackson-databind:${versions.jackson}"
 
     /*------------------------Основные тестовые зависимости --------------------------------------*/
 
