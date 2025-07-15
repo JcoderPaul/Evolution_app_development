@@ -118,7 +118,7 @@ class UserServiceIT extends TestContainerInit {
     }
 
     @Test
-    void findAll() {
+    void findAll_shouldReturn_AllUsersDtoList_Test() {
         List<UserReadDto> userReadDtoList = userService.findAll();
         assertThat(userReadDtoList.size()).isGreaterThan(3);
     }
