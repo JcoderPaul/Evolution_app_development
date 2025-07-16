@@ -7,14 +7,9 @@ import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
-import me.oldboy.config.yaml_read_adapter.YamlPropertySourceFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.PropertySource;
-import org.springframework.core.env.Environment;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 
 import javax.crypto.SecretKey;
 import java.time.Instant;
@@ -29,15 +24,15 @@ public class JwtTokenGenerator {
     @Value("${security.jwt.secret}")
     private String jwtSignature;
 
-    public String getToken(Long accountId, String login){
+    public String getToken(Long accountId, String login) {
         return generateJwtToken(accountId, login);
     }
 
     public boolean isValid(String token, UserDetails userDetails) {
         Jws<Claims> claims = Jwts.parser()
-                                 .verifyWith(getKey())
-                                 .build()
-                                 .parseSignedClaims(token);
+                .verifyWith(getKey())
+                .build()
+                .parseSignedClaims(token);
         final String userName = extractUserName(token);
 
         return (claims.getPayload().getExpiration().after(new Date()) &&
