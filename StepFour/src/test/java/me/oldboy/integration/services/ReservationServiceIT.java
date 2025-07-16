@@ -166,8 +166,7 @@ class ReservationServiceIT extends TestContainerInit {
     void findByUserId_shouldReturnException_haveNoUserId_Test() {
         assertThatThrownBy(() -> reservationService.findByUserId(nonExistentId))
                 .isInstanceOf(ReservationServiceException.class)
-                .hasMessageContaining("There are no reservations for user with ID - " + nonExistentId + "! " +
-                        "Бронирования для пользователя с ID - " + nonExistentId + " отсутствуют!");
+                .hasMessageContaining("Бронирования для пользователя с ID - " + nonExistentId + " отсутствуют!");
     }
 
     @Test
@@ -183,8 +182,7 @@ class ReservationServiceIT extends TestContainerInit {
     void findBySlotId_shouldReturnException_haveNoSlotId_Test() {
         assertThatThrownBy(() -> reservationService.findBySlotId(nonExistentId))
                 .isInstanceOf(ReservationServiceException.class)
-                .hasMessageContaining("There are no reservations for slot ID " + nonExistentId + "! " +
-                        "Бронирования для " + nonExistentId + " отсутствуют!");
+                .hasMessageContaining("Бронирования для " + nonExistentId + " отсутствуют!");
     }
 
     @Test
@@ -200,8 +198,7 @@ class ReservationServiceIT extends TestContainerInit {
     void findByPlaceId_shouldReturnException_haveNoPlaceId_Test() {
         assertThatThrownBy(() -> reservationService.findByPlaceId(nonExistentId))
                 .isInstanceOf(ReservationServiceException.class)
-                .hasMessageContaining("There are no reservations for place ID " + nonExistentId + "! " +
-                        "Бронирования для " + nonExistentId + " отсутствуют!");
+                .hasMessageContaining("Бронирования для " + nonExistentId + " отсутствуют!");
     }
 
     @Test
@@ -217,8 +214,7 @@ class ReservationServiceIT extends TestContainerInit {
     void findByDate_shouldReturnException_haveNoDate_Test() {
         assertThatThrownBy(() -> reservationService.findByDate(notExistentDate))
                 .isInstanceOf(ReservationServiceException.class)
-                .hasMessageContaining("There are no reservations for date " + notExistentDate + "! " +
-                        "Бронирования на " + notExistentDate + " отсутствуют!");
+                .hasMessageContaining("Бронирования на " + notExistentDate + " отсутствуют!");
     }
 
     @Test
@@ -244,7 +240,6 @@ class ReservationServiceIT extends TestContainerInit {
     void findAllFreeSlotsByDate_shouldReturnException_haveNoReservation_Test() {
         assertThatThrownBy(() -> reservationService.findAllFreeSlotsByDate(notExistentDate))
                 .isInstanceOf(ReservationServiceException.class)
-                .hasMessageContaining("There are no reservations for date " + notExistentDate + "! " +
-                        "Бронирования на " + notExistentDate + " отсутствуют!");
+                .hasMessageContaining("Бронирования на " + notExistentDate + " отсутствуют!");
     }
 }
