@@ -71,6 +71,9 @@ dependencies {
     implementation "io.jsonwebtoken:jjwt-api:${versions.jsonwebtoken}"
     runtimeOnly "io.jsonwebtoken:jjwt-jackson:${versions.jsonwebtoken}"
 
+    /* Зависимость отвечающая за работу AOP функционала */
+    implementation "org.aspectj:aspectjweaver:${versions.aspectj}"
+
     /*------------------------Основные тестовые зависимости --------------------------------------*/
 
     /* Зависимость закрывает проблему с "замещением" Hibernate Validation в изолированных тестах */
