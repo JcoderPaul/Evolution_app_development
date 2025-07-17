@@ -18,6 +18,7 @@ ext {
             'jupiter': '5.11.4',
             'glassfish':'4.0.2',
             'jsonwebtoken':'0.12.6',
-            'jackson':'2.17.2'
+            'jackson':'2.17.2',
+            'aspectj':'1.9.22.1'
     ]
 }
