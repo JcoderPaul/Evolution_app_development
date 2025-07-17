@@ -2,15 +2,18 @@ package me.oldboy.config.main_config;
 
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 @Configuration
 @EnableWebMvc
+@EnableAspectJAutoProxy
 @ComponentScan(basePackages = {
         "me.oldboy.config.data_source"
         ,"me.oldboy.config.security_config"
         ,"me.oldboy.config.security_details"
         ,"me.oldboy.config.jwt_config"
+        ,"me.oldboy.aspects"
         ,"me.oldboy.controllers"
         ,"me.oldboy.services"
         ,"me.oldboy.repository"
