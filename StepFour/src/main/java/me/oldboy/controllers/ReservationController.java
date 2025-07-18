@@ -2,6 +2,7 @@ package me.oldboy.controllers;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import me.oldboy.annotations.Auditable;
 import me.oldboy.config.security_details.SecurityUserDetails;
 import me.oldboy.controllers.utils.ParameterChecker;
 import me.oldboy.dto.reservations.ReservationCreateDto;
@@ -11,6 +12,7 @@ import me.oldboy.dto.users.UserReadDto;
 import me.oldboy.exception.NotValidArgumentException;
 import me.oldboy.exception.reservation_exception.ReservationControllerException;
 import me.oldboy.exception.reservation_exception.ReservationServiceException;
+import me.oldboy.models.audit.operations.AuditOperationType;
 import me.oldboy.services.PlaceService;
 import me.oldboy.services.ReservationService;
 import me.oldboy.services.SlotService;
@@ -46,7 +48,7 @@ public class ReservationController {
     @Autowired
     private final ParameterChecker parameterChecker;
 
-    //    @Auditable(operationType = AuditOperationType.CREATE_RESERVATION)
+    @Auditable(operationType = AuditOperationType.CREATE_RESERVATION)
     @PostMapping("/create")
     public ResponseEntity<ReservationReadDto> createReservation(@Validated
                                                                 @RequestBody
@@ -82,7 +84,7 @@ public class ReservationController {
                 .body(reservationService.findById(reservedId).get());
     }
 
-    //    @Auditable(operationType = AuditOperationType.UPDATE_RESERVATION)
+    @Auditable(operationType = AuditOperationType.UPDATE_RESERVATION)
     @PostMapping("/update")
     public ResponseEntity<?> updateReservation(@Validated
                                                @RequestBody
@@ -115,7 +117,7 @@ public class ReservationController {
     Для удаления брони нам необходим ее ID. Вся остальная информация,
     кроме userId, может быть условно неадекватна, но валидна.
     */
-//    @Auditable(operationType = AuditOperationType.DELETE_RESERVATION)
+    @Auditable(operationType = AuditOperationType.DELETE_RESERVATION)
     @PostMapping("/delete")
     public ResponseEntity<?> deleteReservation(@Validated
                                                @RequestBody
