@@ -8,6 +8,8 @@ ext {
             'validator':'8.0.2.Final',
             'jakarta_api':'6.1.0',
             'jakarta_validation':'3.1.1',
+            'jakarta_persistence_api':'3.2.0',
+            'jakarta_annotation':'3.0.0',
             'mapstruct':'1.6.0',
             'lombok_map_struct':'0.2.0',
             'slf4j_log4j_binding':'2.0.16',
@@ -19,6 +21,7 @@ ext {
             'glassfish':'4.0.2',
             'jsonwebtoken':'0.12.6',
             'jackson':'2.17.2',
+            'swagger_open_api': '2.8.9',
             'aspectj':'1.9.22.1'
     ]
 }
