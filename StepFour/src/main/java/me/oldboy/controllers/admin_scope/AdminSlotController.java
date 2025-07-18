@@ -3,9 +3,11 @@ package me.oldboy.controllers.admin_scope;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import me.oldboy.annotations.Auditable;
 import me.oldboy.dto.slots.SlotCreateDeleteDto;
 import me.oldboy.dto.slots.SlotReadUpdateDto;
 import me.oldboy.exception.slot_exception.SlotControllerException;
+import me.oldboy.models.audit.operations.AuditOperationType;
 import me.oldboy.services.SlotService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
@@ -34,12 +36,11 @@ public class AdminSlotController {
      * @param createDto input data for create new time slot
      * @return slot read DTO with slot ID
      */
-//    @Auditable(operationType = AuditOperationType.CREATE_SLOT)
+    @Auditable(operationType = AuditOperationType.CREATE_SLOT)
     @PostMapping("/create")
     public SlotReadUpdateDto createNewSlot(@Validated
                                            @RequestBody
                                            SlotCreateDeleteDto createDto) {
-        /* Все валидации и проверки проводятся на уровне сервисов, для разнообразия */
         Long createdSlotId = slotService.create(createDto);
         return slotService.findById(createdSlotId).get();
     }
@@ -53,7 +54,7 @@ public class AdminSlotController {
      * @return true - if update success
      * false - if update fail
      */
-//    @Auditable(operationType = AuditOperationType.UPDATE_SLOT)
+    @Auditable(operationType = AuditOperationType.UPDATE_SLOT)
     @PostMapping("/update")
     public boolean updateSlot(@Validated
                               @RequestBody
@@ -61,13 +62,13 @@ public class AdminSlotController {
         if (slotService.findById(updateDto.slotId()).isEmpty()) {
             throw new SlotControllerException("Слот с ID = " + updateDto.slotId() + " не найден!");
         }
-        /* Остальные проверки и валидации проводятся на уровне сервисов */
+        /* Остальные проверки проводятся на уровне сервисов */
         return slotService.update(updateDto);
     }
 
     /* D - CRUD удаляем данные о слоте из БД */
 
-    //    @Auditable(operationType = AuditOperationType.DELETE_SLOT)
+    @Auditable(operationType = AuditOperationType.DELETE_SLOT)
     @PostMapping("/delete")
     public boolean deleteSlot(@Validated
                               @RequestBody
