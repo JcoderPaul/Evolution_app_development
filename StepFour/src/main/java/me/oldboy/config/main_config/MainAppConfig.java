@@ -13,6 +13,7 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
         ,"me.oldboy.config.security_config"
         ,"me.oldboy.config.security_details"
         ,"me.oldboy.config.jwt_config"
+        ,"me.oldboy.config.swagger"
         ,"me.oldboy.aspects"
         ,"me.oldboy.controllers"
         ,"me.oldboy.services"
