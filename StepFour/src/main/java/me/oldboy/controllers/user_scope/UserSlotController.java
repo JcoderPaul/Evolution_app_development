@@ -3,7 +3,6 @@ package me.oldboy.controllers.user_scope;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import me.oldboy.annotations.Measurable;
 import me.oldboy.dto.slots.SlotReadUpdateDto;
 import me.oldboy.exception.slot_exception.SlotControllerException;
 import me.oldboy.services.SlotService;
