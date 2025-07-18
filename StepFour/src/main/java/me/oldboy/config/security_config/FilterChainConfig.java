@@ -15,7 +15,7 @@ public class FilterChainConfig {
                 .sessionManagement(manager -> manager.sessionCreationPolicy(STATELESS))
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
                 .authorizeHttpRequests(urlConfig -> urlConfig
-                        .requestMatchers("/api/registration", "/api/login").permitAll()
+                        .requestMatchers("/api/registration", "/api/login", "/v3/api-docs/**", "/swagger-ui/**").permitAll()
                         .requestMatchers("/api/places/**", "/api/slots/**", "/api/reservations/**").authenticated()
                         .requestMatchers("/api/admin/**").hasAuthority("ADMIN")
                         .anyRequest().authenticated());
