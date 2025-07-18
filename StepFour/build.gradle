@@ -3,6 +3,9 @@ plugins {
     id 'war'
     id "io.freefair.lombok" version "8.3"
     id "com.github.ben-manes.versions" version "0.51.0"
+    /* Для работы Swagger-a */
+    id "org.springframework.boot" version "3.1.2"
+    id "org.springdoc.openapi-gradle-plugin" version "1.9.0"
 }
 
 apply from: 'version.gradle'
@@ -47,6 +50,7 @@ dependencies {
     /* Зависимость отвечающая за работу некоторых важных аннотаций, например @Entity */
     implementation "jakarta.servlet:jakarta.servlet-api:${versions.jakarta_api}"
     implementation "jakarta.validation:jakarta.validation-api:${versions.jakarta_validation}"
+    implementation "jakarta.annotation:jakarta.annotation-api:${versions.jakarta_annotation}"
 
     /* Подключим библиотеку Mapstruct */
     implementation "org.projectlombok:lombok-mapstruct-binding:${versions.lombok_map_struct}"
@@ -73,6 +77,9 @@ dependencies {
 
     /* Зависимость отвечающая за работу AOP функционала */
     implementation "org.aspectj:aspectjweaver:${versions.aspectj}"
+
+    /* Подключим зависимость Swagger-a */
+    implementation "org.springdoc:springdoc-openapi-starter-webmvc-ui:${versions.swagger_open_api}"
 
     /*------------------------Основные тестовые зависимости --------------------------------------*/
 
