@@ -3,9 +3,11 @@ package me.oldboy.controllers.admin_scope;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import me.oldboy.annotations.Auditable;
 import me.oldboy.dto.places.PlaceCreateDeleteDto;
 import me.oldboy.dto.places.PlaceReadUpdateDto;
 import me.oldboy.exception.place_exception.PlaceControllerException;
+import me.oldboy.models.audit.operations.AuditOperationType;
 import me.oldboy.services.PlaceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -37,7 +39,7 @@ public class AdminPlaceController {
      * @return place read DTO with place ID, species and place number
      * @throws PlaceControllerException if the user try made duplicate place
      */
-//    @Auditable(operationType = AuditOperationType.CREATE_PLACE)
+    @Auditable(operationType = AuditOperationType.CREATE_PLACE)
     @PostMapping("/create")
     public ResponseEntity<?> createNewPlace(@Validated
                                             @RequestBody
@@ -61,7 +63,7 @@ public class AdminPlaceController {
      * @return true - if update success
      * false - if update fail
      */
-//    @Auditable(operationType = AuditOperationType.UPDATE_PLACE)
+    @Auditable(operationType = AuditOperationType.UPDATE_PLACE)
     @PostMapping("/update")
     public ResponseEntity<?> updatePlace(@Validated
                                          @RequestBody
@@ -88,7 +90,7 @@ public class AdminPlaceController {
 
     /* D - CRUD удаляем данные о рабочем месте / зале из БД */
 
-    //    @Auditable(operationType = AuditOperationType.DELETE_PLACE)
+    @Auditable(operationType = AuditOperationType.DELETE_PLACE)
     @PostMapping("/delete")
     public ResponseEntity<?> deletePlace(@Validated
                                          @RequestBody
