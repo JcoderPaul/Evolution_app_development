@@ -3,7 +3,6 @@ package me.oldboy.integration.controllers.admin_scope;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.SneakyThrows;
 import me.oldboy.config.test_data_source.TestContainerInit;
-import me.oldboy.controllers.admin_scope.AdminPlaceController;
 import me.oldboy.dto.jwt.JwtAuthRequest;
 import me.oldboy.dto.jwt.JwtAuthResponse;
 import me.oldboy.dto.places.PlaceCreateDeleteDto;
