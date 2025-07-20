@@ -1,0 +1,10 @@
+ext {
+    versions = [
+            'hibernate': '6.6.7.Final',
+            'validator':'8.0.2.Final',
+            'mapstruct':'1.6.0',
+            'lombok_map_struct':'0.2.0',
+            'jjwt':'0.12.6',
+            'swagger_open_api': '2.6.0'
+    ]
+}

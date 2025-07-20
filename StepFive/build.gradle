@@ -1,0 +1,83 @@
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version '3.3.13'
+    id "io.spring.dependency-management" version '1.1.7'
+    id "io.freefair.lombok" version "8.3"
+    id "com.github.ben-manes.versions" version "0.51.0"
+    id "org.springdoc.openapi-gradle-plugin" version "1.9.0"
+}
+
+group 'me.oldboy'
+version '1.0-SNAPSHOT'
+
+apply from: 'version.gradle'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+
+    implementation 'org.springframework.boot:spring-boot-starter-jdbc'
+    implementation 'org.springframework.boot:spring-boot-starter-aop'
+
+    implementation 'org.postgresql:postgresql'
+
+    /* Зависимость миграционного фреймворка */
+    implementation 'org.liquibase:liquibase-core'
+
+    /* Зависимость позволяющая в контроллерах принимать JSON запросы */
+    implementation 'com.fasterxml.jackson.core:jackson-databind'
+    implementation 'com.fasterxml.jackson.core:jackson-annotations'
+    implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310'
+
+    /* Подключим Hibernate */
+    implementation "org.hibernate:hibernate-core:${versions.hibernate}"
+    implementation "org.hibernate:hibernate-validator:${versions.validator}"
+
+    /* Подключим библиотеку Mapstruct */
+    implementation "org.projectlombok:lombok-mapstruct-binding:${versions.lombok_map_struct}"
+    implementation "org.mapstruct:mapstruct:${versions.mapstruct}"
+    implementation "org.mapstruct:mapstruct-processor:${versions.mapstruct}"
+    annotationProcessor "org.mapstruct:mapstruct-processor:${versions.mapstruct}",
+            "org.projectlombok:lombok-mapstruct-binding:${versions.lombok_map_struct}"
+
+    /* Подключим функционал позволяющий нам работать с JWT */
+    implementation "io.jsonwebtoken:jjwt-api:${versions.jjwt}"
+    implementation "io.jsonwebtoken:jjwt-root:${versions.jjwt}"
+    runtimeOnly "io.jsonwebtoken:jjwt-impl:${versions.jjwt}"
+    runtimeOnly "io.jsonwebtoken:jjwt-jackson:${versions.jjwt}"
+
+    /* Подключим зависимость Swagger-a */
+    implementation "org.springdoc:springdoc-openapi-starter-webmvc-ui:${versions.swagger_open_api}"
+
+    /* ------------------ Блок пакетов обслуживающий тесты ------------------ */
+
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'org.springframework.security:spring-security-test'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+
+    /* Подключим все для тестов Testcontainers */
+    testImplementation 'org.testcontainers:postgresql'
+    testImplementation 'org.testcontainers:junit-jupiter'
+
+    /* Подключим Mockito и AssertJ */
+    testImplementation 'org.mockito:mockito-core'
+    testRuntimeOnly 'org.mockito:mockito-core'
+    testImplementation 'org.mockito:mockito-junit-jupiter'
+
+    testImplementation 'org.assertj:assertj-core'
+    testRuntimeOnly 'org.assertj:assertj-core'
+}
+
+test {
+    useJUnitPlatform()
+}
+
+wrapper {
+    gradleVersion '8.14.2'
+}
