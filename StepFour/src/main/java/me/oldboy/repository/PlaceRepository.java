@@ -1,7 +1,6 @@
 package me.oldboy.repository;
 
 import me.oldboy.models.entity.Place;
-import me.oldboy.models.entity.options.Species;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
