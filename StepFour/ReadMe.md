@@ -7,7 +7,7 @@
 Т.е. все то, что было описано и проделано на предыдущих шагах:
 - [StepOne](https://github.com/JcoderPaul/Evolution_app_development/tree/master/StepOne);
 - [StepTwo](https://github.com/JcoderPaul/Evolution_app_development/tree/master/StepTwo);
-- [StepThree](https://github.com/JcoderPaul/Evolution_app_development/tree/master/StepThree)
+- [StepThree](https://github.com/JcoderPaul/Evolution_app_development/tree/master/StepThree);
 
 Снова нужно переписать, но уже с применением Spring (nonBoot).
 
