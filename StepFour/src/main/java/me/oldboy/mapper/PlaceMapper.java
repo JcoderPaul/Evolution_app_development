@@ -1,13 +1,5 @@
 package me.oldboy.mapper;
 
-/*
-Теоретически, сущность Place не несет какой-то закрытой информации,
-например password, как сущность User, и которую мы бы не хотели
-отдавать во вне. Однако, в качестве демонстрации работы MapStruct
-мы создадим для каждой из наших 4-х основных сущностей по два DTO
-класса (EntityReadDto и EntityCreateDto)
-*/
-
 import me.oldboy.dto.places.PlaceCreateDeleteDto;
 import me.oldboy.dto.places.PlaceReadUpdateDto;
 import me.oldboy.models.entity.Place;
