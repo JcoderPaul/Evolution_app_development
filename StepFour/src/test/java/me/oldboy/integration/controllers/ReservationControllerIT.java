@@ -555,7 +555,7 @@ class ReservationControllerIT extends TestContainerInit {
         /*
             Мы помним, что сепарация была проведена по placeId, т.к. одно место на конкретную дату,
             можно зарезервировать ограниченное количество слотов (временных диапазонов). Нам известно,
-            что не выбранную дату placeId = 1 (у нас это existId) было зарезервировано 2-а раза, т.е.
+            что на выбранную дату placeId = 1 (у нас это existId) было зарезервировано 2-а раза, т.е.
             freeReservationListSize может быть равен - 7 свободных слотов, извлекаем, проверяем.
         */
         assertThat(reservationDtoMap.get(existId).size()).isEqualTo(7);
