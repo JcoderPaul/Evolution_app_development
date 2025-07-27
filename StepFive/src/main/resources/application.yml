@@ -1,0 +1,42 @@
+logging:
+  level:
+    root: INFO
+    org:
+      springframework:
+        context: DEBUG
+        jdbc:
+          core: TRACE
+        security:
+          web:
+            FilterChainProxy: DEBUG
+            access: DEBUG
+          oauth2:
+            server:
+              resource: DEBUG
+  file.name: Logs/oldboy.log
+
+spring:
+  mvc:
+    format:
+      date: iso
+  datasource:
+    url: jdbc:postgresql://localhost:5436/cw_db
+    username: admin
+    password: admin
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    properties.hibernate:
+      batch_size: 50
+      fetch_size: 50
+      show_sql: true
+      format_sql: true
+      hbm2ddl.auto: validate
+    open-in-view: false
+  liquibase:
+    enabled: true
+    change_log: classpath:db/changelog/db.changelog-master.yaml
+    default_schema: coworking
+
+security:
+  jwt:
+    secret: 4261656C64756E674261656C64756E674261656C64756E674261656C64756E67
