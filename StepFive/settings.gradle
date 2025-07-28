@@ -1,2 +1,3 @@
 rootProject.name = 'StepFive'
+include 'time-logger-spring-boot-starter'
 
