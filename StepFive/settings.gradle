@@ -1,3 +1,4 @@
 rootProject.name = 'StepFive'
 include 'time-logger-spring-boot-starter'
+include 'audit-writer-spring-boot-starter'
 
