@@ -17,13 +17,22 @@ repositories {
 }
 
 dependencies {
+    /* Подключаем наши смописные стартеры основанные на AOP */
+    implementation project(':time-logger-spring-boot-starter')
+
     implementation 'org.springframework.boot:spring-boot-starter'
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.boot:spring-boot-starter-security'
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 
     implementation 'org.springframework.boot:spring-boot-starter-jdbc'
-    implementation 'org.springframework.boot:spring-boot-starter-aop'
+
+    /*
+        Поскольку мы вынесли всю логику основанную на AOP в custom стартеры,
+        тут эта зависимость не нужна, но оставим напоминание, мол, была такая:
+
+        implementation 'org.springframework.boot:spring-boot-starter-aop'
+    */
 
     implementation 'org.postgresql:postgresql'
 
