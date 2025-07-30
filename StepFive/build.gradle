@@ -19,6 +19,7 @@ repositories {
 dependencies {
     /* Подключаем наши смописные стартеры основанные на AOP */
     implementation project(':time-logger-spring-boot-starter')
+    implementation project(':audit-writer-spring-boot-starter')
 
     implementation 'org.springframework.boot:spring-boot-starter'
     implementation 'org.springframework.boot:spring-boot-starter-web'
