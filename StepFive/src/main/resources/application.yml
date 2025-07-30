@@ -45,3 +45,7 @@ app:
   time:
     logger:
       enabled: true
+
+audit:
+  app:
+    enabled: true
