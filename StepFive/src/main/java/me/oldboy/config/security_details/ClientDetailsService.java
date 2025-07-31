@@ -6,6 +6,7 @@ import me.oldboy.models.entity.User;
 import me.oldboy.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -15,6 +16,7 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
+@EnableJpaRepositories(basePackages = "me.oldboy.repository")
 public class ClientDetailsService implements UserDetailsService {
 
 	@Autowired
