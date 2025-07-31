@@ -28,6 +28,7 @@ spring:
     change_log: classpath:db/changelog/db.changelog-master.yaml
     default_schema: coworking
 
-security:
-  jwt:
-    secret: 4261656C64756E67durolsktpt756E674261656C64756E674261656C64756E67
+security.jwt.secret: 4261656C64756E67durolsktpt756E674261656C64756E674261656C64756E67
+
+app.time.logger.enabled: false
+audit.app.runit: false
