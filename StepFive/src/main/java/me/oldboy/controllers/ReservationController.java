@@ -2,6 +2,8 @@ package me.oldboy.controllers;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import me.oldboy.auditor.core.annotation.Auditable;
+import me.oldboy.auditor.core.audit.operations.AuditOperationType;
 import me.oldboy.config.security_details.SecurityUserDetails;
 import me.oldboy.controllers.utils.ParameterChecker;
 import me.oldboy.dto.reservations.ReservationCreateDto;
@@ -43,7 +45,7 @@ public class ReservationController {
     @Autowired
     private final ParameterChecker parameterChecker;
 
-    //    @Auditable(operationType = AuditOperationType.CREATE_RESERVATION)
+    @Auditable(operationType = AuditOperationType.CREATE_RESERVATION)
     @PostMapping("/create")
     public ResponseEntity<ReservationReadDto> createReservation(@Validated
                                                                 @RequestBody
@@ -77,7 +79,7 @@ public class ReservationController {
         return ResponseEntity.ok().body(reservationService.findById(reservedId).get());
     }
 
-    //    @Auditable(operationType = AuditOperationType.UPDATE_RESERVATION)
+    @Auditable(operationType = AuditOperationType.UPDATE_RESERVATION)
     @PostMapping("/update")
     public ResponseEntity<?> updateReservation(@Validated
                                                @RequestBody
@@ -108,7 +110,7 @@ public class ReservationController {
     Для удаления брони нам необходим ее ID. Вся остальная информация,
     кроме userId, может быть условно неадекватна, но валидна.
     */
-//    @Auditable(operationType = AuditOperationType.DELETE_RESERVATION)
+    @Auditable(operationType = AuditOperationType.DELETE_RESERVATION)
     @PostMapping("/delete")
     public ResponseEntity<?> deleteReservation(@Validated
                                                @RequestBody
