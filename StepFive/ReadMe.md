@@ -39,7 +39,7 @@ ________________________________________________________________________________
 ________________________________________________________________________________________________________________________
 #### Описание
 
-- Структура основного проекта не изменилась (только выделены аспекты) - ["основной проект"](https://github.com/JcoderPaul/Evolution_app_development/tree/master/StepFive/src/main/java/me/oldboy).
+- Структура основного проекта не изменилась (только выделены аспекты) - ["основной проект"](https://github.com/JcoderPaul/Evolution_app_development/tree/master/StepFive/src/main/java/me/oldboy), ["аудит-стартер"](https://github.com/JcoderPaul/Evolution_app_development/tree/master/StepFive/audit-writer-spring-boot-starter), ["time-logger-стартер"](https://github.com/JcoderPaul/Evolution_app_development/tree/master/StepFive/time-logger-spring-boot-starter).
 - Тесты [интеграционные](https://github.com/JcoderPaul/Evolution_app_development/tree/master/StepFive/src/test/java/me/oldboy/integration), [unit (2-a вида)](https://github.com/JcoderPaul/Evolution_app_development/tree/master/StepFive/src/test/java/me/oldboy/unit).
 - [Swagger, как и ранее](https://github.com/JcoderPaul/Evolution_app_development/tree/master/StepFour#swagger).
 - Ключевые endpoint-ы можно изучить и протестировать в Swagger-e или использовать [Postman и приведенные ссылки](https://github.com/JcoderPaul/Evolution_app_development/tree/master/StepFour#%D0%BF%D0%B0%D1%80%D0%B0%D0%BC%D0%B5%D1%82%D1%80%D1%8B-%D0%B7%D0%B0%D0%BF%D1%80%D0%BE%D1%81%D0%BE%D0%B2-%D0%BA-%D0%BF%D1%80%D0%B8%D0%BB%D0%BE%D0%B6%D0%B5%D0%BD%D0%B8%D1%8E-api).
