@@ -44,18 +44,18 @@ ________________________________________________________________________________
 - Ключевые endpoint-ы можно изучить и протестировать в Swagger-e или использовать [Postman и приведенные ссылки](https://github.com/JcoderPaul/Evolution_app_development/tree/master/StepFour#%D0%BF%D0%B0%D1%80%D0%B0%D0%BC%D0%B5%D1%82%D1%80%D1%8B-%D0%B7%D0%B0%D0%BF%D1%80%D0%BE%D1%81%D0%BE%D0%B2-%D0%BA-%D0%BF%D1%80%D0%B8%D0%BB%D0%BE%D0%B6%D0%B5%D0%BD%D0%B8%D1%8E-api).
 
 Модуль-стартер (измеритель времени работы метода):
-- time-logger-spring-boot-starter:
+- [time-logger-spring-boot-starter](https://github.com/JcoderPaul/Evolution_app_development/tree/master/StepFive/time-logger-spring-boot-starter):
   - annotation:
-    - Measurable.java - аннотация для пометки методов требующих расчета времени выполнения; 
+    - [Measurable.java](https://github.com/JcoderPaul/Evolution_app_development/blob/master/StepFive/time-logger-spring-boot-starter/src/main/java/me/oldboy/logger/annotation/Measurable.java) - аннотация для пометки методов требующих расчета времени выполнения; 
   - config:
-    - LoggerAutoConfiguration.java - файл авто-конфигурации в нем создаются bean-ы нашего стартера (см. аннотации);
-    - LoggerProperties.java - файл свойств, определяющий работу стартера сообразно настройкам application.properties (*.yml); 
+    - [LoggerAutoConfiguration.java](https://github.com/JcoderPaul/Evolution_app_development/blob/master/StepFive/time-logger-spring-boot-starter/src/main/java/me/oldboy/logger/config/LoggerAutoConfiguration.java) - файл авто-конфигурации в нем создаются bean-ы нашего стартера (см. аннотации);
+    - [LoggerProperties.java](https://github.com/JcoderPaul/Evolution_app_development/blob/master/StepFive/time-logger-spring-boot-starter/src/main/java/me/oldboy/logger/config/LoggerProperties.java) - файл свойств, определяющий работу стартера сообразно настройкам application.properties (*.yml); 
   - measurer:
-    - MethodSpeedCalcAspect.java - класс определяющий наши "точки среза" и advise-ы;
+    - [MethodSpeedCalcAspect.java](https://github.com/JcoderPaul/Evolution_app_development/blob/master/StepFive/time-logger-spring-boot-starter/src/main/java/me/oldboy/logger/measurer/MethodSpeedCalcAspect.java) - класс определяющий наши "точки среза" и advise-ы;
 - resources:
   - META-INF:
-    - spring.factories - файл метаданных, определяет классы авто-конфигурации, в нем указываются файлы описывающие структуру bean-ов нашего стартера, прописываем все @Configuration файлы стартера; 
-- build.gradle - файл настроек стартера;
+    - [spring.factories](https://github.com/JcoderPaul/Evolution_app_development/blob/master/StepFive/time-logger-spring-boot-starter/src/main/resources/META-INF/spring.factories) - файл метаданных, определяет классы авто-конфигурации, в нем указываются файлы описывающие структуру bean-ов нашего стартера, прописываем все @Configuration файлы стартера; 
+- [build.gradle](https://github.com/JcoderPaul/Evolution_app_development/blob/master/StepFive/time-logger-spring-boot-starter/build.gradle) - файл настроек стартера;
 
 Модуль-стартер (аудитор действий пользователя, аннотируем слой сервисов):
 - audit-writer-spring-boot-starter:
