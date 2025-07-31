@@ -3,6 +3,8 @@ package me.oldboy.controllers.admin_scope;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import me.oldboy.auditor.core.annotation.Auditable;
+import me.oldboy.auditor.core.audit.operations.AuditOperationType;
 import me.oldboy.dto.slots.SlotCreateDeleteDto;
 import me.oldboy.dto.slots.SlotReadUpdateDto;
 import me.oldboy.exception.slot_exception.SlotControllerException;
@@ -34,7 +36,7 @@ public class AdminSlotController {
      * @param createDto input data for create new time slot
      * @return slot read DTO with slot ID
      */
-//    @Auditable(operationType = AuditOperationType.CREATE_SLOT)
+    @Auditable(operationType = AuditOperationType.CREATE_SLOT)
     @PostMapping("/create")
     public SlotReadUpdateDto createNewSlot(@Validated
                                            @RequestBody
@@ -52,7 +54,7 @@ public class AdminSlotController {
      * @return true - if update success
      * false - if update fail
      */
-//    @Auditable(operationType = AuditOperationType.UPDATE_SLOT)
+    @Auditable(operationType = AuditOperationType.UPDATE_SLOT)
     @PostMapping("/update")
     public boolean updateSlot(@Validated
                               @RequestBody
@@ -66,7 +68,7 @@ public class AdminSlotController {
 
     /* D - CRUD удаляем данные о слоте из БД */
 
-    //    @Auditable(operationType = AuditOperationType.DELETE_SLOT)
+    @Auditable(operationType = AuditOperationType.DELETE_SLOT)
     @PostMapping("/delete")
     public boolean deleteSlot(@Validated
                               @RequestBody
