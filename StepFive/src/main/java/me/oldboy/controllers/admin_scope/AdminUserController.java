@@ -3,6 +3,8 @@ package me.oldboy.controllers.admin_scope;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import me.oldboy.auditor.core.annotation.Auditable;
+import me.oldboy.auditor.core.audit.operations.AuditOperationType;
 import me.oldboy.dto.users.UserReadDto;
 import me.oldboy.dto.users.UserUpdateDeleteDto;
 import me.oldboy.exception.user_exception.UserControllerException;
@@ -25,7 +27,7 @@ public class AdminUserController {
     @Autowired
     private UserService userService;
 
-    //    @Auditable(operationType = AuditOperationType.DELETE_USER)
+    @Auditable(operationType = AuditOperationType.DELETE_USER)
     @DeleteMapping("/delete")
     public ResponseEntity<?> deleteUser(@Validated
                                         @RequestBody
@@ -47,7 +49,7 @@ public class AdminUserController {
         }
     }
 
-    //    @Auditable(operationType = AuditOperationType.UPDATE_USER)
+    @Auditable(operationType = AuditOperationType.UPDATE_USER)
     @PostMapping("/update")
     public boolean updateUser(@Validated
                               @RequestBody
