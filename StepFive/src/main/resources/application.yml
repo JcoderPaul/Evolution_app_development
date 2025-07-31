@@ -48,4 +48,4 @@ app:
 
 audit:
   app:
-    enabled: true
+    runit: true
