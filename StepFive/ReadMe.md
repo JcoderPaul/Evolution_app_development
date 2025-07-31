@@ -5,10 +5,11 @@
 
 Теперь, то что было описано и проделано на предыдущих шагах:
 
-StepOne;
-StepTwo;
-StepThree;
-StepFour;
+- [StepOne](https://github.com/JcoderPaul/Evolution_app_development/tree/master/StepOne);
+- [StepTwo](https://github.com/JcoderPaul/Evolution_app_development/tree/master/StepTwo);
+- [StepThree](https://github.com/JcoderPaul/Evolution_app_development/tree/master/StepThree);
+- [StepFour](https://github.com/JcoderPaul/Evolution_app_development/tree/master/StepFour);
+
 Снова нужно переписать, но уже с применением Spring Boot технологии.
 
 #### Функциональные и технические требования текущего шага (обновления предыдущих решений):
