@@ -59,28 +59,28 @@ ________________________________________________________________________________
 - [build.gradle](https://github.com/JcoderPaul/Evolution_app_development/blob/master/StepFive/time-logger-spring-boot-starter/build.gradle) - файл настроек стартера;
 
 Модуль-стартер (аудитор действий пользователя, аннотируем слой сервисов):
-- audit-writer-spring-boot-starter:
+- [audit-writer-spring-boot-starter](https://github.com/JcoderPaul/Evolution_app_development/tree/master/StepFive/audit-writer-spring-boot-starter):
   - config:
-      - AuditAutoConfiguration.java - файл авто-конфигурации (см. выше или MakeLoggerFor.md в качестве примера); 
-      - AuditProperties.java - класс определяющий свойства настройки стартера;
+      - [AuditAutoConfiguration.java](https://github.com/JcoderPaul/Evolution_app_development/blob/master/StepFive/audit-writer-spring-boot-starter/src/main/java/me/oldboy/auditor/config/AuditAutoConfiguration.java) - файл авто-конфигурации (см. выше или MakeLoggerFor.md в качестве примера); 
+      - [AuditProperties.java](https://github.com/JcoderPaul/Evolution_app_development/blob/master/StepFive/audit-writer-spring-boot-starter/src/main/java/me/oldboy/auditor/config/AuditProperties.java) - класс определяющий свойства настройки стартера;
   - core:
     - annotation:
-      -  Auditable.java - аннотация которой помечаются "удируемые" методы (создание, удаление, изменения и т.д.) слоя сервисов;
+      -  [Auditable.java](https://github.com/JcoderPaul/Evolution_app_development/blob/master/StepFive/audit-writer-spring-boot-starter/src/main/java/me/oldboy/auditor/core/annotation/Auditable.java) - аннотация которой помечаются "удируемые" методы (создание, удаление, изменения и т.д.) слоя сервисов;
     - entity:
       - operations:
-        - AuditOperationResult.java - enum описывающий возможные результаты действий пользователя;
-        - AuditOperationType.java - enum описывающий возможные типы действий пользователя;
-      -  Audit.java - сущность, которая будет сохраняться в БД;
+        - [AuditOperationResult.java](https://github.com/JcoderPaul/Evolution_app_development/blob/master/StepFive/audit-writer-spring-boot-starter/src/main/java/me/oldboy/auditor/core/entity/operations/AuditOperationResult.java) - enum описывающий возможные результаты действий пользователя;
+        - [AuditOperationType.java](https://github.com/JcoderPaul/Evolution_app_development/blob/master/StepFive/audit-writer-spring-boot-starter/src/main/java/me/oldboy/auditor/core/entity/operations/AuditOperationType.java) - enum описывающий возможные типы действий пользователя;
+      -  [Audit.java](https://github.com/JcoderPaul/Evolution_app_development/blob/master/StepFive/audit-writer-spring-boot-starter/src/main/java/me/oldboy/auditor/core/entity/Audit.java) - сущность, которая будет сохраняться в БД;
     - auditing:
-      - AuditingAspect.java - класс описывающий логику аспекта аудита;
+      - [AuditingAspect.java](https://github.com/JcoderPaul/Evolution_app_development/blob/master/StepFive/audit-writer-spring-boot-starter/src/main/java/me/oldboy/auditor/core/auditing/AuditingAspect.java) - класс описывающий логику аспекта аудита;
     - repository:
-      - AuditRepository.java - интерфейс определяющий связь с БД;
+      - [AuditRepository.java](https://github.com/JcoderPaul/Evolution_app_development/blob/master/StepFive/audit-writer-spring-boot-starter/src/main/java/me/oldboy/auditor/core/repository/AuditRepository.java) - интерфейс определяющий связь с БД;
     - service:
-      - AuditService.java - сервис описывающий логику сохранения данных в БД;
+      - [AuditService.java](https://github.com/JcoderPaul/Evolution_app_development/blob/master/StepFive/audit-writer-spring-boot-starter/src/main/java/me/oldboy/auditor/core/service/AuditService.java) - сервис описывающий логику сохранения данных в БД;
 - resources:
   - META-INF.spring:
-    - org.springframework.boot.autoconfigure.AutoConfiguration.imports - файл метаданных (еще один вариант см. MakeLoggerFor.md), его вид зависит от версии Spring-a, описывает файлы авто-конфигурации для "сканера" Spring-a;
-- build.gradle - файл настроек стартера;
+    - [org.springframework.boot.autoconfigure.AutoConfiguration.imports](https://github.com/JcoderPaul/Evolution_app_development/blob/master/StepFive/audit-writer-spring-boot-starter/src/main/resources/META-INF/spring/org.springframework.boot.autoconfigure.AutoConfiguration.imports) - файл метаданных (еще один вариант см. MakeLoggerFor.md), его вид зависит от версии Spring-a, описывает файлы авто-конфигурации для "сканера" Spring-a;
+- [build.gradle](https://github.com/JcoderPaul/Evolution_app_development/blob/master/StepFive/audit-writer-spring-boot-starter/build.gradle) - файл настроек стартера;
 
 ________________________________________________________________________________________________________________________
 И так, у нас есть многомодульный проект коворкинг-сервиса описанный по шагам с простого Java проекта, до Spring приложения.
