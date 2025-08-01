@@ -1,9 +1,9 @@
-package me.oldboy.models.audit;
+package me.oldboy.auditor.core.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
-import me.oldboy.models.audit.operations.AuditOperationResult;
-import me.oldboy.models.audit.operations.AuditOperationType;
+import me.oldboy.auditor.core.entity.operations.AuditOperationResult;
+import me.oldboy.auditor.core.entity.operations.AuditOperationType;
 
 import java.time.LocalDateTime;
 
