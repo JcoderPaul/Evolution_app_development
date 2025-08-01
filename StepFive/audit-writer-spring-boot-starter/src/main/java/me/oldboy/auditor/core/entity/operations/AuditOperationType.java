@@ -1,4 +1,4 @@
-package me.oldboy.models.audit.operations;
+package me.oldboy.auditor.core.entity.operations;
 
 /**
  * Enumeration representing different operation with entity (Place, Slot, User, Reservation).
