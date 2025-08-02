@@ -1,10 +1,7 @@
 package me.oldboy.unit.controllers.web_mvc.admin_scope;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import jakarta.persistence.EntityManagerFactory;
 import lombok.SneakyThrows;
-import me.oldboy.auditor.core.annotation.Auditable;
-import me.oldboy.auditor.core.auditing.AuditingAspect;
 import me.oldboy.auditor.core.repository.AuditRepository;
 import me.oldboy.controllers.admin_scope.AdminPlaceController;
 import me.oldboy.dto.places.PlaceCreateDeleteDto;
@@ -21,11 +18,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.FilterType;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
-import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
