@@ -5,7 +5,7 @@ import lombok.NoArgsConstructor;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import me.oldboy.auditor.core.annotation.Auditable;
-import me.oldboy.auditor.core.audit.operations.AuditOperationType;
+import me.oldboy.auditor.core.entity.operations.AuditOperationType;
 import me.oldboy.dto.places.PlaceCreateDeleteDto;
 import me.oldboy.dto.places.PlaceReadUpdateDto;
 import me.oldboy.exception.place_exception.PlaceControllerException;
