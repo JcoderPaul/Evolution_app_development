@@ -4,7 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import me.oldboy.auditor.core.annotation.Auditable;
-import me.oldboy.auditor.core.audit.operations.AuditOperationType;
+import me.oldboy.auditor.core.entity.operations.AuditOperationType;
 import me.oldboy.dto.slots.SlotCreateDeleteDto;
 import me.oldboy.dto.slots.SlotReadUpdateDto;
 import me.oldboy.exception.slot_exception.SlotControllerException;
