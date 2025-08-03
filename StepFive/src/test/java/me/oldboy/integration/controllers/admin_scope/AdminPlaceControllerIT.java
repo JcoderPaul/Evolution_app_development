@@ -2,7 +2,6 @@ package me.oldboy.integration.controllers.admin_scope;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.SneakyThrows;
-import me.oldboy.controllers.admin_scope.AdminPlaceController;
 import me.oldboy.dto.places.PlaceCreateDeleteDto;
 import me.oldboy.dto.places.PlaceReadUpdateDto;
 import me.oldboy.integration.ITBaseStarter;

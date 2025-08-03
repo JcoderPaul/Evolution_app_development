@@ -3,7 +3,6 @@ package me.oldboy.integration.controllers.admin_scope;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.SneakyThrows;
-import me.oldboy.controllers.admin_scope.AdminUserController;
 import me.oldboy.dto.users.UserReadDto;
 import me.oldboy.dto.users.UserUpdateDeleteDto;
 import me.oldboy.integration.ITBaseStarter;
@@ -176,7 +175,8 @@ class AdminUserControllerIT extends ITBaseStarter {
                 .andReturn();
 
         String strResult = result.getResponse().getContentAsString();
-        List<UserReadDto> listFromResponse = objectMapper.readValue(strResult, new TypeReference<List<UserReadDto>>() {});
+        List<UserReadDto> listFromResponse = objectMapper.readValue(strResult, new TypeReference<List<UserReadDto>>() {
+        });
 
         assertThat(listFromResponse.size()).isEqualTo(4);
     }

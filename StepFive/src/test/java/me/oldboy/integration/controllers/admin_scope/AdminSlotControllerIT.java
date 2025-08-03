@@ -3,7 +3,6 @@ package me.oldboy.integration.controllers.admin_scope;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import lombok.SneakyThrows;
-import me.oldboy.controllers.admin_scope.AdminSlotController;
 import me.oldboy.dto.slots.SlotCreateDeleteDto;
 import me.oldboy.dto.slots.SlotReadUpdateDto;
 import me.oldboy.integration.ITBaseStarter;
