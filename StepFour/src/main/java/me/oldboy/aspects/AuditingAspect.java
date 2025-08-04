@@ -30,6 +30,7 @@ public class AuditingAspect {
 
     /**
      * Advice to perform auditing around methods annotated with {@link Auditable}.
+     *
      * @param joinPoint The ProceedingJoinPoint for the intercepted method.
      * @return The result of the intercepted method.
      * @throws Throwable If an error occurs during method execution.
