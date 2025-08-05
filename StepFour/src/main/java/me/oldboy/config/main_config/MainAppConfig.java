@@ -5,6 +5,9 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
+/**
+ * Main configuration class that defines the basic capabilities of the application
+ */
 @Configuration
 @EnableWebMvc
 @EnableAspectJAutoProxy
