@@ -19,6 +19,10 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import javax.sql.DataSource;
 
+/**
+ * Data source configuration class, defines data source parameters, migration
+ * framework settings, settings of JdbcTemplate, EntityManager and TransactionManager
+ */
 @Slf4j
 @Configuration
 @PropertySource(value = "classpath:application.yml", factory = YamlPropertySourceFactory.class)
@@ -44,6 +48,11 @@ public class AppDataSourceConfig {
     @Value("${liquibase.enabled}")
     private String enabledLiquibaseStart;
 
+    /**
+     * Defines the DriverManagerDataSource for DataSource.
+     *
+     * @return DataSource - represents a connection factory to a physical data source
+     */
     @Bean
     public DataSource dataSource() {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
@@ -56,6 +65,11 @@ public class AppDataSourceConfig {
         return dataSource;
     }
 
+    /**
+     * Define liquibase settings.
+     *
+     * @return SpringLiquibase - Spring wrapper for Liquibase
+     */
     @Bean
     public SpringLiquibase liquibase() {
         SpringLiquibase liquibase = new SpringLiquibase();
@@ -72,11 +86,24 @@ public class AppDataSourceConfig {
         return liquibase;
     }
 
+    /**
+     * Define JdbcTemplate for data access.
+     *
+     * @return JdbcTemplate - automatically handles the creation and release of JDBC
+     * resources like Connection, Statement, and ResultSet, preventing common errors
+     * such as forgetting to close connections.
+     */
     @Bean
     public JdbcTemplate jdbcTemplate() {
         return new JdbcTemplate(dataSource());
     }
 
+    /**
+     * Define EntityManagerFactory configuration.
+     *
+     * @return LocalContainerEntityManagerFactoryBean - responsible for creating and
+     * managing a JPA EntityManagerFactory instance within a Spring application context.
+     */
     @Bean
     public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
         LocalContainerEntityManagerFactoryBean entityManagerFactoryBean =
@@ -90,6 +117,11 @@ public class AppDataSourceConfig {
         return entityManagerFactoryBean;
     }
 
+    /**
+     * Define TransactionManager configuration.
+     *
+     * @return JpaTransactionManager - transaction manager for transactional data access.
+     */
     @Bean
     public PlatformTransactionManager transactionManager() {
         JpaTransactionManager transactionManager = new JpaTransactionManager();
