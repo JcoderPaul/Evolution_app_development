@@ -16,6 +16,11 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
+/**
+ * This class is a filter that executes once per request.
+ * It checks if the request has a valid JWT token and sets
+ * the authentication in the security context.
+ */
 @Slf4j
 @Component
 @AllArgsConstructor
@@ -29,6 +34,14 @@ public class JwtAuthFilter extends OncePerRequestFilter {
     public static final String BEARER_PREFIX = "Bearer ";
     public static final String HEADER_NAME = "Authorization";
 
+    /**
+     * This method called for every request - check has the request a valid JWT token.
+     * If the token is valid - sets the authentication in the security context.
+     *
+     * @param request the HTTP request
+     * @param response the HTTP response
+     * @param filterChain the filter chain
+     */
     @Override
     @SneakyThrows
     public void doFilterInternal(HttpServletRequest request,
