@@ -16,6 +16,9 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
+/**
+ * Class define security configuration of application
+ */
 @Slf4j
 @Configuration
 @EnableWebSecurity(debug = true)
@@ -28,12 +31,26 @@ public class AppSecurityConfig {
 	@Autowired
 	private JwtAuthFilter jwtAuthFilter;
 
+	/**
+	 * Defines a filter chain which is capable of being matched against an
+	 * HttpServletRequest, in order to decide whether it applies to that
+	 * request.
+	 *
+	 * @param httpSecurity allows configuring web based security for specific http requests
+	 * @param jwtAuthFilter external custom filter for processing JWT token
+	 * @return main security filter chain
+	 */
 	@Bean
 	@SneakyThrows
 	public SecurityFilterChain filterChain(HttpSecurity httpSecurity, JwtAuthFilter jwtAuthFilter) {
 		return FilterChainConfig.getSecurityFilterChain(httpSecurity, jwtAuthFilter);
 	}
 
+	/**
+	 *	Define password encoder
+	 *
+	 * @return current password encoder
+	 */
 	@Bean
 	public PasswordEncoder getPasswordEncoder() {
 		return new BCryptPasswordEncoder();
