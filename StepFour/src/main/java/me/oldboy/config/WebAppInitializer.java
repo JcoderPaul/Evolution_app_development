@@ -4,6 +4,9 @@ import lombok.extern.slf4j.Slf4j;
 import me.oldboy.config.main_config.MainAppConfig;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
+/**
+ * Class to register a DispatcherServlet and define use Java-based Spring configuration.
+ */
 @Slf4j
 public class WebAppInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
     @Override
