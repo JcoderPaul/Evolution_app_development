@@ -14,6 +14,9 @@ import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
+/**
+ * Class for loads user-specific data.
+ */
 @Service
 @AllArgsConstructor
 @NoArgsConstructor
@@ -24,6 +27,14 @@ public class ClientDetailsService implements UserDetailsService {
 	private UserRepository userRepository;
 
 	/* Извлекаем из БД клиентов (user-ов) по имени */
+
+	/**
+	 * Get user by user login or name from DB
+	 *
+	 * @param login the username identifying the user whose data is required.
+	 * @return main user information
+	 * @throws UsernameNotFoundException if the name or login was not found
+	 */
 	@Override
 	public UserDetails loadUserByUsername(String login) throws UsernameNotFoundException {
 		Optional<User> mayBeUser = userRepository.findByLogin(login);
