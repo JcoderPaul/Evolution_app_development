@@ -23,6 +23,9 @@ import java.time.LocalDate;
 import java.util.Collection;
 import java.util.Optional;
 
+/**
+ * Class for checking and converting data received during the application's operation
+ */
 @Slf4j
 @Component
 @AllArgsConstructor
@@ -38,6 +41,12 @@ public class ParameterChecker {
     @Autowired
     private ReservationService reservationService;
 
+    /**
+     * Check user status/role/authority (USER/ADMIN)
+     *
+     * @param userDetails user data for check
+     * @return true - user ADMIN role, false - user USER role
+     */
     public boolean isAdmin(UserDetails userDetails) {
         Collection<? extends GrantedAuthority> userAuthList = ((SecurityUserDetails) userDetails).getAuthorities();
         Optional<? extends GrantedAuthority> mayBeAdmin = userAuthList.stream()
@@ -50,6 +59,13 @@ public class ParameterChecker {
         }
     }
 
+    /**
+     * Convert received string data to LocalDate class
+     *
+     * @param dateToParse received string data
+     * @return converted to LocalDate information
+     * @throws ReservationControllerException received wrong format to convert
+     */
     public LocalDate convertStringDateWithValidate(String dateToParse) throws ReservationControllerException {
         if (!dateToParse.matches("^\\d{4}\\-(0[1-9]|1[012])\\-(0[1-9]|[12][0-9]|3[01])$") || dateToParse.length() == 0) {
             throw new ReservationControllerException("Значение даты пустое или не верно, ожидается, например - '2007-12-03' !");
@@ -57,6 +73,14 @@ public class ParameterChecker {
         return LocalDate.parse(dateToParse);
     }
 
+    /**
+     * Checks a delete or update operation can be applied to the retrieved data
+     *
+     * @param ownerName owner of operation login or user name
+     * @param isAdmin the status who performs the operation
+     * @param updateDeleteReservation for update or delete data
+     * @throws ReservationControllerException if any exception are thrown during the checking
+     */
     public void canUpdateOrDelete(String ownerName,
                                   Boolean isAdmin,
                                   ReservationUpdateDeleteDto updateDeleteReservation) throws ReservationControllerException {
@@ -97,6 +121,13 @@ public class ParameterChecker {
     несуществующий userId. Пусть и масло масленое, но проверку на существующего в БД
     пользователя мы сделаем.
     */
+
+    /**
+     * Check user exists in db
+     *
+     * @param userId user id from checking data
+     * @throws ReservationControllerException if user id not found
+     */
     public void isUserCorrect(Long userId) throws ReservationControllerException {
         Optional<UserReadDto> mayBeUser = userService.findById(userId);
         if (mayBeUser.isEmpty()) {
@@ -105,6 +136,15 @@ public class ParameterChecker {
     }
 
     /* Проверяем не приведет ли обновление или создание новой брони к дублированию в БД */
+
+    /**
+     * Check for duplicate reservation
+     *
+     * @param reservationDate reservation date
+     * @param placeId reservation place id
+     * @param slotId reservation slot id
+     * @throws ReservationControllerException if reservation is duplication
+     */
     public void isReservationNotDuplicate(LocalDate reservationDate,
                                           Long placeId,
                                           Long slotId) throws ReservationControllerException {
@@ -116,6 +156,13 @@ public class ParameterChecker {
     }
 
     /* Проверяем есть ли в БД резервируемый временной слот */
+
+    /**
+     * Check slot exists in db
+     *
+     * @param slotId slot id
+     * @throws ReservationControllerException if slot id not found
+     */
     public void isSlotCorrect(Long slotId) throws ReservationControllerException {
         Optional<SlotReadUpdateDto> mayBeSlot = slotService.findById(slotId);
         if (mayBeSlot.isEmpty()) {
@@ -124,6 +171,13 @@ public class ParameterChecker {
     }
 
     /* Проверяем есть ли в БД резервируемое место/зал */
+
+    /**
+     * Check place exists in db
+     *
+     * @param placeId place id
+     * @throws ReservationControllerException if place id not found
+     */
     public void isPlaceCorrect(Long placeId) throws ReservationControllerException {
         Optional<PlaceReadUpdateDto> mayBePlace = placeService.findById(placeId);
         if (mayBePlace.isEmpty()) {
