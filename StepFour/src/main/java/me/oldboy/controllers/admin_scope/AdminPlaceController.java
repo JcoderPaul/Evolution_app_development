@@ -20,6 +20,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Optional;
 
+/**
+ * Define place manipulation only for ADMIN role or authority
+ */
 @Slf4j
 @RestController
 @AllArgsConstructor
@@ -33,9 +36,9 @@ public class AdminPlaceController {
     /* С - CRUD создаем новое рабочее место / зал */
 
     /**
-     * Create new place (HALL and PLACE).
+     * Create new place.
      *
-     * @param createDto input data for create new place (species and place number)
+     * @param createDto input data for create new place
      * @return place read DTO with place ID, species and place number
      * @throws PlaceControllerException if the user try made duplicate place
      */
@@ -57,11 +60,10 @@ public class AdminPlaceController {
     /* U - CRUD обновляем данные по рабочему месту / залу */
 
     /**
-     * Update existent place (HALL and PLACE).
+     * Update existent place.
      *
-     * @param updateDto input place new data from update
-     * @return true - if update success
-     * false - if update fail
+     * @param updateDto input place new data for update
+     * @return true - update success, false - update fail
      */
     @Auditable(operationType = AuditOperationType.UPDATE_PLACE)
     @PostMapping("/update")
@@ -90,6 +92,13 @@ public class AdminPlaceController {
 
     /* D - CRUD удаляем данные о рабочем месте / зале из БД */
 
+    /**
+     * Return success or fail message
+     *
+     * @param deleteDto for remove data
+     * @return information message about operation result
+     * @throws PlaceControllerException if any exception are thrown during removing
+     */
     @Auditable(operationType = AuditOperationType.DELETE_PLACE)
     @PostMapping("/delete")
     public ResponseEntity<?> deletePlace(@Validated
