@@ -24,6 +24,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Optional;
 
+/**
+ * Class for handling access to the application functionality registration and user authentication.
+ */
 @Slf4j
 @RestController
 @RequiredArgsConstructor
@@ -38,6 +41,13 @@ public class AuthController {
     @Autowired
     private final PasswordEncoder passwordEncoder;
 
+    /**
+     * Registration user and save to DB
+     *
+     * @param userCreateDto for create (save) user data
+     * @return created UserDto
+     * @throws JsonProcessingException if user with received registration data is already exist
+     */
     @PostMapping("/registration")
     public ResponseEntity<?> regUser(@Validated
                                      @RequestBody
@@ -61,6 +71,12 @@ public class AuthController {
         }
     }
 
+    /**
+     * User authentication in the application
+     *
+     * @param jwtAuthRequest with login and password user request
+     * @return with user id, login and JWT Token response
+     */
     @PostMapping("/login")
     public ResponseEntity<JwtAuthResponse> loginUser(@Validated
                                                      @RequestBody
