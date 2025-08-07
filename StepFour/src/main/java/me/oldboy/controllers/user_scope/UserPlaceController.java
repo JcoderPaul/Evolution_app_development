@@ -17,6 +17,9 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Class get place information
+ */
 @Slf4j
 @RestController
 @AllArgsConstructor
@@ -30,7 +33,7 @@ public class UserPlaceController {
     /* R - CRUD читаем (получаем) рабочие места / залы */
 
     /**
-     * Read existing place (HALL and WORKPLACE) / Извлекаем рабочее место или зал из БД
+     * Read existing place / Извлекаем рабочее место или зал из БД
      *
      * @param placeId place ID for find / ID искомого места / зала
      * @return reading place
@@ -46,7 +49,7 @@ public class UserPlaceController {
     }
 
     /**
-     * Read existing place (HALL and WORKPLACE) / Извлекаем рабочее место или зал из БД
+     * Read existing place / Извлекаем рабочее место или зал из БД
      *
      * @param species     place species for find / вид - место / зал
      * @param placeNumber place number for find / номер искомого зала / места
@@ -63,7 +66,7 @@ public class UserPlaceController {
     }
 
     /**
-     * Show all available HALLs and WORKPLACEs / Просмотр всех доступных рабочих места и залов
+     * Show all available places / Просмотр всех доступных рабочих места и залов
      */
     @GetMapping()
     public List<PlaceReadUpdateDto> getAllPlaces() {
