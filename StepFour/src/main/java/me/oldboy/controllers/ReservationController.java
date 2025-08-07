@@ -31,6 +31,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+/**
+ * Class for managing reservations, creating, updating, deleting, reading
+ */
 @Slf4j
 @RestController
 @RequiredArgsConstructor
@@ -48,6 +51,14 @@ public class ReservationController {
     @Autowired
     private final ParameterChecker parameterChecker;
 
+    /**
+     * Create reservation (booking)
+     *
+     * @param createDto for create reservation data
+     * @param userDetails for whom the reservation is made
+     * @return ResponseEntity with reservation info
+     * @throws ReservationControllerException if any exception are thrown during reservation create
+     */
     @Auditable(operationType = AuditOperationType.CREATE_RESERVATION)
     @PostMapping("/create")
     public ResponseEntity<ReservationReadDto> createReservation(@Validated
@@ -84,6 +95,14 @@ public class ReservationController {
                 .body(reservationService.findById(reservedId).get());
     }
 
+    /**
+     * Update reservation
+     *
+     * @param updateDto for update reservation data
+     * @param userDetails who is doing the update
+     * @return ResponseEntity with success message
+     * @throws ReservationControllerException if any exception are thrown during reservation update
+     */
     @Auditable(operationType = AuditOperationType.UPDATE_RESERVATION)
     @PostMapping("/update")
     public ResponseEntity<?> updateReservation(@Validated
@@ -117,6 +136,15 @@ public class ReservationController {
     Для удаления брони нам необходим ее ID. Вся остальная информация,
     кроме userId, может быть условно неадекватна, но валидна.
     */
+
+    /**
+     * Delete reservation
+     *
+     * @param deleteDto for delete reservation data
+     * @param userDetails who is doing the remove
+     * @return ResponseEntity with success message
+     * @throws ReservationControllerException if any exception are thrown during reservation delete
+     */
     @Auditable(operationType = AuditOperationType.DELETE_RESERVATION)
     @PostMapping("/delete")
     public ResponseEntity<?> deleteReservation(@Validated
@@ -141,6 +169,12 @@ public class ReservationController {
                 .body("Бронь удалена");
     }
 
+    /**
+     * Get all available reservation list
+     *
+     * @return reservation list
+     * @throws ReservationServiceException if any exception are thrown during reading
+     */
     @GetMapping()
     public List<ReservationReadDto> readAllReservation() throws ReservationServiceException {
         return reservationService.findAll();
@@ -188,6 +222,14 @@ public class ReservationController {
         return reservationByParam;
     }
 
+    /**
+     * Get all free slots by current date
+     *
+     * @param date date for which need to receive a list of reservations
+     * @return free slots map
+     * @throws ReservationControllerException if any exception are thrown during reading reservations
+     * @throws ReservationServiceException if any exception are thrown during reading reservations
+     */
     @GetMapping("/free/date/{date}")
     public Map<Long, List<Long>> getFreeSlotsByDate(@PathVariable("date") String date) throws ReservationControllerException, ReservationServiceException {
         return reservationService.findAllFreeSlotsByDate(parameterChecker.convertStringDateWithValidate(date));
