@@ -16,6 +16,9 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Class for get information about time slot
+ */
 @Slf4j
 @RestController
 @AllArgsConstructor
