@@ -3,6 +3,9 @@ package me.oldboy.dto.users;
 import jakarta.validation.constraints.*;
 import lombok.Builder;
 
+/**
+ * A record representing user update or delete info.
+ */
 @Builder
 public record UserUpdateDeleteDto (@NotNull
                                    @Positive(message = "User ID must be positive. ID пользователя не может быть отрицательным")
