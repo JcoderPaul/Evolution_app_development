@@ -5,6 +5,9 @@ import jakarta.validation.constraints.Positive;
 import lombok.Builder;
 import me.oldboy.models.entity.options.Species;
 
+/**
+ * A record representing a create or delete place info.
+ */
 @Builder
 public record PlaceCreateDeleteDto(@NotNull(message = "Species can not be blank/empty")
                                    Species species,
