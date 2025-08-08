@@ -7,6 +7,9 @@ import lombok.Builder;
 
 import java.time.LocalDate;
 
+/**
+ * A record representing reservation update or delete info.
+ */
 @Builder
 public record ReservationUpdateDeleteDto(@NotNull(message = "Reservation ID can not be blank")
                                          @PositiveOrZero
