@@ -8,26 +8,42 @@ import lombok.*;
 import java.time.LocalDate;
 import java.util.Objects;
 
+/**
+ * Class representing create reservation info.
+ */
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
 public class ReservationCreateDto {
+
+        /**
+         * Reservation date
+         */
         @NotNull(message = "Reservation date can not be blank or null")
         @FutureOrPresent(message = "Reservation date must be a date in the present or in the future")
         @Getter
         private LocalDate reservationDate;
 
+        /**
+         * User id for whom the reservation is made
+         */
         @NotNull(message = "User ID can not be blank or negative")
         @PositiveOrZero(message = "ID must be greater than or equal to 0")
         @Setter
         @Getter
         private Long userId;
 
+        /**
+         * Place id that was booked
+         */
         @NotNull(message = "Place ID can not be blank or negative")
         @PositiveOrZero(message = "ID must be greater than or equal to 0")
         @Getter
         private Long placeId;
 
+        /**
+         * Slot id that was booked
+         */
         @NotNull(message = "Slot ID date can not be blank or negative")
         @PositiveOrZero(message = "ID must be greater than or equal to 0")
         @Getter
