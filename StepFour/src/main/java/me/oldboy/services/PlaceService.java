@@ -19,6 +19,9 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+/**
+ * Service class for place managing.
+ */
 @Service
 @AllArgsConstructor
 @NoArgsConstructor
@@ -144,6 +147,13 @@ public class PlaceService {
                     .collect(Collectors.toList());
     }
 
+    /**
+     * Check exist place or not by two param
+     *
+     * @param species place species
+     * @param placeNumber place number
+     * @return true - place exist, false - place non existent
+     */
     @Measurable
     public boolean isPlaceExist(Species species, Integer placeNumber) {
         Optional<Place> isPlaceExist = placeRepository.findBySpeciesAndNumber(species.name(), placeNumber);
@@ -153,6 +163,12 @@ public class PlaceService {
             return false;
     }
 
+    /**
+     * Check exist place or not by one param
+     *
+     * @param placeId place id for checking
+     * @return true - place exist, false - place non existent
+     */
     @Measurable
     public boolean isPlaceExist(Long placeId) {
         Optional<PlaceReadUpdateDto> isPlaceExist = findById(placeId);
