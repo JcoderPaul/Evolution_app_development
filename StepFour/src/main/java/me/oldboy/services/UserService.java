@@ -21,6 +21,9 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+/**
+ * Service class for users managing.
+ */
 @Slf4j
 @Service
 @AllArgsConstructor
@@ -33,6 +36,12 @@ public class UserService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+    /**
+     * Creating a new user from the received createDTO
+     *
+     * @param userCreateDto data for creation new user
+     * @return created user id
+     */
     @Transactional
     @Measurable
     public Long create(UserCreateDto userCreateDto) {
@@ -46,6 +55,12 @@ public class UserService {
         return userRepository.save(createdUser).getUserId();
     }
 
+    /**
+     * Remove user from DB by user id
+     *
+     * @param id user id for removal
+     * @return true - deletion successful, false - user deletion failed
+     */
     @Transactional
     @Measurable
     public boolean delete(Long id) {
@@ -58,6 +73,12 @@ public class UserService {
         return maybeUser.isPresent();
     }
 
+    /**
+     * Update existent user
+     *
+     * @param updateDto data for update
+     * @return true - update succeeded, false - update failed
+     */
     @Transactional
     @Measurable
     public boolean update(UserUpdateDeleteDto updateDto) {
@@ -77,11 +98,22 @@ public class UserService {
         return maybeUser.isPresent();
     }
 
+    /**
+     * Find user by ID
+     *
+     * @param id user id for search
+     * @return optional found user DTO
+     */
     @Measurable
     public Optional<UserReadDto> findById(Long id) {
         return userRepository.findById(id).map(UserMapper.INSTANCE::mapToUserReadDto);
     }
 
+    /**
+     * Get all available user from DB
+     *
+     * @return users data collection
+     */
     @Measurable
     public List<UserReadDto> findAll() {
         return userRepository.findAll().stream()
@@ -89,6 +121,12 @@ public class UserService {
                 .collect(Collectors.toList());
     }
 
+    /**
+     * Find user by login
+     *
+     * @param login login for search
+     * @return optional user found data
+     */
     @Measurable
     public Optional<UserReadDto> findByLogin(String login) {
         return userRepository.findByLogin(login).map(UserMapper.INSTANCE::mapToUserReadDto);
