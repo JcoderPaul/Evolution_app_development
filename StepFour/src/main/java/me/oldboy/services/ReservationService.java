@@ -34,6 +34,10 @@ import java.util.stream.Collectors;
 - поиск всех бронирований по ID временного слота (slotId);
 - поиск всех бронирований по ID места (placeId);
 */
+
+/**
+ * Service class for reservation managing.
+ */
 @Service
 @Transactional(readOnly = true)
 public class ReservationService {
@@ -254,6 +258,13 @@ public class ReservationService {
                     .collect(Collectors.toList()));
     }
 
+    /**
+     * Find all available slots for a specific date
+     *
+     * @param date specific date
+     * @return collection of free slots selected by places
+     * @throws ReservationServiceException catches any exceptions from the service layer when calculating free slots
+     */
     @Measurable
     public Map<Long, List<Long>> findAllFreeSlotsByDate(LocalDate date) throws ReservationServiceException {
         /* Проверяем есть ли вообще брони на заданную дату, есть дергаем список */
