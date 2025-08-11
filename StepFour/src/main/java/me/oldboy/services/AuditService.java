@@ -52,6 +52,11 @@ public class AuditService {
         return auditRepository.save(audit);
     }
 
+    /**
+     * Return all audit records
+     *
+     * @return List of Audit object (audit record)
+     */
     public List<Audit> getAllAudit() {
         return auditRepository.findAll();
     }
