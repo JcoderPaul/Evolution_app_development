@@ -9,6 +9,12 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Data Access Object (DAO) interface for managing Place entities.
+ *
+ * Extends the generic JpaRepository interface with special operations
+ * for working with Place entities.
+ */
 @Repository
 public interface PlaceRepository extends JpaRepository<Place, Long> {
 
