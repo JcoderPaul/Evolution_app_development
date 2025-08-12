@@ -18,6 +18,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Optional;
 
+/**
+ * Class defining methods for managing slots for a user with ADMIN rules or authority
+ */
 @Slf4j
 @RestController
 @AllArgsConstructor
@@ -68,6 +71,13 @@ public class AdminSlotController {
 
     /* D - CRUD удаляем данные о слоте из БД */
 
+    /**
+     * Delete exist slot
+     *
+     * @param deleteDto for deleting slot data
+     * @return true - remove success, false - remove fail
+     * @throws SlotControllerException if any exception are thrown during removing
+     */
     @Auditable(operationType = AuditOperationType.DELETE_SLOT)
     @PostMapping("/delete")
     public boolean deleteSlot(@Validated
