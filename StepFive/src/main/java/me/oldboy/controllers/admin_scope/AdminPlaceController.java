@@ -20,6 +20,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Optional;
 
+/**
+ * Define place manipulation only for ADMIN role or authority
+ */
 @Slf4j
 @RestController
 @AllArgsConstructor
@@ -86,6 +89,13 @@ public class AdminPlaceController {
 
     /* D - CRUD удаляем данные о рабочем месте / зале из БД */
 
+    /**
+     * Return success or fail message
+     *
+     * @param deleteDto for remove data
+     * @return information message about operation result
+     * @throws PlaceControllerException if any exception are thrown during removing
+     */
     @Auditable(operationType = AuditOperationType.DELETE_PLACE)
     @PostMapping("/delete")
     public ResponseEntity<?> deletePlace(@Validated
