@@ -17,6 +17,9 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Class for managing users, accessible only to users with ADMIN role or authority
+ */
 @Slf4j
 @RestController
 @AllArgsConstructor
@@ -27,6 +30,12 @@ public class AdminUserController {
     @Autowired
     private UserService userService;
 
+    /**
+     * Delete exist user
+     *
+     * @param deleteDto for remove user data
+     * @return ResponseEntity with success or fail message
+     */
     @Auditable(operationType = AuditOperationType.DELETE_USER)
     @DeleteMapping("/delete")
     public ResponseEntity<?> deleteUser(@Validated
@@ -49,6 +58,12 @@ public class AdminUserController {
         }
     }
 
+    /**
+     * Update exist user
+     *
+     * @param updateDto for update user data
+     * @return true - update success, false - update fail
+     */
     @Auditable(operationType = AuditOperationType.UPDATE_USER)
     @PostMapping("/update")
     public boolean updateUser(@Validated
@@ -57,6 +72,11 @@ public class AdminUserController {
         return userService.update(updateDto);
     }
 
+    /**
+     * Get all user from DB
+     *
+     * @return exist user list
+     */
     @GetMapping("/all")
     public List<UserReadDto> getAllUser() {
         return userService.findAll();
