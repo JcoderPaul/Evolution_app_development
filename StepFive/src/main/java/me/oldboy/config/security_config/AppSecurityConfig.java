@@ -20,9 +20,12 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 import static org.springframework.security.config.http.SessionCreationPolicy.STATELESS;
 
+/**
+ * Class define security configuration of application
+ */
 @Slf4j
 @Configuration
-@EnableWebSecurity(debug = true)
+@EnableWebSecurity(debug = true) // Not for prod
 @EnableMethodSecurity(prePostEnabled = true, securedEnabled = true, jsr250Enabled = true)
 @ComponentScan("me.oldboy")
 @AllArgsConstructor
@@ -32,6 +35,14 @@ public class AppSecurityConfig {
 	@Autowired
 	private JwtAuthFilter jwtAuthFilter;
 
+	/**
+	 * Defines a filter chain which is capable of being matched against an
+	 * HttpServletRequest, in order to decide whether it applies to that
+	 * request.
+	 *
+	 * @param httpSecurity allows configuring web based security for specific http requests
+	 * @return main security filter chain
+	 */
 	@Bean
 	@SneakyThrows
 	public SecurityFilterChain filterChain(HttpSecurity httpSecurity) {
@@ -53,6 +64,11 @@ public class AppSecurityConfig {
 		return httpSecurity.build();
 	}
 
+	/**
+	 *	Define password encoder
+	 *
+	 * @return current password encoder
+	 */
 	@Bean
 	public PasswordEncoder getPasswordEncoder() {
 		return new BCryptPasswordEncoder();
