@@ -8,6 +8,9 @@ import lombok.Builder;
 
 import java.time.LocalTime;
 
+/**
+ * A record representing slot create or delete info.
+ */
 @Builder
 public record SlotCreateDeleteDto(@NotNull
                                   @PositiveOrZero(message = "Slot number can not be blank/null/negative, it must be greater than or equal to 0")
