@@ -9,6 +9,9 @@ import lombok.Builder;
 
 import java.time.LocalTime;
 
+/**
+ * A record representing slot read or update info.
+ */
 @Builder
 public record SlotReadUpdateDto(@NotNull
                                 @Positive(message = "SlotId can not be null/negative")
