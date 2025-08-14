@@ -3,7 +3,11 @@ package me.oldboy.dto.users;
 import jakarta.validation.constraints.*;
 import lombok.Builder;
 
-/* Никакой кириллицы в message */
+/* !!! Никакой кириллицы в message !!! */
+
+/**
+ * A record representing user update or delete info.
+ */
 @Builder
 public record UserUpdateDeleteDto(@NotNull
                                   @Positive(message = "User ID must be positive")
