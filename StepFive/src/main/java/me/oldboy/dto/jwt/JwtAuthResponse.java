@@ -7,14 +7,28 @@ import lombok.NoArgsConstructor;
 
 import java.util.Objects;
 
+/**
+ * Class representing a response containing an authentication token.
+ */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
 public class JwtAuthResponse {
 
+    /**
+     * Response user id
+     */
     private Long id;
+
+    /**
+     * Response user name (login)
+     */
     private String login;
+
+    /**
+     * Response generated JWT token
+     */
     private String accessToken;
 
     @Override
