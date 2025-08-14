@@ -5,6 +5,9 @@ import jakarta.validation.constraints.Positive;
 import lombok.Builder;
 import me.oldboy.models.entity.options.Species;
 
+/**
+ * A record representing a read or update place info.
+ */
 @Builder
 public record PlaceReadUpdateDto(@NotNull
                                  @Positive(message = "PlaceId can not be null/negative")
