@@ -6,6 +6,9 @@ import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 import lombok.Builder;
 
+/**
+ * A record representing user create info.
+ */
 @Builder
 public record UserCreateDto(@NotEmpty(message = "The login can not be EMPTY")
                             @Size(min = 3, max = 64, message = "Wrong format (to short/to long)")
