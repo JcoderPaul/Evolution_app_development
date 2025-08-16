@@ -7,6 +7,10 @@ import me.oldboy.models.entity.options.Role;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Represents the user type with information: user ID, user login (must be unique),
+ * password, role (defines access to application resources).
+ */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
