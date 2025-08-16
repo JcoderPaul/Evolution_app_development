@@ -7,6 +7,11 @@ import me.oldboy.models.entity.options.Species;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Represents the booking place type with information: place ID (for DB),
+ * type of booking place (workplace/conference hall/studio/meeting room),
+ * number of a specific place in the system.
+ */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
