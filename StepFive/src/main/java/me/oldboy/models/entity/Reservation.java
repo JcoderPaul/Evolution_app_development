@@ -5,6 +5,11 @@ import lombok.*;
 
 import java.time.LocalDate;
 
+/**
+ * Represents the booking type with information: booking ID (for DB),
+ * booking date, user for whom the booking is made, reserved place,
+ * reserved time slot.
+ */
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
