@@ -7,6 +7,10 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Represents a time slot type with information: slot id (for DB),
+ * slot number (for presentation), slot start time, slot end time.
+ */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
