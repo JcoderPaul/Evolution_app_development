@@ -8,6 +8,12 @@ import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
+/**
+ * Data Access Object (DAO) interface for managing User entities.
+ *
+ * Extends the generic JpaRepository interface with special operations
+ * for working with User entities.
+ */
 @Repository
 public interface UserRepository extends JpaRepository<User, Long>,
                                         CrudRepository<User, Long> {
