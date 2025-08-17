@@ -10,6 +10,12 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Data Access Object (DAO) interface for managing Reservation entities.
+ *
+ * Extends the generic JpaRepository interface with special operations
+ * for working with Reservation entities.
+ */
 @Repository
 public interface ReservationRepository extends JpaRepository<Reservation, Long> {
 
