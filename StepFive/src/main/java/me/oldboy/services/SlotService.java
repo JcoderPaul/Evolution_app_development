@@ -17,6 +17,9 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+/**
+ * Service class for slots managing.
+ */
 @Service
 @NoArgsConstructor
 @AllArgsConstructor
@@ -26,6 +29,12 @@ public class SlotService {
     @Autowired
     private SlotRepository slotRepository;
 
+    /**
+     * Create new slot
+     *
+     * @param slotCreateDeleteDto data for creating a slot
+     * @return created slot id
+     */
     @Transactional
     @Measurable
     public Long create(SlotCreateDeleteDto slotCreateDeleteDto) {
@@ -46,11 +55,22 @@ public class SlotService {
         return slotRepository.save(createSlot).getSlotId();
     }
 
+    /**
+     * Find slot by ID
+     *
+     * @param slotId for find slot id
+     * @return optional found slot data
+     */
     @Measurable
     public Optional<SlotReadUpdateDto> findById(Long slotId) {
         return slotRepository.findById(slotId).map(SlotMapper.INSTANCE::mapToSlotReadDto);
     }
 
+    /**
+     * Find all available slots
+     *
+     * @return all slots data collection
+     */
     @Measurable
     public List<SlotReadUpdateDto> findAll() {
         return slotRepository.findAll()
@@ -59,11 +79,23 @@ public class SlotService {
                 .collect(Collectors.toList());
     }
 
+    /**
+     * Find slot by number
+     *
+     * @param slotNumber number of slot for find
+     * @return optional found slot data
+     */
     @Measurable
     public Optional<SlotReadUpdateDto> findSlotByNumber(Integer slotNumber) {
         return slotRepository.findBySlotNumber(slotNumber).map(SlotMapper.INSTANCE::mapToSlotReadDto);
     }
 
+    /**
+     * Delete slot bu id
+     *
+     * @param slotId slot id for remove
+     * @return true - deletion successful, false - deletion failed
+     */
     @Transactional
     @Measurable
     public boolean delete(Long slotId) {
@@ -77,6 +109,12 @@ public class SlotService {
         return mayBeSlot.isPresent();
     }
 
+    /**
+     * Update existent slot
+     *
+     * @param slotReadUpdateDto data for update slot info
+     * @return true - update successful, false - update failed
+     */
     @Transactional
     @Measurable
     public boolean update(SlotReadUpdateDto slotReadUpdateDto) {
@@ -134,6 +172,13 @@ public class SlotService {
     }
 
     /* Проверяем конфликтует ли вновь создаваемый слот (бронируемая единица) с уже существующими */
+
+    /**
+     * Check if there will be a time range conflict when creating a new slot or updating an existing one
+     *
+     * @param slotCreateDeleteDto for create new slot data
+     * @return true - there was a time range conflict, false - there is no conflict
+     */
     private boolean isNewSlotConflicts(SlotCreateDeleteDto slotCreateDeleteDto) {
         List<Slot> allSlots = slotRepository.findAll();
         return allSlots.stream()
